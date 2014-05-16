@@ -17,8 +17,15 @@ describe('cumin utilities', function(){
   });
   describe('expose', function(){
     // forceful, as, expose defaults such as filling missing keys with 0
+    it('should leave main namespace clear', function(){
+      expect(function(){
+        dot();
+      }).toThrow("Can't find variable: dot");
+    });
     it('should make functions available on top namespace', function(){
-      _.expose('dot', 'map');
+      _.expose('dot', 'map', 'each', 'eachArr', 'eachObj', 'map',
+               'compose', 'dot'
+              );
       expect(function(){
         dot();
         map();
@@ -27,10 +34,9 @@ describe('cumin utilities', function(){
   });
   describe('each', function(){
     beforeEach(function(){
-      _.expose('each');
     });
     it('should call every element over an array', function(){
-      each(dummy)([1,2]);
+      each(dummy)([1, 2]);
       expect(dummy).toHaveBeenCalledWith(1);
       expect(dummy).toHaveBeenCalledWith(2);
     });
@@ -43,7 +49,6 @@ describe('cumin utilities', function(){
   });
   describe('eachObj', function(){
     it('should each all values of an object', function(){
-      _.expose('eachObj');
       eachObj(dummy)({x: 1, y: 2});
       expect(dummy).toHaveBeenCalledWith(1);
       expect(dummy).toHaveBeenCalledWith(2);
@@ -51,33 +56,32 @@ describe('cumin utilities', function(){
   });
   describe('eachArr', function(){
     it('should each all values in an array', function(){
-      _.expose('eachArr');
-      eachArr(dummy)([1,2]);
+      eachArr(dummy)([1, 2]);
       expect(dummy).toHaveBeenCalledWith(1);
       expect(dummy).toHaveBeenCalledWith(2);
     });
     it('call the arguments array if give multi args', function(){
-      eachArr(dummy)(1,2);
+      eachArr(dummy)(1, 2);
       expect(dummy).toHaveBeenCalledWith(1);
       expect(dummy).toHaveBeenCalledWith(2);
     });
   });
   describe('map', function(){
     it('should map arrays', function(){
-      var add3All = _.map(add3);
-      expect(add3All([1,2,3])).toEqual([4,5,6]);
+      var add3All = map(add3);
+      expect(add3All([1, 2, 3])).toEqual([4, 5, 6]);
     });
   });
   describe('compose', function(){
     it('should combine functions', function(){
-      var compound = _.compose(add3, multiply2);
+      var compound = compose(add3, multiply2);
       expect(compound(2)).toEqual(7);
     });
   });
   describe('dot', function(){
     it('should pull an objects value', function(){
       var person = {name: 'Mike'};
-      var name = _.dot('name');
+      var name = dot('name');
       expect(name(person)).toEqual('Mike');
     });
   });

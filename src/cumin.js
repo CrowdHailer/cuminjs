@@ -43,6 +43,17 @@ var _ = (function(){
     };
   }
 
+  function limit(){
+    var keys = Array.prototype.slice.call(arguments);
+    return function(obj){
+      var results = {};
+      eachArr(function(key){
+        results[key] = obj[key];
+      })(keys);
+      return results;
+    };
+  }
+
   function compose(){
     var funcs = arguments;
     return function(){
@@ -77,6 +88,7 @@ var _ = (function(){
     each: each,
     eachObj: eachObj,
     eachArr: eachArr,
+    limit: limit,
   };
   return _;
 }());

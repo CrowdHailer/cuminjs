@@ -24,7 +24,7 @@ describe('cumin utilities', function(){
     });
     it('should make functions available on top namespace', function(){
       _.expose('dot', 'map', 'each', 'eachArr', 'eachObj', 'map',
-               'compose', 'dot'
+               'compose', 'dot', 'limit'
               );
       expect(function(){
         dot();
@@ -70,6 +70,24 @@ describe('cumin utilities', function(){
     it('should map arrays', function(){
       var add3All = map(add3);
       expect(add3All([1, 2, 3])).toEqual([4, 5, 6]);
+    });
+  });
+  describe('limit', function(){
+    var obj;
+    beforeEach(function(){
+      obj = {a: 1, b: 2, c: 3};
+    });
+    it('should restrict on keys', function(){
+      var limited = limit('a')(obj);
+      expect(limited).toEqual({a: 1});
+    });
+    it('should restrict on multiple keys', function(){
+      var limited = limit('a', 'b')(obj);
+      expect(limited).toEqual({a: 1, b: 2});
+    });
+    it('should not add values not on original', function(){
+      var limited = limit('a', 'd')(obj);
+      expect(limited).toEqual({a: 1});
     });
   });
   describe('compose', function(){

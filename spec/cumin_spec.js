@@ -75,6 +75,10 @@ describe('cumin utilities', function(){
       var add3All = map(add3);
       expect(add3All({x: 1, y: 2})).toEqual({x: 4, y: 5});
     });
+    it('should map arguments if given multiple', function(){
+      var add3All = map(add3);
+      expect(add3All(1, 2, 3)).toEqual([4, 5, 6]);
+    });
   });
   describe('limit', function(){
     var obj;

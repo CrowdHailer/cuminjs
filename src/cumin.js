@@ -11,6 +11,7 @@ var _ = (function(){
       })(keys);
     };
   }
+
   function eachArr(operation){
     return function(arr){
       if (arguments.length > 1) {
@@ -23,6 +24,7 @@ var _ = (function(){
       }
     };
   }
+
   function each(operation){
     return function(collection){
       if (collection.length) {
@@ -35,6 +37,9 @@ var _ = (function(){
 
   function map(operation){
     return function(collection){
+      if (arguments.length > 1) {
+        collection = Array.prototype.slice.call(arguments);
+      }
       var results;
       each(function(item, index){
         results = this.empty;

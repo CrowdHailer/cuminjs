@@ -56,6 +56,11 @@ describe('cumin utilities', function(){
       expect(dummy).toHaveBeenCalledWith(1);
       expect(dummy).toHaveBeenCalledWith(2);
     });
+    it('call the arguments array if give multi args', function(){
+      eachArr(dummy)(1,2);
+      expect(dummy).toHaveBeenCalledWith(1);
+      expect(dummy).toHaveBeenCalledWith(2);
+    });
   });
   describe('map', function(){
     it('should map arrays', function(){

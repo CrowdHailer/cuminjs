@@ -12,6 +12,9 @@ var _ = (function(){
   }
   function eachArr(operation){
     return function(arr){
+      if (arguments.length > 1) {
+        arr = Array.prototype.slice.call(arguments);
+      }
       for (i = 0; i < arr.length; i++) {
         item = arr[i];
         operation.call(this, item);

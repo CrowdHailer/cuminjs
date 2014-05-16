@@ -1,4 +1,6 @@
 var _ = (function(){
+  //each function
+  //option of immutable return
   function map(operation){
     return function(collection){
       var results = [];

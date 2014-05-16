@@ -24,7 +24,7 @@ describe('cumin utilities', function(){
     });
     it('should make functions available on top namespace', function(){
       _.expose('dot', 'map', 'each', 'eachArr', 'eachObj', 'map',
-               'compose', 'dot', 'limit'
+               'compose', 'dot', 'limit', 'extend'
               );
       expect(function(){
         dot();
@@ -88,6 +88,13 @@ describe('cumin utilities', function(){
     it('should not add values not on original', function(){
       var limited = limit('a', 'd')(obj);
       expect(limited).toEqual({a: 1});
+    });
+  });
+  describe('extend', function(){
+    it('should extend an object', function(){
+      var obj = {a: 1};
+      var extended = extend({e: 5})(obj);
+      expect(extended).toEqual({a: 1, e: 5});
     });
   });
   describe('compose', function(){

@@ -54,6 +54,19 @@ var _ = (function(){
     };
   }
 
+  function extend(extention){
+    return function(obj){
+      var results = Object.create({});
+      eachArr(function(key){
+        results[key] = obj[key];
+      })(Object.keys(obj));
+      eachArr(function(key){
+        results[key] = extention[key];
+      })(Object.keys(extention));
+      return results
+    };
+  }
+
   function compose(){
     var funcs = arguments;
     return function(){
@@ -89,6 +102,7 @@ var _ = (function(){
     eachObj: eachObj,
     eachArr: eachArr,
     limit: limit,
+    extend: extend
   };
   return _;
 }());

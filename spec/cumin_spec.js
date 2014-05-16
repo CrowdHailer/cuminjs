@@ -14,6 +14,25 @@ describe('cumin utilities', function(){
     add3 = add(3);
     multiply2 = multiply(2);
   });
+  describe('expose', function(){
+    // forceful, as, expose defaults such as filling missing keys with 0
+    it('should make functions available on top namespace', function(){
+      _.expose('dot', 'map');
+      expect(function(){
+        dot();
+        map();
+      }).not.toThrow();
+    });
+  });
+  describe('each', function(){
+    it('should call every element over an array', function(){
+      _.expose('each');
+      var test = jasmine.createSpy();
+      each(test)([1,2]);
+      expect(test).toHaveBeenCalledWith(1);
+      expect(test).toHaveBeenCalledWith(2);
+    });
+  });
   describe('map', function(){
     it('should map arrays', function(){
       var add3All = _.map(add3);
@@ -31,15 +50,6 @@ describe('cumin utilities', function(){
       var person = {name: 'Mike'};
       var name = _.dot('name');
       expect(name(person)).toEqual('Mike');
-    });
-  });
-  describe('expose', function(){
-    it('should make functions available on top namespace', function(){
-      _.expose('dot', 'map');
-      expect(function(){
-        dot();
-        map();
-      }).not.toThrow();
     });
   });
 });

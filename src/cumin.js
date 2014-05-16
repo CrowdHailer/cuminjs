@@ -1,6 +1,15 @@
 var _ = (function(){
   //each function
   //option of immutable return
+  function each(operation){
+    return function(collection){
+      for (var i = 0; i < collection.length; i++) {
+        var item = collection[i];
+        operation.call(this, item);
+      }
+    };
+  }
+
   function map(operation){
     return function(collection){
       var results = [];
@@ -37,7 +46,8 @@ var _ = (function(){
     map: map,
     compose: compose,
     dot: dot,
-    expose: expose
+    expose: expose,
+    each: each
   };
   return _;
 }());

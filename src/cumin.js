@@ -1,6 +1,15 @@
 var _ = (function(){
   //option of immutable return
   // pass index/key to func
+  function eachObj(operation){
+    return function(obj){
+      var keys = Object.keys(obj);
+      for (i = 0; i < keys.length; i++) {
+        item = obj[keys[i]];
+        operation.call(this, item);
+      }
+    };
+  }
   function each(operation){
     return function(collection){
       var i, item;
@@ -56,13 +65,14 @@ var _ = (function(){
       window[name] = _[name];
     }
   }
-  
+
   var _ =  {
     map: map,
     compose: compose,
     dot: dot,
     expose: expose,
-    each: each
+    each: each,
+    eachObj: eachObj
   };
   return _;
 }());

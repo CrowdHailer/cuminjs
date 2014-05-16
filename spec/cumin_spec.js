@@ -1,5 +1,5 @@
 describe('cumin utilities', function(){
-  var add, add3, multiply, multiply2;
+  var add, add3, multiply, multiply2, dummy;
   beforeEach(function(){
     add = function(a){
       return function(b){
@@ -13,6 +13,7 @@ describe('cumin utilities', function(){
     };
     add3 = add(3);
     multiply2 = multiply(2);
+    dummy = jasmine.createSpy();
   });
   describe('expose', function(){
     // forceful, as, expose defaults such as filling missing keys with 0
@@ -25,10 +26,8 @@ describe('cumin utilities', function(){
     });
   });
   describe('each', function(){
-    var dummy;
     beforeEach(function(){
       _.expose('each');
-      dummy = jasmine.createSpy();
     });
     it('should call every element over an array', function(){
       each(dummy)([1,2]);
@@ -41,6 +40,14 @@ describe('cumin utilities', function(){
       expect(dummy).toHaveBeenCalledWith(2);
     });
 
+  });
+  describe('eachObj', function(){
+    it('should each all values of an object', function(){
+      _.expose('eachObj');
+      eachObj(dummy)({x: 1, y: 2});
+      expect(dummy).toHaveBeenCalledWith(1);
+      expect(dummy).toHaveBeenCalledWith(2);
+    });
   });
   describe('map', function(){
     it('should map arrays', function(){

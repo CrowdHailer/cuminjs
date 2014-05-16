@@ -30,7 +30,16 @@ describe('cumin utilities', function(){
     it('should pull an objects value', function(){
       var person = {name: 'Mike'};
       var name = _.dot('name');
-      expect(name(person)).toEqual('Mike')
+      expect(name(person)).toEqual('Mike');
+    });
+  });
+  describe('expose', function(){
+    it('should make functions available on top namespace', function(){
+      _.expose('dot', 'map');
+      expect(function(){
+        dot();
+        map();
+      }).not.toThrow();
     });
   });
 });

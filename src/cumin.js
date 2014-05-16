@@ -24,9 +24,18 @@ var _ = (function(){
       return obj[key];
     };
   }
-  return {
+  function expose(){
+    var funcs = arguments;
+    for (var i = funcs.length - 1; i >= 0; i--) {
+      var name = funcs[i];
+      window[name] = _[name];
+    }
+  }
+  var _ =  {
     map: map,
     compose: compose,
-    dot: dot
+    dot: dot,
+    expose: expose
   };
+  return _;
 }());

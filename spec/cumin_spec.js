@@ -37,39 +37,43 @@ describe('cumin utilities', function(){
     });
     it('should call every element over an array', function(){
       each(dummy)([1, 2]);
-      expect(dummy).toHaveBeenCalledWith(1);
-      expect(dummy).toHaveBeenCalledWith(2);
+      expect(dummy).toHaveBeenCalledWith(1, 0);
+      expect(dummy).toHaveBeenCalledWith(2, 1);
     });
     it('should call every value in an object', function(){
       each(dummy)({x: 1, y: 2});
-      expect(dummy).toHaveBeenCalledWith(1);
-      expect(dummy).toHaveBeenCalledWith(2);
+      expect(dummy).toHaveBeenCalledWith(1, 'x');
+      expect(dummy).toHaveBeenCalledWith(2, 'y');
     });
 
   });
   describe('eachObj', function(){
     it('should each all values of an object', function(){
       eachObj(dummy)({x: 1, y: 2});
-      expect(dummy).toHaveBeenCalledWith(1);
-      expect(dummy).toHaveBeenCalledWith(2);
+      expect(dummy).toHaveBeenCalledWith(1, 'x');
+      expect(dummy).toHaveBeenCalledWith(2, 'y');
     });
   });
   describe('eachArr', function(){
     it('should each all values in an array', function(){
       eachArr(dummy)([1, 2]);
-      expect(dummy).toHaveBeenCalledWith(1);
-      expect(dummy).toHaveBeenCalledWith(2);
+      expect(dummy).toHaveBeenCalledWith(1, 0);
+      expect(dummy).toHaveBeenCalledWith(2, 1);
     });
     it('call the arguments array if give multi args', function(){
       eachArr(dummy)(1, 2);
-      expect(dummy).toHaveBeenCalledWith(1);
-      expect(dummy).toHaveBeenCalledWith(2);
+      expect(dummy).toHaveBeenCalledWith(1, 0);
+      expect(dummy).toHaveBeenCalledWith(2, 1);
     });
   });
   describe('map', function(){
     it('should map arrays', function(){
       var add3All = map(add3);
       expect(add3All([1, 2, 3])).toEqual([4, 5, 6]);
+    });
+    it('should map objects', function(){
+      var add3All = map(add3);
+      expect(add3All({x: 1, y: 2})).toEqual({x: 4, y: 5});
     });
   });
   describe('limit', function(){

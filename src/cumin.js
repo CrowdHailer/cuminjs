@@ -4,9 +4,10 @@ var _ = (function(){
   function eachObj(operation){
     return function(obj){
       var keys = Object.keys(obj);
+      var context = {empty: {}};
       eachArr(function(key){
         var value = obj[key];
-        operation.call(this, value);
+        operation.call(context, value, key);
       })(keys);
     };
   }
@@ -15,9 +16,10 @@ var _ = (function(){
       if (arguments.length > 1) {
         arr = Array.prototype.slice.call(arguments);
       }
+      var context = {empty: []};
       for (var i = 0; i < arr.length; i++) {
         item = arr[i];
-        operation.call(this, item);
+        operation.call(context, item, i);
       }
     };
   }
@@ -33,12 +35,11 @@ var _ = (function(){
 
   function map(operation){
     return function(collection){
-      var results = [];
-      function push(value){
-        results.push(value);
-      }
-      action = compose(push, operation);
-      each(action)(collection);
+      var results;
+      each(function(item, index){
+        results = this.empty;
+        results[index] = operation.call({}, item, index);
+      })(collection);
       return results;
     };
   }
@@ -63,7 +64,7 @@ var _ = (function(){
       eachArr(function(key){
         results[key] = extention[key];
       })(Object.keys(extention));
-      return results
+      return results;
     };
   }
 

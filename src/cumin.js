@@ -19,8 +19,14 @@ var _ = (function(){
       return args[0];
     };
   }
+  function dot(key){
+    return function(obj){
+      return obj[key];
+    };
+  }
   return {
     map: map,
-    compose: compose
+    compose: compose,
+    dot: dot
   };
 }());

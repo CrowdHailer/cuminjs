@@ -26,4 +26,11 @@ describe('cumin utilities', function(){
       expect(compound(2)).toEqual(7);
     });
   });
+  describe('dot', function(){
+    it('should pull an objects value', function(){
+      var person = {name: 'Mike'};
+      var name = _.dot('name');
+      expect(name(person)).toEqual('Mike')
+    });
+  });
 });

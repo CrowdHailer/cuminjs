@@ -1,6 +1,6 @@
 var _ = (function(){
-  //each function
   //option of immutable return
+  // pass index/key to func
   function each(operation){
     return function(collection){
       var i, item;
@@ -22,12 +22,15 @@ var _ = (function(){
   function map(operation){
     return function(collection){
       var results = [];
-      collection.forEach(function(value){
-        results.push(operation(value));
-      });
+      function push(value){
+        results.push(value);
+      }
+      action = compose(push, operation);
+      each(action)(collection);
       return results;
     };
   }
+
   function compose(){
     var funcs = arguments;
     return function(){
@@ -39,11 +42,13 @@ var _ = (function(){
       return args[0];
     };
   }
+
   function dot(key){
     return function(obj){
       return obj[key];
     };
   }
+
   function expose(){
     var funcs = arguments;
     for (var i = funcs.length - 1; i >= 0; i--) {
@@ -51,6 +56,7 @@ var _ = (function(){
       window[name] = _[name];
     }
   }
+  
   var _ =  {
     map: map,
     compose: compose,

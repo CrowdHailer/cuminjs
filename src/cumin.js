@@ -10,6 +10,14 @@ var _ = (function(){
       }
     };
   }
+  function eachArr(operation){
+    return function(arr){
+      for (i = 0; i < arr.length; i++) {
+        item = arr[i];
+        operation.call(this, item);
+      }
+    };
+  }
   function each(operation){
     return function(collection){
       var i, item;
@@ -72,7 +80,8 @@ var _ = (function(){
     dot: dot,
     expose: expose,
     each: each,
-    eachObj: eachObj
+    eachObj: eachObj,
+    eachArr: eachArr,
   };
   return _;
 }());

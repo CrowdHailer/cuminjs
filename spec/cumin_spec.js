@@ -49,6 +49,14 @@ describe('cumin utilities', function(){
       expect(dummy).toHaveBeenCalledWith(2);
     });
   });
+  describe('eachArr', function(){
+    it('should each all values in an array', function(){
+      _.expose('eachArr');
+      eachArr(dummy)([1,2]);
+      expect(dummy).toHaveBeenCalledWith(1);
+      expect(dummy).toHaveBeenCalledWith(2);
+    });
+  });
   describe('map', function(){
     it('should map arrays', function(){
       var add3All = _.map(add3);

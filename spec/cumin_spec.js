@@ -25,13 +25,22 @@ describe('cumin utilities', function(){
     });
   });
   describe('each', function(){
-    it('should call every element over an array', function(){
+    var dummy;
+    beforeEach(function(){
       _.expose('each');
-      var test = jasmine.createSpy();
-      each(test)([1,2]);
-      expect(test).toHaveBeenCalledWith(1);
-      expect(test).toHaveBeenCalledWith(2);
+      dummy = jasmine.createSpy();
     });
+    it('should call every element over an array', function(){
+      each(dummy)([1,2]);
+      expect(dummy).toHaveBeenCalledWith(1);
+      expect(dummy).toHaveBeenCalledWith(2);
+    });
+    it('should call every value in an object', function(){
+      each(dummy)({x: 1, y: 2});
+      expect(dummy).toHaveBeenCalledWith(1);
+      expect(dummy).toHaveBeenCalledWith(2);
+    });
+
   });
   describe('map', function(){
     it('should map arrays', function(){

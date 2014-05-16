@@ -3,9 +3,18 @@ var _ = (function(){
   //option of immutable return
   function each(operation){
     return function(collection){
-      for (var i = 0; i < collection.length; i++) {
-        var item = collection[i];
-        operation.call(this, item);
+      var i, item;
+      if (collection.length) {
+        for (i = 0; i < collection.length; i++) {
+          item = collection[i];
+          operation.call(this, item);
+        }
+      } else {
+        var keys = Object.keys(collection);
+        for (i = 0; i < keys.length; i++) {
+          item = collection[keys[i]];
+          operation.call(this, item);
+        }
       }
     };
   }

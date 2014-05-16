@@ -4,10 +4,10 @@ var _ = (function(){
   function eachObj(operation){
     return function(obj){
       var keys = Object.keys(obj);
-      for (i = 0; i < keys.length; i++) {
-        item = obj[keys[i]];
-        operation.call(this, item);
-      }
+      eachArr(function(key){
+        var value = obj[key];
+        operation.call(this, value);
+      })(keys);
     };
   }
   function eachArr(operation){
@@ -15,7 +15,7 @@ var _ = (function(){
       if (arguments.length > 1) {
         arr = Array.prototype.slice.call(arguments);
       }
-      for (i = 0; i < arr.length; i++) {
+      for (var i = 0; i < arr.length; i++) {
         item = arr[i];
         operation.call(this, item);
       }
@@ -23,18 +23,10 @@ var _ = (function(){
   }
   function each(operation){
     return function(collection){
-      var i, item;
       if (collection.length) {
-        for (i = 0; i < collection.length; i++) {
-          item = collection[i];
-          operation.call(this, item);
-        }
+        eachArr(operation)(collection);
       } else {
-        var keys = Object.keys(collection);
-        for (i = 0; i < keys.length; i++) {
-          item = collection[keys[i]];
-          operation.call(this, item);
-        }
+        eachObj(operation)(collection);
       }
     };
   }

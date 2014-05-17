@@ -81,14 +81,20 @@ describe('cumin utilities', function(){
     });
   });
   describe('filter', function(){
-    it('should filter from array', function(){
+    var greaterThan2;
+    beforeEach(function(){
       function greater(a){
         return function(b){
           return b > a;
         };
       }
-      var greaterThan2 = greater(2);
-      expect(filter(greaterThan2)([1, 3])).toEqual([3]);
+      greaterThan2 = greater(2);
+    });
+    it('should filter from array', function(){
+      expect(filter(greaterThan2)([1, 3, 2])).toEqual([3]);
+    });
+    it('should filter from object', function(){
+      expect(filter(greaterThan2)({x: 1, y: 3, z: 2})).toEqual({y: 3});
     });
   });
   describe('limit', function(){

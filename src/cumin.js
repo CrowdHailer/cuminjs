@@ -55,8 +55,11 @@ var _ = (function(){
       each(function(item, index){
         results = this.empty;
         if (operation.call({}, item, index)) {
-          results.push(item);
+          index = (results.length !== undefined)? results.length : index;
+          results[index] = item;
         }
+        //add push methd to object
+        // endless curry push function
       })(collection);
       return results;
     };

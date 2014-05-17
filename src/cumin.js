@@ -106,15 +106,11 @@ var _ = (function(){
     };
   }
 
-  function expose(){
-    var fNames = arguments;
+  function expose(nameList){
+    var fNames = nameList.split(' ');
     eachArr(function(fName){
       window[fName] = _[fName];
     })(fNames);
-    // for (var i = funcs.length - 1; i >= 0; i--) {
-    //   var name = funcs[i];
-    //   window[name] = _[name];
-    // }
   }
 
   var _ =  {

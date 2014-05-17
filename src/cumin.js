@@ -62,10 +62,10 @@ var _ = (function(){
 
   function reduce(memo){
     return function(operation){
-      return function(collection){
+      return function(){
         each(function(item, index){
           memo = operation(memo)(item);
-        })(collection);
+        }).apply({}, arguments);
         return memo;
       };
     };

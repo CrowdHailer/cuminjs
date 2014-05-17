@@ -113,6 +113,9 @@ describe('cumin utilities', function(){
     it('should reduce an object', function(){
       expect(_.reduce(0)(add)({x: 1, y: 3, z: 2})).toEqual(6);
     });
+    it('should reduce arguments', function(){
+      expect(_.reduce(0)(add)(1, 2, 3)).toEqual(6);
+    });
   });
 
   describe('not', function(){

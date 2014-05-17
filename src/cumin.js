@@ -49,6 +49,19 @@ var _ = (function(){
     };
   }
 
+  function filter(operation){
+    return function(collection){
+      var results;
+      each(function(item, index){
+        results = this.empty;
+        if (operation.call({}, item, index)) {
+          results.push(item);
+        }
+      })(collection);
+      return results
+    };
+  }
+
   function limit(){
     var keys = Array.prototype.slice.call(arguments);
     return function(obj){
@@ -108,7 +121,8 @@ var _ = (function(){
     eachObj: eachObj,
     eachArr: eachArr,
     limit: limit,
-    extend: extend
+    extend: extend,
+    filter: filter
   };
   return _;
 }());

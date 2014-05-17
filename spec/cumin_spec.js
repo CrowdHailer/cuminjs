@@ -24,7 +24,7 @@ describe('cumin utilities', function(){
     });
     it('should make functions available on top namespace', function(){
       _.expose('dot', 'map', 'each', 'eachArr', 'eachObj', 'map',
-               'compose', 'dot', 'limit', 'extend'
+               'compose', 'dot', 'limit', 'extend', 'filter'
               );
       expect(function(){
         dot();
@@ -78,6 +78,17 @@ describe('cumin utilities', function(){
     it('should map arguments if given multiple', function(){
       var add3All = map(add3);
       expect(add3All(1, 2, 3)).toEqual([4, 5, 6]);
+    });
+  });
+  describe('filter', function(){
+    it('should filter from array', function(){
+      function greater(a){
+        return function(b){
+          return b > a;
+        };
+      }
+      var greaterThan2 = greater(2);
+      expect(filter(greaterThan2)([1, 3])).toEqual([3]);
     });
   });
   describe('limit', function(){

@@ -58,7 +58,7 @@ var _ = (function(){
           results.push(item);
         }
       })(collection);
-      return results
+      return results;
     };
   }
 

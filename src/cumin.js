@@ -45,7 +45,7 @@ var _ = (function(){
         results = this.empty;
         results[index] = operation.call({}, item, index);
       })(collection);
-      return results;
+      return Object.freeze(results);
     };
   }
 

@@ -67,17 +67,21 @@ describe('cumin utilities', function(){
     });
   });
   describe('map', function(){
+    var add3All;
+    beforeEach(function(){
+      add3All = map(add3);
+    });
     it('should map arrays', function(){
-      var add3All = map(add3);
-      expect(add3All([1, 2, 3])).toEqual([4, 5, 6]);
+      var answer = add3All([1, 2, 3]);
+      expect(answer).toEqual(Object.freeze([4, 5, 6]));
     });
     it('should map objects', function(){
-      var add3All = map(add3);
-      expect(add3All({x: 1, y: 2})).toEqual({x: 4, y: 5});
+      var answer = add3All({x: 1, y: 2});
+      expect(answer).toEqual(Object.freeze({x: 4, y: 5}));
     });
     it('should map arguments if given multiple', function(){
-      var add3All = map(add3);
-      expect(add3All(1, 2, 3)).toEqual([4, 5, 6]);
+      var answer = add3All(1, 2, 3);
+      expect(answer).toEqual(Object.freeze([4, 5, 6]));
     });
   });
   describe('filter', function(){

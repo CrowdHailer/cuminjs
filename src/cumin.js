@@ -36,15 +36,12 @@ var _ = (function(){
   }
 
   function map(operation){
-    return function(collection){
-      if (arguments.length > 1) {
-        collection = argsToList(arguments);
-      }
+    return function(){
       var results;
       each(function(item, index){
         results = this.empty;
         results[index] = operation.call({}, item, index);
-      })(collection);
+      }).apply({}, arguments);
       return Object.freeze(results);
     };
   }

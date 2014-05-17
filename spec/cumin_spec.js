@@ -107,14 +107,18 @@ describe('cumin utilities', function(){
   });
 
   describe('reduce', function(){
+    var sum;
+    beforeEach(function(){
+      sum = reduce(0)(add);
+    });
     it('should reduce a list', function(){
-      expect(reduce(0)(add)([1, 2, 3])).toEqual(6);
+      expect(sum([1, 2, 3])).toEqual(6);
     });
     it('should reduce an object', function(){
-      expect(reduce(0)(add)({x: 1, y: 3, z: 2})).toEqual(6);
+      expect(sum({x: 1, y: 3, z: 2})).toEqual(6);
     });
     it('should reduce arguments', function(){
-      expect(reduce(0)(add)(1, 2, 3)).toEqual(6);
+      expect(sum(1, 2, 3)).toEqual(6);
     });
   });
 

@@ -1,3 +1,8 @@
+// definitions
+// Arrays have index, element
+// Objects have key, value
+// Colletions have location???, item
+
 var _ = (function(){
   //option of immutable return
   // pass index/key to func

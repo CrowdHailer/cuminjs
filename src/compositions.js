@@ -4,9 +4,12 @@ function hasK(permitted){
     return permitted.indexOf(key) !== -1;
   };
 }
-// limit = function(){
-//   var args = argsToList(arguments);
-//   return filter(hasK(args));
-// };
+function hasNotK(permitted){
+  var permitted = argsToList(arguments);
+  return function(value, key){
+    return permitted.indexOf(key) === -1;
+  };
+}
 
 limit = _.compose(_.filter, hasK);
+weed = _.compose(_.filter, hasNotK);

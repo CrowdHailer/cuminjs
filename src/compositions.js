@@ -10,6 +10,12 @@ function hasNotK(permitted){
     return permitted.indexOf(key) === -1;
   };
 }
-
+function not(func){
+  return function(){
+    var args = argsToList(arguments);
+    func.apply({}, args);
+  };
+}
 limit = _.compose(_.filter, hasK);
 weed = _.compose(_.filter, hasNotK);
+// weed = _.compose(_.filter, not(hasK));

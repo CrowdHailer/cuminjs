@@ -64,16 +64,16 @@ var _ = (function(){
     };
   }
 
-  function limit(){
-    var keys = Array.prototype.slice.call(arguments);
-    return function(obj){
-      var results = {};
-      eachArr(function(key){
-        results[key] = obj[key];
-      })(keys);
-      return results;
-    };
-  }
+  // function limit(){
+  //   var keys = Array.prototype.slice.call(arguments);
+  //   return function(obj){
+  //     var results = {};
+  //     eachArr(function(key){
+  //       results[key] = obj[key];
+  //     })(keys);
+  //     return results;
+  //   };
+  // }
 
   function extend(extention){
     return function(obj){
@@ -121,7 +121,7 @@ var _ = (function(){
     each: each,
     eachObj: eachObj,
     eachArr: eachArr,
-    limit: limit,
+    // limit: limit,
     extend: extend,
     filter: filter
   };

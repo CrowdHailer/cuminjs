@@ -24,7 +24,7 @@ describe('cumin utilities', function(){
     });
     it('should make functions available on top namespace', function(){
       _.expose('dot map each eachArr eachObj ' +
-               'compose dot limit extend filter'
+               'compose dot extend filter'
               );
       expect(function(){
         dot();
@@ -104,7 +104,7 @@ describe('cumin utilities', function(){
       expect(filter(greaterThan2)(1, 3, 2)).toEqual([3]);
     });
   });
-  describe('limit', function(){
+  xdescribe('limit', function(){
     var obj;
     beforeEach(function(){
       obj = {a: 1, b: 2, c: 3};

@@ -39,8 +39,6 @@ describe('cumin utilities', function(){
     });
   });
   describe('each', function(){
-    beforeEach(function(){
-    });
     it('should call every element over an array', function(){
       each(dummy)([1, 2]);
       expect(dummy).toHaveBeenCalledWith(1, 0);

@@ -63,13 +63,14 @@ var _ = (function(){
     };
   }
 
-  function reduce(operation){
-    return function(collection){
-      memo = collection.shift();
-      each(function(item, index){
-        memo = operation(memo)(item);
-      })(collection);
-      return memo;
+  function reduce(memo){
+    return function(operation){
+      return function(collection){
+        each(function(item, index){
+          memo = operation(memo)(item);
+        })(collection);
+        return memo;
+      };
     };
   }
 

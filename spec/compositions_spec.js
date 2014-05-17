@@ -1,4 +1,19 @@
 describe('compositions', function(){
+  describe('expose', function(){
+    it('should leave main namespace clear', function(){
+      expect(function(){
+        limit();
+      }).toThrow("Can't find variable: limit");
+    });
+    it('should make functions available on top namespace', function(){
+      _.expose('weed limit '
+              );
+      expect(function(){
+        limit();
+        weed();
+      }).not.toThrow();
+    });
+  });
   describe('limit by keys', function(){
     var obj;
     beforeEach(function(){

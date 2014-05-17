@@ -88,6 +88,13 @@ var _ = (function(){
     };
   }
 
+  function not(func){
+    return function(){
+      var args = argsToList(arguments);
+      return !func.apply({}, args);
+    };
+  }
+
   function dot(key){
     return function(obj){
       return obj[key];
@@ -104,6 +111,7 @@ var _ = (function(){
   var _ =  {
     map: map,
     compose: compose,
+    not: not,
     dot: dot,
     expose: expose,
     each: each,

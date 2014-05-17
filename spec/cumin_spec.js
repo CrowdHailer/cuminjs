@@ -30,7 +30,7 @@ describe('cumin utilities', function(){
       }).toThrow("Can't find variable: dot");
     });
     it('should make functions available on top namespace', function(){
-      _.expose('dot map each eachArr eachObj ' +
+      _.expose('dot map each eachArr eachObj not ' +
                'compose dot extend filter'
               );
       expect(function(){

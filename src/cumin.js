@@ -25,9 +25,9 @@ var _ = (function(){
   function each(operation){
     return function(collection){
       if (arguments.length > 1) {
-        collection = Array.prototype.slice.call(arguments);
+        collection = argsToList(arguments);
       }
-      if (collection.length) {
+      if (isArray(collection)) {
         eachArr(operation)(collection);
       } else {
         eachObj(operation)(collection);
@@ -38,7 +38,7 @@ var _ = (function(){
   function map(operation){
     return function(collection){
       if (arguments.length > 1) {
-        collection = Array.prototype.slice.call(arguments);
+        collection = argsToList(arguments);
       }
       var results;
       each(function(item, index){
@@ -55,10 +55,9 @@ var _ = (function(){
       each(function(item, index){
         results = this.empty;
         if (operation.call({}, item, index)) {
-          index = (results.length !== undefined)? results.length : index;
+          index = isArray(results)? results.length : index;
           results[index] = item;
         }
-        //add push methd to object
         // endless curry push function
       }).apply({}, arguments);
       return results;

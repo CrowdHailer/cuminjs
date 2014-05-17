@@ -3,6 +3,7 @@ module.exports = function(config) {
     basePath: '',
     frameworks: ['jasmine'],
     files: [
+      'src/helpers.js',
       'src/cumin.js',
       'spec/cumin_spec.js'
     ],

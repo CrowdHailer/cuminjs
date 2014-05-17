@@ -13,7 +13,7 @@ function hasNotK(permitted){
 function not(func){
   return function(){
     var args = argsToList(arguments);
-    func.apply({}, args);
+    return !func.apply({}, args);
   };
 }
 limit = _.compose(_.filter, hasK);

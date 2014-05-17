@@ -1,5 +1,5 @@
 describe('cumin utilities', function(){
-  var add, add3, multiply, multiply2, dummy;
+  var add, add3, multiply, multiply2, greater, greaterThan2, dummy;
   beforeEach(function(){
     add = function(a){
       return function(b){
@@ -11,8 +11,14 @@ describe('cumin utilities', function(){
         return a * b;
       };
     };
+    greater = function(a){
+      return function(b){
+        return b > a;
+      };
+    };
     add3 = add(3);
     multiply2 = multiply(2);
+    greaterThan2 = greater(2);
     dummy = jasmine.createSpy();
   });
   describe('expose', function(){
@@ -85,15 +91,6 @@ describe('cumin utilities', function(){
     });
   });
   describe('filter', function(){
-    var greaterThan2;
-    beforeEach(function(){
-      function greater(a){
-        return function(b){
-          return b > a;
-        };
-      }
-      greaterThan2 = greater(2);
-    });
     it('should filter from array', function(){
       expect(filter(greaterThan2)([1, 3, 2])).toEqual([3]);
     });
@@ -102,6 +99,13 @@ describe('cumin utilities', function(){
     });
     it('should filter from arguments', function(){
       expect(filter(greaterThan2)(1, 3, 2)).toEqual([3]);
+    });
+  });
+
+  describe('not', function(){
+    it('should late eval truthy statments', function(){
+      lessThan2 = not(greaterThan2);
+      expect(lessThan2(1)).toBe(true);
     });
   });
   xdescribe('limit', function(){

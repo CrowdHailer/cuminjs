@@ -19,9 +19,14 @@
   
   var limit = _.compose(_.filter, hasK);
   var weed = _.compose(_.filter, hasNotK);
+  var pluck = _.compose(_.map, _.dot);
+
+  //not working
   var all = _.compose(_.reduce(true), and);
+  // end
   namespace.limit = limit;
   namespace.weed = weed;
   namespace.all = all;
+  namespace.pluck = pluck;
   // weed = _.compose(_.filter, not(hasK));
 }(_));

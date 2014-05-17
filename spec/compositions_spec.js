@@ -6,7 +6,7 @@ describe('compositions', function(){
       }).toThrow("Can't find variable: limit");
     });
     it('should make functions available on top namespace', function(){
-      _.expose('weed limit all '
+      _.expose('weed limit all pluck '
               );
       expect(function(){
         limit();
@@ -50,6 +50,13 @@ describe('compositions', function(){
     it('should not add values not on original', function(){
       var weeded = weed('a', 'd')(obj);
       expect(weeded).toEqual(Object.freeze({b: 2, c: 3}));
+    });
+  });
+
+  describe('pluck', function(){
+    it('should slectivly flatten array', function(){
+      var array = [{a: 1}, {a: 3}, {a: 2}];
+      expect(pluck('a')(array)).toEqual(Object.freeze([1, 3, 2]));
     });
   });
 

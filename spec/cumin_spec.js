@@ -60,7 +60,7 @@ describe('cumin utilities', function(){
       expect(dummy).toHaveBeenCalledWith(1, 0);
       expect(dummy).toHaveBeenCalledWith(2, 1);
     });
-    it('call the arguments array if give multi args', function(){
+    xit('call the arguments array if give multi args', function(){
       eachArr(dummy)(1, 2);
       expect(dummy).toHaveBeenCalledWith(1, 0);
       expect(dummy).toHaveBeenCalledWith(2, 1);
@@ -95,6 +95,9 @@ describe('cumin utilities', function(){
     });
     it('should filter from object', function(){
       expect(filter(greaterThan2)({x: 1, y: 3, z: 2})).toEqual({y: 3});
+    });
+    it('should filter from arguments', function(){
+      expect(filter(greaterThan2)(1, 3, 2)).toEqual([3]);
     });
   });
   describe('limit', function(){

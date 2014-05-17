@@ -14,9 +14,6 @@ var _ = (function(){
 
   function eachArr(operation){
     return function(arr){
-      if (arguments.length > 1) {
-        arr = Array.prototype.slice.call(arguments);
-      }
       var context = {empty: []};
       for (var i = 0; i < arr.length; i++) {
         item = arr[i];
@@ -27,6 +24,9 @@ var _ = (function(){
 
   function each(operation){
     return function(collection){
+      if (arguments.length > 1) {
+        collection = Array.prototype.slice.call(arguments);
+      }
       if (collection.length) {
         eachArr(operation)(collection);
       } else {
@@ -50,7 +50,7 @@ var _ = (function(){
   }
 
   function filter(operation){
-    return function(collection){
+    return function(){
       var results;
       each(function(item, index){
         results = this.empty;
@@ -60,7 +60,7 @@ var _ = (function(){
         }
         //add push methd to object
         // endless curry push function
-      })(collection);
+      }).apply({}, arguments);
       return results;
     };
   }

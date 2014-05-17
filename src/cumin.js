@@ -58,22 +58,10 @@ var _ = (function(){
           index = isArray(results)? results.length : index;
           results[index] = item;
         }
-        // endless curry push function
       }).apply({}, arguments);
       return results;
     };
   }
-
-  // function limit(){
-  //   var keys = Array.prototype.slice.call(arguments);
-  //   return function(obj){
-  //     var results = {};
-  //     eachArr(function(key){
-  //       results[key] = obj[key];
-  //     })(keys);
-  //     return results;
-  //   };
-  // }
 
   function extend(extention){
     return function(obj){

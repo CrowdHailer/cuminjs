@@ -1,13 +1,13 @@
 function hasK(permitted){
-  var permitted = argsToList(arguments);
+  permitted = argsToList(arguments);
   return function(value, key){
     return permitted.indexOf(key) !== -1;
   };
 }
-function hasNotK(permitted){
-  var permitted = argsToList(arguments);
+function hasNotK(forbidden){
+  forbidden = argsToList(arguments);
   return function(value, key){
-    return permitted.indexOf(key) === -1;
+    return forbidden.indexOf(key) === -1;
   };
 }
 function not(func){

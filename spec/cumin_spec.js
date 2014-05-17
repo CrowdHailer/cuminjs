@@ -21,6 +21,7 @@ describe('cumin utilities', function(){
     greaterThan2 = greater(2);
     dummy = jasmine.createSpy();
   });
+
   describe('expose', function(){
     // forceful, as, expose defaults such as filling missing keys with 0
     it('should leave main namespace clear', function(){
@@ -38,9 +39,8 @@ describe('cumin utilities', function(){
       }).not.toThrow();
     });
   });
+
   describe('each', function(){
-    beforeEach(function(){
-    });
     it('should call every element over an array', function(){
       each(dummy)([1, 2]);
       expect(dummy).toHaveBeenCalledWith(1, 0);
@@ -53,6 +53,7 @@ describe('cumin utilities', function(){
     });
 
   });
+
   describe('eachObj', function(){
     it('should each all values of an object', function(){
       eachObj(dummy)({x: 1, y: 2});
@@ -60,6 +61,7 @@ describe('cumin utilities', function(){
       expect(dummy).toHaveBeenCalledWith(2, 'y');
     });
   });
+
   describe('eachArr', function(){
     it('should each all values in an array', function(){
       eachArr(dummy)([1, 2]);
@@ -72,6 +74,7 @@ describe('cumin utilities', function(){
       expect(dummy).toHaveBeenCalledWith(2, 1);
     });
   });
+
   describe('map', function(){
     var add3All;
     beforeEach(function(){
@@ -90,6 +93,7 @@ describe('cumin utilities', function(){
       expect(answer).toEqual(Object.freeze([4, 5, 6]));
     });
   });
+
   describe('filter', function(){
     it('should filter from array', function(){
       expect(filter(greaterThan2)([1, 3, 2])).toEqual([3]);
@@ -108,24 +112,7 @@ describe('cumin utilities', function(){
       expect(lessThan2(1)).toBe(true);
     });
   });
-  xdescribe('limit', function(){
-    var obj;
-    beforeEach(function(){
-      obj = {a: 1, b: 2, c: 3};
-    });
-    it('should restrict on keys', function(){
-      var limited = limit('a')(obj);
-      expect(limited).toEqual({a: 1});
-    });
-    it('should restrict on multiple keys', function(){
-      var limited = limit('a', 'b')(obj);
-      expect(limited).toEqual({a: 1, b: 2});
-    });
-    it('should not add values not on original', function(){
-      var limited = limit('a', 'd')(obj);
-      expect(limited).toEqual({a: 1});
-    });
-  });
+
   describe('extend', function(){
     it('should extend an object', function(){
       var obj = {a: 1};
@@ -133,12 +120,14 @@ describe('cumin utilities', function(){
       expect(extended).toEqual({a: 1, e: 5});
     });
   });
+
   describe('compose', function(){
     it('should combine functions', function(){
       var compound = compose(add3, multiply2);
       expect(compound(2)).toEqual(7);
     });
   });
+  
   describe('dot', function(){
     it('should pull an objects value', function(){
       var person = {name: 'Mike'};

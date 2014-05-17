@@ -27,6 +27,16 @@ var _ = (function(){
     };
   }
 
+  function eachArrRight(operation){
+    return function(arr){
+      var context = {empty: []};
+      for (var i = arr.length - 1; i > -1; i--) {
+        item = arr[i];
+        operation.call(context, item, i);
+      }
+    };
+  }
+
   function each(operation){
     return function(collection){
       if (arguments.length > 1) {
@@ -134,6 +144,7 @@ var _ = (function(){
     extend: extend,
     filter: filter,
     reduce: reduce,
+    eachArrRight: eachArrRight
   };
   return _;
 }());

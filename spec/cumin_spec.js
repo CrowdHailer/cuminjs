@@ -31,7 +31,7 @@ describe('cumin utilities', function(){
     });
     it('should make functions available on top namespace', function(){
       _.expose('dot map each eachArr eachObj not reduce ' +
-               'compose dot extend filter'
+               'compose dot extend filter eachArrRight'
               );
       expect(function(){
         dot();
@@ -66,12 +66,15 @@ describe('cumin utilities', function(){
     it('should each all values in an array', function(){
       eachArr(dummy)([1, 2]);
       expect(dummy).toHaveBeenCalledWith(1, 0);
-      expect(dummy).toHaveBeenCalledWith(2, 1);
+      expect(dummy.mostRecentCall.args).toEqual([2, 1]);
     });
-    xit('call the arguments array if give multi args', function(){
-      eachArr(dummy)(1, 2);
-      expect(dummy).toHaveBeenCalledWith(1, 0);
+  });
+
+  describe('eachArrRight', function(){
+    it('should call with each value from last', function(){
+      eachArrRight(dummy)([1, 2]);
       expect(dummy).toHaveBeenCalledWith(2, 1);
+      expect(dummy.mostRecentCall.args).toEqual([1, 0]);
     });
   });
 

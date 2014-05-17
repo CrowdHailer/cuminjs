@@ -96,13 +96,13 @@ describe('cumin utilities', function(){
 
   describe('filter', function(){
     it('should filter from array', function(){
-      expect(filter(greaterThan2)([1, 3, 2])).toEqual([3]);
+      expect(filter(greaterThan2)([1, 3, 2])).toEqual(Object.freeze([3]));
     });
     it('should filter from object', function(){
-      expect(filter(greaterThan2)({x: 1, y: 3, z: 2})).toEqual({y: 3});
+      expect(filter(greaterThan2)({x: 1, y: 3, z: 2})).toEqual(Object.freeze({y: 3}));
     });
     it('should filter from arguments', function(){
-      expect(filter(greaterThan2)(1, 3, 2)).toEqual([3]);
+      expect(filter(greaterThan2)(1, 3, 2)).toEqual(Object.freeze([3]));
     });
   });
 

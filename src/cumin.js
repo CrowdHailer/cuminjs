@@ -59,7 +59,7 @@ var _ = (function(){
           results[index] = item;
         }
       }).apply({}, arguments);
-      return results;
+      return Object.freeze(results);
     };
   }
 

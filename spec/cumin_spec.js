@@ -30,7 +30,7 @@ describe('cumin utilities', function(){
       }).toThrow("Can't find variable: dot");
     });
     it('should make functions available on top namespace', function(){
-      _.expose('dot map each eachArr eachObj not ' +
+      _.expose('dot map each eachArr eachObj not reduce ' +
                'compose dot extend filter'
               );
       expect(function(){
@@ -103,6 +103,12 @@ describe('cumin utilities', function(){
     });
     it('should filter from arguments', function(){
       expect(filter(greaterThan2)(1, 3, 2)).toEqual([3]);
+    });
+  });
+
+  describe('reduce', function(){
+    it('should reduce a list', function(){
+      expect(_.reduce(add)([1, 2, 3])).toEqual(6);
     });
   });
 

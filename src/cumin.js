@@ -63,6 +63,16 @@ var _ = (function(){
     };
   }
 
+  function reduce(operation){
+    return function(collection){
+      memo = collection.shift();
+      each(function(item, index){
+        memo = operation(memo)(item);
+      })(collection);
+      return memo;
+    };
+  }
+
   function extend(extention){
     return function(obj){
       var results = Object.create({});
@@ -119,7 +129,8 @@ var _ = (function(){
     eachArr: eachArr,
     // limit: limit,
     extend: extend,
-    filter: filter
+    filter: filter,
+    reduce: reduce,
   };
   return _;
 }());

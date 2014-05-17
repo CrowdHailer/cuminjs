@@ -7,7 +7,7 @@ module.exports = function(config) {
       'src/cumin.js',
       'src/compositions.js',
       'spec/cumin_spec.js',
-      'spec/compositions_spec.js'
+      // 'spec/compositions_spec.js'
     ],
     exclude: [
     ],

@@ -146,6 +146,11 @@ describe('cumin utilities', function(){
       expect(all(singleCharKey)({x: 3, y: 4})).toBe(true);
       expect(all(singleCharKey)({xy: 3, y: 4})).toBe(false);
     });
+    it('should use values if not give a function', function(){
+      expect(all()([true, true])).toEqual(true);
+      expect(all()(true, false)).toEqual(false);
+      expect(all()({x: false})).toEqual(false);
+    });
   });
 
   describe('any', function(){

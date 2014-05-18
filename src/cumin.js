@@ -105,6 +105,7 @@ var _ = (function(){
 
   function all(operation){
     var memo = true;
+    operation = operation || I;
     return function(){
       each(function(item, location){
         memo = memo && operation(item, location);
@@ -184,7 +185,9 @@ var _ = (function(){
 
 // Components
 
-
+  function I(x){
+    return x;
+  }
 
   function dot(key){
     return function(obj){

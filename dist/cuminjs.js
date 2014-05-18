@@ -138,6 +138,16 @@ var _ = (function(){
     };
   }
 
+  function max(operation){
+    return function(collection){
+      var memo = collection.shift();
+      each(function(item){
+        memo = operation(memo) > operation(item) ? memo : item;
+      })(collection);
+      return memo;
+    };
+  }
+
 // Array
 
   function cyclic(n){
@@ -192,8 +202,7 @@ var _ = (function(){
 
   function not(func){
     return function(){
-      var args = argsToList(arguments);
-      return !func.apply({}, args);
+      return !func.apply({}, arguments);
     };
   }
 
@@ -236,7 +245,8 @@ var _ = (function(){
     extend: extend,
     filter: filter,
     reduce: reduce,
-    eachArrRight: eachArrRight
+    eachArrRight: eachArrRight,
+    max: max
   };
   return _;
 }());

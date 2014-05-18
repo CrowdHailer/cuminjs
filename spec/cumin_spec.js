@@ -32,7 +32,7 @@ describe('cumin utilities', function(){
     it('should make functions available on top namespace', function(){
       _.expose('dot map each eachArr eachObj not reduce ' +
                'compose dot extend filter eachArrRight ' +
-               'merge extend all any cyclic reject'
+               'merge extend all any cyclic reject max '
               );
       expect(function(){
         dot();
@@ -189,6 +189,18 @@ describe('cumin utilities', function(){
       expect(any()([true, true])).toEqual(true);
       expect(any()(true, false)).toEqual(true);
       expect(any()({x: false})).toEqual(false);
+    });
+  });
+
+  describe('max', function(){
+    var maxLength;
+    beforeEach(function(){
+      maxLength = max(function(item){
+        return item.length;
+      });
+    });
+    it('should return maximum using function from array', function(){
+      expect(maxLength(['a', 'bb'])).toEqual('bb');
     });
   });
 

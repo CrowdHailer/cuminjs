@@ -32,7 +32,7 @@ describe('cumin utilities', function(){
     it('should make functions available on top namespace', function(){
       _.expose('dot map each eachArr eachObj not reduce ' +
                'compose dot extend filter eachArrRight ' +
-               'merge extend all any cyclic reject max '
+               'merge extend all any cyclic reject max min '
               );
       expect(function(){
         dot();
@@ -192,6 +192,27 @@ describe('cumin utilities', function(){
     });
   });
 
+  describe('min', function(){
+    var minLength;
+    beforeEach(function(){
+      minLength = min(function(item){
+        return item.length;
+      });
+    });
+    it('should return minimum using function from array', function(){
+      expect(minLength(['a', 'bb'])).toEqual('a');
+    });
+    it('should return minimum from an array of one', function(){
+      expect(minLength(['bb'])).toEqual('bb');
+    });
+    xit('should return minimum from an object', function(){
+      expect(minLength({x: 'a', y: 'bb'})).toEqual({x: 'a'});
+    });
+    it('should return minimum from a selection of arguments', function(){
+      expect(minLength('a', 'bb')).toEqual('a');
+    });
+  });
+
   describe('max', function(){
     var maxLength;
     beforeEach(function(){
@@ -205,8 +226,8 @@ describe('cumin utilities', function(){
     it('should return maximum from an array of one', function(){
       expect(maxLength(['bb'])).toEqual('bb');
     });
-    it('should return maximum from an object', function(){
-      expect(maxLength(['bb'])).toEqual('bb');
+    xit('should return maximum from an object', function(){
+      expect(maxLength({x: 'a', y: 'bb'})).toEqual({y: 'bb'});
     });
     it('should return maximum from a selection of arguments', function(){
       expect(maxLength('a', 'bb')).toEqual('bb');

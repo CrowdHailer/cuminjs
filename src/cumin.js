@@ -127,6 +127,19 @@ var _ = (function(){
     };
   }
 
+  function min(operation){
+    return function(collection){
+      if (arguments.length > 1) {
+        collection = argsToList(arguments);
+      }
+      var memo = collection.shift();
+      each(function(item){
+        memo = operation(memo) < operation(item) ? memo : item;
+      })(collection);
+      return memo;
+    };
+  }
+
   function max(operation){
     return function(collection){
       if (arguments.length > 1) {
@@ -238,7 +251,8 @@ var _ = (function(){
     filter: filter,
     reduce: reduce,
     eachArrRight: eachArrRight,
-    max: max
+    max: max,
+    min: min
   };
   return _;
 }());

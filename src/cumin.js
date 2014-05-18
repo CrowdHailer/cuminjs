@@ -90,6 +90,8 @@ var _ = (function(){
     };
   }
 
+  var reject = compose(filter, not);
+
   function reduce(memo){
     return function(operation){
       return function(){
@@ -219,6 +221,7 @@ var _ = (function(){
     eachArr: eachArr,
     // limit: limit,
     merge: merge,
+    reject: reject,
     extend: extend,
     filter: filter,
     reduce: reduce,

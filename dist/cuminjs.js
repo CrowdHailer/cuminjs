@@ -1,14 +1,14 @@
-argsToList = function(x){
+var argsToList = function(x){
   return Array.prototype.slice.call(x);
-}
+};
 
-isArray = function(obj) {
-  return (obj && obj.constructor == Array);
-}
+var isArray = function(obj) {
+  return (obj && obj.constructor === Array);
+};
 
-isObj = function(obj) {
-  return (typeof obj == "object" && !isArray(obj));
-}
+var isObj = function(obj) {
+  return (typeof obj === "object" && !isArray(obj));
+};
 // Definitions
 // Arrays have index, element
 // Objects have key, value
@@ -28,7 +28,7 @@ var _ = (function(){
     return function(arr){
       var context = {empty: []};
       for (var i = 0; i < arr.length; i++) {
-        item = arr[i];
+        var item = arr[i];
         operation.call(context, item, i);
       }
     };

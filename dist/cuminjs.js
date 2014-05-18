@@ -134,6 +134,22 @@ var _ = (function(){
     };
   }
 
+// Array
+
+  function cyclic(n){
+    var results = [];
+    return function(collection){
+      eachArr(function(element, index){
+        if (index < n) {
+          results[index] = [element];
+        } else {
+          results[index % n].push(element);
+        }
+      })(collection);
+      return results;
+    };
+  }
+
 // Object 
 
   function merge(extention){
@@ -200,6 +216,7 @@ var _ = (function(){
     map: map,
     compose: compose,
     all: all,
+    cyclic: cyclic,
     any: any,
     not: not,
     dot: dot,
@@ -239,12 +256,12 @@ var _ = (function(){
   var weed = _.compose(_.filter, hasNotK);
   var pluck = _.compose(_.map, _.dot);
 
-  var every = _.reduce(true)(and);
+  // var every = _.reduce(true)(and);
 
 
   namespace.limit = limit;
   namespace.weed = weed;
-  namespace.every = every;
+  // namespace.every = every;
   namespace.pluck = pluck;
   namespace.and = and;
   // weed = _.compose(_.filter, not(hasK));

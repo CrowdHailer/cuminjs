@@ -6,7 +6,7 @@ describe('compositions', function(){
       }).toThrow("Can't find variable: limit");
     });
     it('should make functions available on top namespace', function(){
-      _.expose('weed limit all pluck '
+      _.expose('weed limit every pluck '
               );
       expect(function(){
         limit();
@@ -60,16 +60,21 @@ describe('compositions', function(){
     });
   });
 
-  xdescribe('all', function(){
+  describe('every', function(){
     // TODO solve this one as compositions
-    it('should check if all satisfy condition', function(){
+    it('should check if every satisfy condition', function(){
+      expect(every([true, true])).toEqual(true);
+      expect(every([true, false])).toEqual(false);
+    });
+    it('should be possible to make every statement', function(){
       function modulo(denominator){
         return function(number){
           return number % denominator;
         };
       }
-      var divisiblyBy2 = modulo(2);
-      expect(all(divisiblyBy2)([2,4,6])).toEqual(true);
+      var divisiblyBy2 = not(modulo(2));
+      var action = compose(reduce(true)(_.and), map(divisiblyBy2)) ;
+      expect(action([2, 4, 6])).toEqual(true);
     });
   });
 });

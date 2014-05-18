@@ -22,11 +22,18 @@
   var pluck = _.compose(_.map, _.dot);
 
   //not working
-  var all = _.compose(_.reduce(true), and);
+  // var every = _.compose(_.reduce, and);
+  var every = _.reduce(true)(and);
   // end
+
+
+  // var every = _.reduce(true)(function(memo){
+
+  // })
   namespace.limit = limit;
   namespace.weed = weed;
-  namespace.all = all;
+  namespace.every = every;
   namespace.pluck = pluck;
+  namespace.and = and;
   // weed = _.compose(_.filter, not(hasK));
 }(_));

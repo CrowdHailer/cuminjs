@@ -27,6 +27,9 @@ module.exports = function(grunt) {
     karma: {
       unit: {
         configFile: 'karma.conf.js'
+      },
+      min: {
+        configFile: 'karmamin.conf.js'
       }
     }
   });
@@ -34,5 +37,5 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-concat');
   grunt.loadNpmTasks('grunt-karma');
   grunt.loadNpmTasks('grunt-contrib-uglify');
-  grunt.registerTask('default', ['karma', 'concat', 'uglify']);
+  grunt.registerTask('default', ['karma:unit', 'concat', 'uglify', 'karma:min']);
 };

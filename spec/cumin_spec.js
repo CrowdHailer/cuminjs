@@ -202,6 +202,15 @@ describe('cumin utilities', function(){
     it('should return maximum using function from array', function(){
       expect(maxLength(['a', 'bb'])).toEqual('bb');
     });
+    it('should return maximum from an array of one', function(){
+      expect(maxLength(['bb'])).toEqual('bb');
+    });
+    it('should return maximum from an object', function(){
+      expect(maxLength(['bb'])).toEqual('bb');
+    });
+    it('should return maximum from a selection of arguments', function(){
+      expect(maxLength('a', 'bb')).toEqual('bb');
+    });
   });
 
   describe('cyclic', function(){

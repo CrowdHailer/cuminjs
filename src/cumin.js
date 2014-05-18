@@ -129,6 +129,9 @@ var _ = (function(){
 
   function max(operation){
     return function(collection){
+      if (arguments.length > 1) {
+        collection = argsToList(arguments);
+      }
       var memo = collection.shift();
       each(function(item){
         memo = operation(memo) > operation(item) ? memo : item;

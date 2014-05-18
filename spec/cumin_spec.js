@@ -32,7 +32,7 @@ describe('cumin utilities', function(){
     it('should make functions available on top namespace', function(){
       _.expose('dot map each eachArr eachObj not reduce ' +
                'compose dot extend filter eachArrRight ' +
-               'merge extend all '
+               'merge extend all any '
               );
       expect(function(){
         dot();
@@ -145,6 +145,28 @@ describe('cumin utilities', function(){
       }
       expect(all(singleCharKey)({x: 3, y: 4})).toBe(true);
       expect(all(singleCharKey)({xy: 3, y: 4})).toBe(false);
+    });
+  });
+
+  describe('any', function(){
+    it('should check elements of an array', function(){
+      expect(any(greaterThan2)([1, 4])).toBe(true);
+      expect(any(greaterThan2)([1, 0])).toBe(false);
+    });
+    it('should check values of an object', function(){
+      expect(any(greaterThan2)({x: 1, y: 4})).toBe(true);
+      expect(any(greaterThan2)({x: 0, y: 1})).toBe(false);
+    });
+    it('should check all arguments', function(){
+      expect(any(greaterThan2)(1, 4)).toBe(true);
+      expect(any(greaterThan2)(1, 0)).toBe(false);
+    });
+    it('should optionally check object keys', function(){
+      function singleCharKey(value, key){
+        return key.length === 1;
+      }
+      expect(any(singleCharKey)({x: 3, y: 4})).toBe(true);
+      expect(any(singleCharKey)({xy: 3, cy: 4})).toBe(false);
     });
   });
 

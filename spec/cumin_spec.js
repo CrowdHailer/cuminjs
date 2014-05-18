@@ -139,6 +139,13 @@ describe('cumin utilities', function(){
       expect(all(greaterThan2)(3, 4)).toBe(true);
       expect(all(greaterThan2)(1, 0)).toBe(false);
     });
+    it('should optionally check object keys', function(){
+      function singleCharKey(value, key){
+        return key.length === 1;
+      }
+      expect(all(singleCharKey)({x: 3, y: 4})).toBe(true);
+      expect(all(singleCharKey)({xy: 3, y: 4})).toBe(false);
+    });
   });
 
   describe('not', function(){

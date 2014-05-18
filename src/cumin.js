@@ -107,7 +107,7 @@ var _ = (function(){
     var memo = true;
     return function(){
       each(function(item, location){
-        memo = memo && operation(item);
+        memo = memo && operation(item, location);
       }).apply({}, arguments);
       return memo;
     };

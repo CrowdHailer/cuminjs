@@ -1,23 +1,19 @@
-// definitions
+// Definitions
 // Arrays have index, element
 // Objects have key, value
-// Colletions have location???, item
+// Colletions have location, item
 
+// uses underscore namespace,
+// provides duplicate functionality for underscore.
+
+// functions return frozen objects
 var _ = (function(){
-  //option of immutable return
-  // pass index/key to func
-  function eachObj(operation){
-    return function(obj){
-      var keys = Object.keys(obj);
-      var context = {empty: {}};
-      eachArr(function(key){
-        var value = obj[key];
-        operation.call(context, value, key);
-      })(keys);
-    };
-  }
+
+// basic iterators
 
   function eachArr(operation){
+  // iterates array left to right
+  // assumes array type
     return function(arr){
       var context = {empty: []};
       for (var i = 0; i < arr.length; i++) {
@@ -28,16 +24,33 @@ var _ = (function(){
   }
 
   function eachArrRight(operation){
+  // iterates array right to left
+  // assumes array type
     return function(arr){
       var context = {empty: []};
-      for (var i = arr.length - 1; i > -1; i--) {
-        item = arr[i];
-        operation.call(context, item, i);
+      for (var index = arr.length - 1; index > -1; index--) {
+        item = arr[index];
+        operation.call(context, item, index);
       }
     };
   }
 
+  function eachObj(operation){
+  // iterates through object key/value pairs
+  // no order assumed
+    return function(obj){
+      var keys = Object.keys(obj);
+      var context = {empty: {}};
+      eachArr(function(key){
+        var value = obj[key];
+        operation.call(context, value, key);
+      })(keys);
+    };
+  }
+
   function each(operation){
+  // iterates through object/array/arguments
+  // iterates left to right when given array/arguments
     return function(collection){
       if (arguments.length > 1) {
         collection = argsToList(arguments);
@@ -50,12 +63,14 @@ var _ = (function(){
     };
   }
 
+// Basic collection operations
+
   function map(operation){
     return function(){
       var results;
-      each(function(item, index){
+      each(function(item, location){
         results = this.empty;
-        results[index] = operation.call({}, item, index);
+        results[location] = operation.call({}, item, location);
       }).apply({}, arguments);
       return Object.freeze(results);
     };
@@ -64,11 +79,11 @@ var _ = (function(){
   function filter(operation){
     return function(){
       var results;
-      each(function(item, index){
+      each(function(item, location){
         results = this.empty;
-        if (operation.call({}, item, index)) {
-          index = isArray(results)? results.length : index;
-          results[index] = item;
+        if (operation.call({}, item, location)) {
+          location = isArray(results)? results.length : location;
+          results[location] = item;
         }
       }).apply({}, arguments);
       return Object.freeze(results);
@@ -86,6 +101,8 @@ var _ = (function(){
     };
   }
 
+// Object 
+
   function extend(extention){
     return function(obj){
       var results = Object.create({});
@@ -98,6 +115,8 @@ var _ = (function(){
       return results;
     };
   }
+
+// Function operations
 
   function compose(){
     var funcs = arguments;
@@ -122,6 +141,8 @@ var _ = (function(){
       return obj[key];
     };
   }
+
+// Utilities
 
   function expose(nameList){
     var fNames = nameList.split(' ');

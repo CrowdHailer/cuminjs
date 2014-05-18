@@ -21,15 +21,9 @@
   var weed = _.compose(_.filter, hasNotK);
   var pluck = _.compose(_.map, _.dot);
 
-  //not working
-  // var every = _.compose(_.reduce, and);
   var every = _.reduce(true)(and);
-  // end
 
 
-  // var every = _.reduce(true)(function(memo){
-
-  // })
   namespace.limit = limit;
   namespace.weed = weed;
   namespace.every = every;

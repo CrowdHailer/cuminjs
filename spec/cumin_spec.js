@@ -40,28 +40,6 @@ describe('cumin utilities', function(){
     });
   });
 
-  describe('each', function(){
-    it('should call every element over an array', function(){
-      each(dummy)([1, 2]);
-      expect(dummy).toHaveBeenCalledWith(1, 0);
-      expect(dummy).toHaveBeenCalledWith(2, 1);
-    });
-    it('should call every value in an object', function(){
-      each(dummy)({x: 1, y: 2});
-      expect(dummy).toHaveBeenCalledWith(1, 'x');
-      expect(dummy).toHaveBeenCalledWith(2, 'y');
-    });
-
-  });
-
-  describe('eachObj', function(){
-    it('should each all values of an object', function(){
-      eachObj(dummy)({x: 1, y: 2});
-      expect(dummy).toHaveBeenCalledWith(1, 'x');
-      expect(dummy).toHaveBeenCalledWith(2, 'y');
-    });
-  });
-
   describe('eachArr', function(){
     it('should each all values in an array', function(){
       eachArr(dummy)([1, 2]);
@@ -76,6 +54,28 @@ describe('cumin utilities', function(){
       expect(dummy).toHaveBeenCalledWith(2, 1);
       expect(dummy.mostRecentCall.args).toEqual([1, 0]);
     });
+  });
+
+  describe('eachObj', function(){
+    it('should each all values of an object', function(){
+      eachObj(dummy)({x: 1, y: 2});
+      expect(dummy).toHaveBeenCalledWith(1, 'x');
+      expect(dummy).toHaveBeenCalledWith(2, 'y');
+    });
+  });
+
+  describe('each', function(){
+    it('should call every element over an array', function(){
+      each(dummy)([1, 2]);
+      expect(dummy).toHaveBeenCalledWith(1, 0);
+      expect(dummy).toHaveBeenCalledWith(2, 1);
+    });
+    it('should call every value in an object', function(){
+      each(dummy)({x: 1, y: 2});
+      expect(dummy).toHaveBeenCalledWith(1, 'x');
+      expect(dummy).toHaveBeenCalledWith(2, 'y');
+    });
+
   });
 
   describe('map', function(){

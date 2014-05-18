@@ -32,7 +32,7 @@ describe('cumin utilities', function(){
     it('should make functions available on top namespace', function(){
       _.expose('dot map each eachArr eachObj not reduce ' +
                'compose dot extend filter eachArrRight ' +
-               'merge extend all any '
+               'merge extend all any cyclic'
               );
       expect(function(){
         dot();
@@ -167,6 +167,13 @@ describe('cumin utilities', function(){
       }
       expect(any(singleCharKey)({x: 3, y: 4})).toBe(true);
       expect(any(singleCharKey)({xy: 3, cy: 4})).toBe(false);
+    });
+  });
+
+  describe('cyclic', function(){
+    it('should cyclicly fill results array', function(){
+      var answer = cyclic(3)([0, 1, 2, 3, 4, 5]);
+      expect(answer).toEqual([[0, 3], [1, 4], [2, 5]]);
     });
   });
 

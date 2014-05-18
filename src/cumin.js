@@ -123,6 +123,22 @@ var _ = (function(){
     };
   }
 
+// Array
+
+  function cyclic(n){
+    var results = [];
+    return function(collection){
+      eachArr(function(element, index){
+        if (index < n) {
+          results[index] = [element];
+        } else {
+          results[index % n].push(element);
+        }
+      })(collection);
+      return results;
+    };
+  }
+
 // Object 
 
   function merge(extention){
@@ -189,6 +205,7 @@ var _ = (function(){
     map: map,
     compose: compose,
     all: all,
+    cyclic: cyclic,
     any: any,
     not: not,
     dot: dot,

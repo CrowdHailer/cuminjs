@@ -7,6 +7,8 @@
 // provides duplicate functionality for underscore.
 
 // functions return frozen objects
+
+// JavaScript all things? function(executable method invokable), collection, primitive, void(null undef)
 var _ = (function(){
 
 // basic iterators

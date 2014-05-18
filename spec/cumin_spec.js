@@ -31,7 +31,8 @@ describe('cumin utilities', function(){
     });
     it('should make functions available on top namespace', function(){
       _.expose('dot map each eachArr eachObj not reduce ' +
-               'compose dot extend filter eachArrRight merge extend '
+               'compose dot extend filter eachArrRight ' +
+               'merge extend all '
               );
       expect(function(){
         dot();
@@ -122,6 +123,13 @@ describe('cumin utilities', function(){
     });
     it('should reduce arguments', function(){
       expect(sum(1, 2, 3)).toEqual(6);
+    });
+  });
+
+  describe('all', function(){
+    it('should check elements of an array', function(){
+      expect(all(greaterThan2)([3, 4])).toBe(true);
+      expect(all(greaterThan2)([1, 0])).toBe(false);
     });
   });
 

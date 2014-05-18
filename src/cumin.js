@@ -101,6 +101,18 @@ var _ = (function(){
     };
   }
 
+// Higher collection operations
+
+  function all(operation){
+    var memo = true;
+    return function(){
+      each(function(item, location){
+        memo = memo && operation(item);
+      }).apply({}, arguments);
+      return memo;
+    };
+  }
+
 // Object 
 
   function merge(extention){
@@ -144,6 +156,10 @@ var _ = (function(){
     };
   }
 
+// Components
+
+
+
   function dot(key){
     return function(obj){
       return obj[key];
@@ -162,6 +178,7 @@ var _ = (function(){
   var _ =  {
     map: map,
     compose: compose,
+    all: all,
     not: not,
     dot: dot,
     expose: expose,

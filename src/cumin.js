@@ -113,6 +113,16 @@ var _ = (function(){
     };
   }
 
+  function any(operation){
+    var memo = false;
+    return function(){
+      each(function(item, location){
+        memo = memo || operation(item, location);
+      }).apply({}, arguments);
+      return memo;
+    };
+  }
+
 // Object 
 
   function merge(extention){
@@ -179,6 +189,7 @@ var _ = (function(){
     map: map,
     compose: compose,
     all: all,
+    any: any,
     not: not,
     dot: dot,
     expose: expose,

@@ -116,6 +116,7 @@ var _ = (function(){
 
   function any(operation){
     var memo = false;
+    operation = operation || I;
     return function(){
       each(function(item, location){
         memo = memo || operation(item, location);

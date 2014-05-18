@@ -173,6 +173,11 @@ describe('cumin utilities', function(){
       expect(any(singleCharKey)({x: 3, y: 4})).toBe(true);
       expect(any(singleCharKey)({xy: 3, cy: 4})).toBe(false);
     });
+    it('should use values if not give a function', function(){
+      expect(any()([true, true])).toEqual(true);
+      expect(any()(true, false)).toEqual(true);
+      expect(any()({x: false})).toEqual(false);
+    });
   });
 
   describe('cyclic', function(){

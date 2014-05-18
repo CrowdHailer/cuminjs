@@ -235,26 +235,32 @@ var _ = (function(){
   }
 
   var _ =  {
-    map: map,
-    compose: compose,
-    all: all,
-    cyclic: cyclic,
-    any: any,
-    not: not,
-    dot: dot,
-    expose: expose,
-    each: each,
-    eachObj: eachObj,
     eachArr: eachArr,
-    // limit: limit,
-    merge: merge,
-    reject: reject,
-    extend: extend,
-    filter: filter,
-    reduce: reduce,
     eachArrRight: eachArrRight,
+    eachObj: eachObj,
+    each: each,
+
+    map: map,
+    filter: filter,
+    reject: reject,
+    reduce: reduce,
+
+    all: all, //poss every 
+    any: any, //poss sum use any as anything eg first from obj or and shift to obj
+    min: min, 
     max: max,
-    min: min
+
+    cyclic: cyclic,
+    merge: merge,
+    extend: extend,
+
+    compose: compose,
+    not: not,
+
+    I: I,
+    dot: dot,
+
+    expose: expose,
   };
   return _;
 }());

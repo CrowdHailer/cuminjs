@@ -114,7 +114,7 @@ var _ = (function(){
 
 // Object 
 
-  function extend(extention){
+  function merge(extention){
     return function(obj){
       var results = Object.create({});
       eachArr(function(key){
@@ -124,6 +124,14 @@ var _ = (function(){
         results[key] = extention[key];
       })(Object.keys(extention));
       return results;
+    };
+  }
+
+  function extend(extra){
+    return function(object){
+      eachObj(function(value, key){
+        object[key] = value;
+      })(extra);
     };
   }
 
@@ -172,6 +180,7 @@ var _ = (function(){
     eachObj: eachObj,
     eachArr: eachArr,
     // limit: limit,
+    merge: merge,
     extend: extend,
     filter: filter,
     reduce: reduce,

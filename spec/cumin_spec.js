@@ -31,7 +31,7 @@ describe('cumin utilities', function(){
     });
     it('should make functions available on top namespace', function(){
       _.expose('dot map each eachArr eachObj not reduce ' +
-               'compose dot extend filter eachArrRight'
+               'compose dot extend filter eachArrRight merge extend '
               );
       expect(function(){
         dot();
@@ -132,11 +132,21 @@ describe('cumin utilities', function(){
     });
   });
 
+  describe('merge', function(){
+    it('should merge an object', function(){
+      var obj = {a: 1};
+      var extended = merge({e: 5})(obj);
+      expect(extended).toEqual({a: 1, e: 5});
+    });
+  });
+
   describe('extend', function(){
     it('should extend an object', function(){
-      var obj = {a: 1};
-      var extended = extend({e: 5})(obj);
-      expect(extended).toEqual({a: 1, e: 5});
+      var a = function(a){ return true; };
+      var b = {x: 5};
+      extend(b)(a);
+      expect(a()).toBe(true);
+      expect(a.x).toEqual(5);
     });
   });
 

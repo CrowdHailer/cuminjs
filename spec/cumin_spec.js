@@ -135,6 +135,10 @@ describe('cumin utilities', function(){
       expect(all(greaterThan2)({x: 3, y: 4})).toBe(true);
       expect(all(greaterThan2)({x: 0, y: 1})).toBe(false);
     });
+    it('should check all arguments', function(){
+      expect(all(greaterThan2)(3, 4)).toBe(true);
+      expect(all(greaterThan2)(1, 0)).toBe(false);
+    });
   });
 
   describe('not', function(){

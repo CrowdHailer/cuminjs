@@ -211,6 +211,9 @@ describe('cumin utilities', function(){
     it('should return minimum from a selection of arguments', function(){
       expect(minLength('a', 'bb')).toEqual('a');
     });
+    it('should work from values given no comparison', function(){
+      expect(min()([1, 2, 3, 4])).toEqual(1);
+    });
   });
 
   describe('max', function(){
@@ -231,6 +234,9 @@ describe('cumin utilities', function(){
     });
     it('should return maximum from a selection of arguments', function(){
       expect(maxLength('a', 'bb')).toEqual('bb');
+    });
+    it('should work from values', function(){
+      expect(max()(1, 2, 3)).toEqual(3);
     });
   });
 

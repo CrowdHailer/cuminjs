@@ -270,6 +270,12 @@ describe('cumin utilities', function(){
       expect(a()).toBe(true);
       expect(a.x).toEqual(5);
     });
+    it('should overwrite second object', function(){
+      var a = {x: 5};
+      var b = {x: 7};
+      extend(b)(a);
+      expect(a.x).toEqual(7);
+    });
   });
 
   describe('compose', function(){

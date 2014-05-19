@@ -18,6 +18,8 @@ var isObj = function(obj) {
 // provides duplicate functionality for underscore.
 
 // functions return frozen objects
+
+// JavaScript all things? function(executable method invokable), collection, primitive, void(null undef)
 var _ = (function(){
 
 // basic iterators
@@ -205,6 +207,16 @@ var _ = (function(){
     };
   }
 
+
+  function basic(object){
+    return function(extra){
+      eachObj(function(value, key){
+        object[key] = value;
+      })(extra);
+    };
+  }
+
+
 // Function operations
 
   function compose(){
@@ -264,6 +276,7 @@ var _ = (function(){
     cyclic: cyclic,
     merge: merge,
     extend: extend,
+    basic: basic,
 
     compose: compose,
     not: not,

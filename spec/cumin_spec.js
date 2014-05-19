@@ -32,7 +32,8 @@ describe('cumin utilities', function(){
     it('should make functions available on top namespace', function(){
       _.expose('dot map each eachArr eachObj not reduce ' +
                'compose dot extend filter eachArrRight ' +
-               'merge extend all any cyclic reject max min '
+               'merge extend all any cyclic reject max min ' +
+               'basic '
               );
       expect(function(){
         dot();
@@ -275,6 +276,15 @@ describe('cumin utilities', function(){
       var b = {x: 7};
       extend(b)(a);
       expect(a.x).toEqual(7);
+    });
+  });
+
+  describe('basic', function(){
+    it('should build an object from defaults', function(){
+      var basicObj = {x: 5};
+      var b = {x: 7};
+      basic(basicObj)(b);
+      expect(basicObj.x).toEqual(7);
     });
   });
 

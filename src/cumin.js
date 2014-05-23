@@ -40,13 +40,11 @@ var _ = (function(){
   function eachObject(operation){
   // iterates through object key/value pairs
   // no order assumed
-    return function(obj){
-      var keys = Object.keys(obj);
+    return function(object){
       var context = {empty: {}};
       eachArray(function(key){
-        var value = obj[key];
-        operation.call(context, value, key);
-      })(keys);
+        operation.call(context, object[key], key);
+      })(Object.keys(object));
     };
   }
 

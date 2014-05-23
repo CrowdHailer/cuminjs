@@ -37,7 +37,7 @@ var _ = (function(){
     };
   }
 
-  function eachObj(operation){
+  function eachObject(operation){
   // iterates through object key/value pairs
   // no order assumed
     return function(obj){
@@ -60,7 +60,7 @@ var _ = (function(){
       if (isArray(collection)) {
         eachArray(operation)(collection);
       } else {
-        eachObj(operation)(collection);
+        eachObject(operation)(collection);
       }
     };
   }
@@ -190,7 +190,7 @@ var _ = (function(){
 
   function extend(extra){
     return function(object){
-      eachObj(function(value, key){
+      eachObject(function(value, key){
         object[key] = value;
       })(extra);
     };
@@ -199,7 +199,7 @@ var _ = (function(){
 
   function basic(object){
     return function(extra){
-      eachObj(function(value, key){
+      eachObject(function(value, key){
         object[key] = value;
       })(extra);
     };
@@ -249,7 +249,7 @@ var _ = (function(){
   var _ =  {
     eachArray: eachArray,
     eachArrayRight: eachArrayRight,
-    eachObj: eachObj,
+    eachObject: eachObject,
     each: each,
 
     map: map,

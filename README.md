@@ -13,7 +13,8 @@ Iterates over an array of elements, with increasing index, from index 0 to lengt
 **eachArrayRight** `_.eachArrayRight(operation)(array)`  
 Iterates over an array of elements, with decreasing index, from index length-1 to 0. The operation is called for each element with two arguments `(element, index)` *This is the reverse operation to eachArray*
 
-- **eachObj**
+**eachObj** 
+
 - **each**
 
 - **map**
@@ -63,6 +64,9 @@ _.expose('map dot')
 map() // valid
 dot() // valid
 ```
+
+### Future possibilities
+include breaker;
 
 ### Inspired by
 - [underscore.js](http://underscorejs.org/)

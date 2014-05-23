@@ -89,7 +89,14 @@ describe('cumin utilities', function(){
       expect(dummy).toHaveBeenCalledWith(1, 'x');
       expect(dummy).toHaveBeenCalledWith(2, 'y');
     });
-
+    it('should not call operation for an empty array', function(){
+      each(dummy)([]);
+      expect(dummy).not.toHaveBeenCalled();
+    });
+    it('should not call operation for an empty object', function(){
+      each(dummy)({});
+      expect(dummy).not.toHaveBeenCalled();
+    });
   });
 
   describe('map', function(){

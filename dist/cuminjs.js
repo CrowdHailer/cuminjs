@@ -48,16 +48,14 @@ var _ = (function(){
     };
   }
 
-  function eachObj(operation){
+  function eachObject(operation){
   // iterates through object key/value pairs
   // no order assumed
-    return function(obj){
-      var keys = Object.keys(obj);
+    return function(object){
       var context = {empty: {}};
       eachArray(function(key){
-        var value = obj[key];
-        operation.call(context, value, key);
-      })(keys);
+        operation.call(context, object[key], key);
+      })(Object.keys(object));
     };
   }
 
@@ -71,7 +69,7 @@ var _ = (function(){
       if (isArray(collection)) {
         eachArray(operation)(collection);
       } else {
-        eachObj(operation)(collection);
+        eachObject(operation)(collection);
       }
     };
   }
@@ -201,7 +199,7 @@ var _ = (function(){
 
   function extend(extra){
     return function(object){
-      eachObj(function(value, key){
+      eachObject(function(value, key){
         object[key] = value;
       })(extra);
     };
@@ -210,7 +208,7 @@ var _ = (function(){
 
   function basic(object){
     return function(extra){
-      eachObj(function(value, key){
+      eachObject(function(value, key){
         object[key] = value;
       })(extra);
     };
@@ -260,7 +258,7 @@ var _ = (function(){
   var _ =  {
     eachArray: eachArray,
     eachArrayRight: eachArrayRight,
-    eachObj: eachObj,
+    eachObject: eachObject,
     each: each,
 
     map: map,

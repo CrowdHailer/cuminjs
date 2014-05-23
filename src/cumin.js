@@ -223,7 +223,7 @@ var _ = (function(){
     };
   }
 
-// Components
+// Utilities
 
   function I(x){
     return x;
@@ -235,7 +235,19 @@ var _ = (function(){
     };
   }
 
-// Utilities
+  function times(n){
+    return function(operation){
+      for (var i = 0; i < n; i++){
+        operation();
+      }
+    };
+  }
+
+  function random(max){
+    return function(){
+      return Math.random()*max|0;
+    }
+  }
 
   function expose(nameList){
     var fNames = nameList.split(' ');
@@ -270,6 +282,8 @@ var _ = (function(){
 
     I: I,
     dot: dot,
+    times: times,
+    random: random,
 
     expose: expose,
   };

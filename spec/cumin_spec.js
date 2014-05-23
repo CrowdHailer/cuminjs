@@ -33,7 +33,7 @@ describe('cumin utilities', function(){
       _.expose('dot map each eachArray eachObject not reduce ' +
                'compose dot extend filter eachArrayRight ' +
                'merge extend all any cyclic reject max min ' +
-               'basic '
+               'basic times random '
               );
       expect(function(){
         dot();
@@ -324,6 +324,32 @@ describe('cumin utilities', function(){
       var person = {name: 'Mike'};
       var name = dot('name');
       expect(name(person)).toEqual('Mike');
+    });
+  });
+
+  describe('times', function(){
+    it('should call a function n times', function(){
+      var thrice = times(3);
+      thrice(dummy);
+      expect(dummy.calls.length).toEqual(3);
+    });
+    it('should not call the function given 0 or less', function(){
+      times(0)(dummy);
+      times(-1)(dummy);
+      expect(dummy.calls.length).toEqual(0);
+    });
+  });
+  describe('random', function(){
+    it('should return a number from 0 up to but not including max', function(){
+      var val = random()();
+      var val2 = random(4);
+      var array = map(function(){
+        return val2();
+      })([1,1,1,1]);
+      expect(all(function(element){
+        return -1 < element && element < 4;
+      })(array)).toBe(true);
+      expect(val).toBe(0);
     });
   });
 });

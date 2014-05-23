@@ -7,10 +7,17 @@ cumin.js
 [![Code Climate](https://codeclimate.com/github/CrowdHailer/cuminjs/coverage.png)](https://codeclimate.com/github/CrowdHailer/cuminjs)
 
 ### Core functions
-- **eachArr**
-- **eachArrRight**
-- **eachObj**
-- **each**
+**eachArray** `_.eachArray(operation)(array)`  
+Iterates over an array of elements, with increasing index, from index 0 to length-1. The operation is called for each element with two arguments `(element, index)`
+
+**eachArrayRight** `_.eachArrayRight(operation)(array)`  
+Iterates over an array of elements, with decreasing index, from index length-1 to 0. The operation is called for each element with two arguments `(element, index)` *This is the reverse operation to eachArray*
+
+**eachObj** `_.eachObject(operation)(object)`  
+Iterates through all key value pairs on an object. The operation is called for each pair with two arguments `(value, key)`
+
+**each** `_.each(operation)(object)`  
+Iterates through collection (array, object, arguments). No order is guarenteed. The operations is called for each item with two arguments `(item, location)`
 
 - **map**
 - **filter**
@@ -59,6 +66,9 @@ _.expose('map dot')
 map() // valid
 dot() // valid
 ```
+
+### Future possibilities
+include breaker;
 
 ### Inspired by
 - [underscore.js](http://underscorejs.org/)

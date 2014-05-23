@@ -24,40 +24,38 @@ var _ = (function(){
 
 // basic iterators
 
-  function eachArr(operation){
+  function eachArray(operation){
   // iterates array left to right
   // assumes array type
-    return function(arr){
+    return function(array){
       var context = {empty: []};
-      for (var i = 0; i < arr.length; i++) {
-        var item = arr[i];
+      for (var i = 0; i < array.length; i++) {
+        var item = array[i];
         operation.call(context, item, i);
       }
     };
   }
 
-  function eachArrRight(operation){
+  function eachArrayRight(operation){
   // iterates array right to left
   // assumes array type
-    return function(arr){
+    return function(array){
       var context = {empty: []};
-      for (var index = arr.length - 1; index > -1; index--) {
-        item = arr[index];
+      for (var index = array.length - 1; index > -1; index--) {
+        item = array[index];
         operation.call(context, item, index);
       }
     };
   }
 
-  function eachObj(operation){
+  function eachObject(operation){
   // iterates through object key/value pairs
   // no order assumed
-    return function(obj){
-      var keys = Object.keys(obj);
+    return function(object){
       var context = {empty: {}};
-      eachArr(function(key){
-        var value = obj[key];
-        operation.call(context, value, key);
-      })(keys);
+      eachArray(function(key){
+        operation.call(context, object[key], key);
+      })(Object.keys(object));
     };
   }
 
@@ -69,9 +67,9 @@ var _ = (function(){
         collection = argsToList(arguments);
       }
       if (isArray(collection)) {
-        eachArr(operation)(collection);
+        eachArray(operation)(collection);
       } else {
-        eachObj(operation)(collection);
+        eachObject(operation)(collection);
       }
     };
   }
@@ -173,7 +171,7 @@ var _ = (function(){
   function cyclic(n){
     var results = [];
     return function(collection){
-      eachArr(function(element, index){
+      eachArray(function(element, index){
         if (index < n) {
           results[index] = [element];
         } else {
@@ -189,10 +187,10 @@ var _ = (function(){
   function merge(extention){
     return function(obj){
       var results = Object.create({});
-      eachArr(function(key){
+      eachArray(function(key){
         results[key] = obj[key];
       })(Object.keys(obj));
-      eachArr(function(key){
+      eachArray(function(key){
         results[key] = extention[key];
       })(Object.keys(extention));
       return results;
@@ -201,7 +199,7 @@ var _ = (function(){
 
   function extend(extra){
     return function(object){
-      eachObj(function(value, key){
+      eachObject(function(value, key){
         object[key] = value;
       })(extra);
     };
@@ -210,7 +208,7 @@ var _ = (function(){
 
   function basic(object){
     return function(extra){
-      eachObj(function(value, key){
+      eachObject(function(value, key){
         object[key] = value;
       })(extra);
     };
@@ -223,7 +221,7 @@ var _ = (function(){
     var funcs = arguments;
     return function(){
       var args = arguments;
-      eachArrRight(function(func){
+      eachArrayRight(function(func){
         args = [func.apply(this, args)];
       })(funcs);
       return args[0];
@@ -252,15 +250,15 @@ var _ = (function(){
 
   function expose(nameList){
     var fNames = nameList.split(' ');
-    eachArr(function(fName){
+    eachArray(function(fName){
       window[fName] = _[fName];
     })(fNames);
   }
 
   var _ =  {
-    eachArr: eachArr,
-    eachArrRight: eachArrRight,
-    eachObj: eachObj,
+    eachArray: eachArray,
+    eachArrayRight: eachArrayRight,
+    eachObject: eachObject,
     each: each,
 
     map: map,

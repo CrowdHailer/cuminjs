@@ -30,8 +30,8 @@ describe('cumin utilities', function(){
       }).toThrow("Can't find variable: dot");
     });
     it('should make functions available on top namespace', function(){
-      _.expose('dot map each eachArr eachObj not reduce ' +
-               'compose dot extend filter eachArrRight ' +
+      _.expose('dot map each eachArray eachObject not reduce ' +
+               'compose dot extend filter eachArrayRight ' +
                'merge extend all any cyclic reject max min ' +
                'basic '
               );
@@ -42,27 +42,39 @@ describe('cumin utilities', function(){
     });
   });
 
-  describe('eachArr', function(){
+  describe('eachArray', function(){
     it('should each all values in an array', function(){
-      eachArr(dummy)([1, 2]);
+      eachArray(dummy)([1, 2]);
       expect(dummy).toHaveBeenCalledWith(1, 0);
       expect(dummy.mostRecentCall.args).toEqual([2, 1]);
     });
-  });
-
-  describe('eachArrRight', function(){
-    it('should call with each value from last', function(){
-      eachArrRight(dummy)([1, 2]);
-      expect(dummy).toHaveBeenCalledWith(2, 1);
-      expect(dummy.mostRecentCall.args).toEqual([1, 0]);
+    it('should not call for an empty array', function(){
+      eachArray(dummy)([]);
+      expect(dummy).not.toHaveBeenCalled();
     });
   });
 
-  describe('eachObj', function(){
+  describe('eachArrayRight', function(){
+    it('should call with each value from last', function(){
+      eachArrayRight(dummy)([1, 2]);
+      expect(dummy).toHaveBeenCalledWith(2, 1);
+      expect(dummy.mostRecentCall.args).toEqual([1, 0]);
+    });
+    it('should not call for an empty array', function(){
+      eachArrayRight(dummy)([]);
+      expect(dummy).not.toHaveBeenCalled();
+    });
+  });
+
+  describe('eachObject', function(){
     it('should each all values of an object', function(){
-      eachObj(dummy)({x: 1, y: 2});
+      eachObject(dummy)({x: 1, y: 2});
       expect(dummy).toHaveBeenCalledWith(1, 'x');
       expect(dummy).toHaveBeenCalledWith(2, 'y');
+    });
+    it('should not have been called for an empty object', function(){
+      eachObject(dummy)({});
+      expect(dummy).not.toHaveBeenCalled();
     });
   });
 
@@ -77,7 +89,19 @@ describe('cumin utilities', function(){
       expect(dummy).toHaveBeenCalledWith(1, 'x');
       expect(dummy).toHaveBeenCalledWith(2, 'y');
     });
-
+    it('should call operation for a list of arguments', function(){
+      each(dummy)(1, 2);
+      expect(dummy).toHaveBeenCalledWith(1, 0);
+      expect(dummy).toHaveBeenCalledWith(2, 1);
+    });
+    it('should not call operation for an empty array', function(){
+      each(dummy)([]);
+      expect(dummy).not.toHaveBeenCalled();
+    });
+    it('should not call operation for an empty object', function(){
+      each(dummy)({});
+      expect(dummy).not.toHaveBeenCalled();
+    });
   });
 
   describe('map', function(){

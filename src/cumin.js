@@ -235,6 +235,14 @@ var _ = (function(){
     };
   }
 
+  function times(n){
+    return function(operation){
+      for (var i = 0; i < n; i++){
+        operation()
+      }
+    };
+  }
+
   function expose(nameList){
     var fNames = nameList.split(' ');
     eachArray(function(fName){
@@ -268,6 +276,7 @@ var _ = (function(){
 
     I: I,
     dot: dot,
+    times: times,
 
     expose: expose,
   };

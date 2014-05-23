@@ -33,7 +33,7 @@ describe('cumin utilities', function(){
       _.expose('dot map each eachArray eachObject not reduce ' +
                'compose dot extend filter eachArrayRight ' +
                'merge extend all any cyclic reject max min ' +
-               'basic '
+               'basic times'
               );
       expect(function(){
         dot();
@@ -324,6 +324,14 @@ describe('cumin utilities', function(){
       var person = {name: 'Mike'};
       var name = dot('name');
       expect(name(person)).toEqual('Mike');
+    });
+  });
+
+  describe('times', function(){
+    it('should call a function n times', function(){
+      var thrice = times(3);
+      thrice(dummy);
+      expect(dummy.calls.length).toEqual(3);
     });
   });
 });

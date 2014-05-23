@@ -89,6 +89,11 @@ describe('cumin utilities', function(){
       expect(dummy).toHaveBeenCalledWith(1, 'x');
       expect(dummy).toHaveBeenCalledWith(2, 'y');
     });
+    it('should call operation for a list of arguments', function(){
+      each(dummy)(1, 2);
+      expect(dummy).toHaveBeenCalledWith(1, 0);
+      expect(dummy).toHaveBeenCalledWith(2, 1);
+    });
     it('should not call operation for an empty array', function(){
       each(dummy)([]);
       expect(dummy).not.toHaveBeenCalled();

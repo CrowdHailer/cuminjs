@@ -243,6 +243,12 @@ var _ = (function(){
     };
   }
 
+  function random(max){
+    return function(){
+      return Math.random()*max|0;
+    }
+  }
+
   function expose(nameList){
     var fNames = nameList.split(' ');
     eachArray(function(fName){
@@ -277,6 +283,7 @@ var _ = (function(){
     I: I,
     dot: dot,
     times: times,
+    random: random,
 
     expose: expose,
   };

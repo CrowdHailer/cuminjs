@@ -16,10 +16,10 @@ var _ = (function(){
   function eachArr(operation){
   // iterates array left to right
   // assumes array type
-    return function(arr){
+    return function(array){
       var context = {empty: []};
-      for (var i = 0; i < arr.length; i++) {
-        var item = arr[i];
+      for (var i = 0; i < array.length; i++) {
+        var item = array[i];
         operation.call(context, item, i);
       }
     };
@@ -28,10 +28,10 @@ var _ = (function(){
   function eachArrRight(operation){
   // iterates array right to left
   // assumes array type
-    return function(arr){
+    return function(array){
       var context = {empty: []};
-      for (var index = arr.length - 1; index > -1; index--) {
-        item = arr[index];
+      for (var index = array.length - 1; index > -1; index--) {
+        item = array[index];
         operation.call(context, item, index);
       }
     };

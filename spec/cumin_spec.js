@@ -333,5 +333,10 @@ describe('cumin utilities', function(){
       thrice(dummy);
       expect(dummy.calls.length).toEqual(3);
     });
+    it('should not call the function given 0 or less', function(){
+      times(0)(dummy);
+      times(-1)(dummy);
+      expect(dummy.calls.length).toEqual(0);
+    });
   });
 });

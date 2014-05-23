@@ -223,7 +223,7 @@ var _ = (function(){
     };
   }
 
-// Components
+// Utilities
 
   function I(x){
     return x;
@@ -234,8 +234,6 @@ var _ = (function(){
       return obj[key];
     };
   }
-
-// Utilities
 
   function expose(nameList){
     var fNames = nameList.split(' ');

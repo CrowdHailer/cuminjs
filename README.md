@@ -7,8 +7,12 @@ cumin.js
 [![Code Climate](https://codeclimate.com/github/CrowdHailer/cuminjs/coverage.png)](https://codeclimate.com/github/CrowdHailer/cuminjs)
 
 ### Core functions
-- **eachArr**
-- **eachArrRight**
+**eachArr** `_.eachArr(operation)(array)`  
+Iterates over an array of elements, with increasing index, from index 0 to length-1. The operation is called for each element with two arguments `(element, index)`
+
+**eachArrRight** `_.eachArrRight(operation)(array)`  
+Iterates over an array of elements, with decreasing index, from index length-1 to 0. The operation is called for each element with two arguments `(element, index)` *This is the reverse operation to eachArr*
+
 - **eachObj**
 - **each**
 

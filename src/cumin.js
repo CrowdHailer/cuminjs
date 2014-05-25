@@ -17,10 +17,8 @@ var _ = (function(){
   // iterates array left to right
   // assumes array type
     return function(array){
-      var context = {empty: []};
       for (var i = 0; i < array.length; i++) {
-        var item = array[i];
-        operation.call(context, item, i);
+        operation(array[i], i);
       }
     };
   }
@@ -29,10 +27,8 @@ var _ = (function(){
   // iterates array right to left
   // assumes array type
     return function(array){
-      var context = {empty: []};
-      for (var index = array.length - 1; index > -1; index--) {
-        item = array[index];
-        operation.call(context, item, index);
+      for (var i = array.length - 1; i > -1; i--) {
+        operation(array[i], i);
       }
     };
   }

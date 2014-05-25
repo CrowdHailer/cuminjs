@@ -65,6 +65,16 @@ var _ = (function(){
 
 // Basic collection operations
 
+  function mapArray(operation){
+    return function(array){
+      var results = [];
+      eachArray(function(element, index){
+        results[index] = operation(element, index);
+      })(array);
+      return Object.freeze(results);
+    };
+  }
+
   function mapObject(operation){
     return function(object){
       var results = {};
@@ -256,7 +266,7 @@ var _ = (function(){
   function random(max){
     return function(){
       return Math.random()*max|0;
-    }
+    };
   }
 
   function expose(nameList){
@@ -272,8 +282,9 @@ var _ = (function(){
     eachObject: eachObject,
     each: each,
 
-    map: map,
+    mapArray: mapArray,
     mapObject: mapObject,
+    map: map,
     filter: filter,
     reject: reject,
     reduce: reduce,

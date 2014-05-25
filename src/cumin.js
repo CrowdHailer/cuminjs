@@ -86,13 +86,15 @@ var _ = (function(){
   }
 
   function map(operation){
-    return function(){
-      var results;
-      each(function(item, location){
-        results = this.empty;
-        results[location] = operation.call({}, item, location);
-      }).apply({}, arguments);
-      return Object.freeze(results);
+    return function(collection){
+      if (arguments.length > 1) {
+        collection = argsToList(arguments);
+      }
+      if (isArray(collection)) {
+        return mapArray(operation)(collection);
+      } else {
+        return mapObject(operation)(collection);
+      }
     };
   }
 

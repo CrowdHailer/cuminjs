@@ -195,6 +195,10 @@ describe('cumin utilities', function(){
       expect(onlyGreaterThan2({})).
         toEqual(Object.freeze({}));
     });
+    it('should reject an object', function(){
+      expect(rejectObject(greaterThan2)({x: 1, y: 3})).
+        toEqual(Object.freeze({x: 1}));
+    });
   });
 
   describe('filter', function(){

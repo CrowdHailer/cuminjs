@@ -120,7 +120,7 @@ var _ = (function(){
     };
   }
 
-  var rejectObject;
+  var rejectObject = compose(filterObject, not);
 
   function filter(operation){
     return function(){

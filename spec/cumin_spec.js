@@ -113,6 +113,10 @@ describe('cumin utilities', function(){
       expect(add3Values({x: 1, y: 2})).
         toEqual(Object.freeze({x: 4, y: 5}));
     });
+    it('should map an empty object', function(){
+      expect(add3Values({})).
+        toEqual(Object.freeze({}));
+    });
   });
 
   describe('map', function(){

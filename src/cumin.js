@@ -104,7 +104,7 @@ var _ = (function(){
       eachArray(function(element, index){
         if (operation(element, index)) { results.push(element); }
       })(array);
-      return results;
+      return Object.freeze(results);
     };
   }
 

@@ -170,15 +170,15 @@ describe('cumin utilities', function(){
     });
     it('should filter an array', function(){
       expect(onlyGreaterThan2([1, 3])).
-        toEqual([3]);
+        toEqual(Object.freeze([3]));
     });
     it('should filter an empty array', function(){
       expect(onlyGreaterThan2([])).
-        toEqual([]);
+        toEqual(Object.freeze([]));
     });
     it('should reject values from an array', function(){
       expect(rejectArray(greaterThan2)([1, 3])).
-        toEqual([1]);
+        toEqual(Object.freeze([1]));
     });
   });
 

@@ -65,14 +65,36 @@ var _ = (function(){
 
 // Basic collection operations
 
-  function map(operation){
-    return function(){
-      var results;
-      each(function(item, location){
-        results = this.empty;
-        results[location] = operation.call({}, item, location);
-      }).apply({}, arguments);
+  function mapArray(operation){
+    return function(array){
+      var results = [];
+      eachArray(function(element, index){
+        results.push(operation(element, index));
+      })(array);
       return Object.freeze(results);
+    };
+  }
+
+  function mapObject(operation){
+    return function(object){
+      var results = {};
+      eachObject(function(value, key){
+        results[key] = operation(value, key);
+      })(object);
+      return Object.freeze(results);
+    };
+  }
+
+  function map(operation){
+    return function(collection){
+      if (arguments.length > 1) {
+        collection = argsToList(arguments);
+      }
+      if (isArray(collection)) {
+        return mapArray(operation)(collection);
+      } else {
+        return mapObject(operation)(collection);
+      }
     };
   }
 
@@ -246,7 +268,7 @@ var _ = (function(){
   function random(max){
     return function(){
       return Math.random()*max|0;
-    }
+    };
   }
 
   function expose(nameList){
@@ -262,6 +284,8 @@ var _ = (function(){
     eachObject: eachObject,
     each: each,
 
+    mapArray: mapArray,
+    mapObject: mapObject,
     map: map,
     filter: filter,
     reject: reject,

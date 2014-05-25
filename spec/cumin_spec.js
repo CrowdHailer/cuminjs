@@ -33,7 +33,7 @@ describe('cumin utilities', function(){
       _.expose('dot map each eachArray eachObject not reduce ' +
                'compose dot extend filter eachArrayRight ' +
                'merge extend all any cyclic reject max min ' +
-               'basic times random '
+               'basic times random mapObject mapArray'
               );
       expect(function(){
         dot();
@@ -101,6 +101,45 @@ describe('cumin utilities', function(){
     it('should not call operation for an empty object', function(){
       each(dummy)({});
       expect(dummy).not.toHaveBeenCalled();
+    });
+  });
+
+  describe('mapArray', function(){
+    var add3Elements;
+    beforeEach(function(){
+      add3Elements = mapArray(add3);
+    });
+    it('should map an array', function(){
+      expect(add3Elements([1, 2])).
+        toEqual(Object.freeze([4, 5]));
+    });
+    it('should map an empty array', function(){
+      expect(add3Elements([])).
+        toEqual(Object.freeze([]));
+    });
+    xit('may return value for an object', function(){
+      // possible to implement requires mapArray calling each NOT eachArray. unsure.
+      expect(add3Elements({x: 1, y: 2})).
+        toEqual([4, 5]);
+    });
+  });
+
+  describe('mapObject', function(){
+    var add3Values;
+    beforeEach(function(){
+      add3Values = mapObject(add3);
+    });
+    it('should map an object', function(){
+      expect(add3Values({x: 1, y: 2})).
+        toEqual(Object.freeze({x: 4, y: 5}));
+    });
+    it('should map an empty object', function(){
+      expect(add3Values({})).
+        toEqual(Object.freeze({}));
+    });
+    it('may return value for array', function(){
+      expect(add3Values([1, 2])).
+        toEqual(Object.freeze({0: 4, 1: 5}));
     });
   });
 

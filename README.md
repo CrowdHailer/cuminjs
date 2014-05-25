@@ -19,8 +19,42 @@ Iterates through all key value pairs on an object. The operation is called for e
 **each** `_.each(operation)(object)`  
 Iterates through a collection (array, object, arguments). No order is guarenteed. The operations is called for each item with two arguments `(item, location)`
 
+**mapArray** `_.mapArray(operation)(array)`
+Maps each element in an array to an element in new array. New values are the return of operation. Operation is called each time with arguments `(element, index)`. By default the return array is frozen.
 
-- **map**
+**mapObject** `_.mapObject(operation)(object)`
+Maps each value in an object to the same key in a new object. New values are the return of operation. Operation is called each time with arguments `(value, key)`. By default the return object is frozen.
+
+**map** `_.map(operation)(collection)`
+Maps items in a collection (array, object, arguments) to a new collection. The returned map is frozen by default. If given an object map will return an object. If given an array or multiple arguments map will return an array.
+
+**Note on maps**
+Map may not behave as expected if using cumin.js after other libraries, notably underscore.js. See examples.
+```js
+function plus1 (number) {
+  return number + 1;
+}
+
+// cumin.js
+var incrementItems = map(plus1)
+
+incrementItems([1, 2])
+=> [2, 3]
+
+incrementItems({a: 1, b: 2})
+=> {a: 2, b: 3}
+
+incrementItems(1, 2)
+=> [2, 3]
+
+// underscore.js
+_.map([1, 2], plus1)
+=> [2, 3]
+
+_.map({a: 1, b: 2}, plus1)
+=> [2, 3]
+```
+
 - **filter**
 - **reject**
 - **reduce**
@@ -69,6 +103,7 @@ dot() // valid
 ```
 
 ### Future possibilities
+Needs clarification on context
 include breaker;
 
 ### Inspired by

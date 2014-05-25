@@ -117,6 +117,11 @@ describe('cumin utilities', function(){
       expect(add3Elements([])).
         toEqual(Object.freeze([]));
     });
+    xit('may return value for an object', function(){
+      // possible to implement requires mapArray calling each NOT eachArray. unsure.
+      expect(add3Elements({x: 1, y: 2})).
+        toEqual([4, 5]);
+    });
   });
 
   describe('mapObject', function(){

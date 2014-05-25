@@ -69,7 +69,7 @@ var _ = (function(){
     return function(array){
       var results = [];
       eachArray(function(element, index){
-        results[index] = operation(element, index);
+        results.push(operation(element, index));
       })(array);
       return Object.freeze(results);
     };

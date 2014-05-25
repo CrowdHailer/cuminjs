@@ -33,7 +33,7 @@ describe('cumin utilities', function(){
       _.expose('dot map each eachArray eachObject not reduce ' +
                'compose dot extend filter eachArrayRight ' +
                'merge extend all any cyclic reject max min ' +
-               'basic times random '
+               'basic times random mapObject'
               );
       expect(function(){
         dot();
@@ -101,6 +101,17 @@ describe('cumin utilities', function(){
     it('should not call operation for an empty object', function(){
       each(dummy)({});
       expect(dummy).not.toHaveBeenCalled();
+    });
+  });
+
+  describe('mapObject', function(){
+    var add3Values;
+    beforeEach(function(){
+      add3Values = mapObject(add3);
+    });
+    it('should map an object', function(){
+      expect(add3Values({x: 1, y: 2})).
+        toEqual(Object.freeze({x: 4, y: 5}));
     });
   });
 

@@ -65,6 +65,16 @@ var _ = (function(){
 
 // Basic collection operations
 
+  function mapObject(operation){
+    return function(object){
+      var results = {};
+      eachObject(function(value, key){
+        results[key] = operation(value, key);
+      })(object);
+      return Object.freeze(results);
+    };
+  }
+
   function map(operation){
     return function(){
       var results;
@@ -263,6 +273,7 @@ var _ = (function(){
     each: each,
 
     map: map,
+    mapObject: mapObject,
     filter: filter,
     reject: reject,
     reduce: reduce,

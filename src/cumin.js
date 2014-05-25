@@ -37,9 +37,8 @@ var _ = (function(){
   // iterates through object key/value pairs
   // no order assumed
     return function(object){
-      var context = {empty: {}};
       eachArray(function(key){
-        operation.call(context, object[key], key);
+        operation(object[key], key);
       })(Object.keys(object));
     };
   }

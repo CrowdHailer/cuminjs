@@ -98,6 +98,16 @@ var _ = (function(){
     };
   }
 
+  function filterArray(operation){
+    return function(array){
+      var results = [];
+      eachArray(function(element, index){
+        if (operation(element, index)) { results.push(element); }
+      })(array);
+      return results;
+    };
+  }
+
   function filter(operation){
     return function(){
       var results;
@@ -287,6 +297,8 @@ var _ = (function(){
     mapArray: mapArray,
     mapObject: mapObject,
     map: map,
+
+    filterArray: filterArray,
     filter: filter,
     reject: reject,
     reduce: reduce,

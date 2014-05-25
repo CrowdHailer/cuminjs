@@ -33,7 +33,7 @@ describe('cumin utilities', function(){
       _.expose('dot map each eachArray eachObject not reduce ' +
                'compose dot extend filter eachArrayRight ' +
                'merge extend all any cyclic reject max min ' +
-               'basic times random mapObject mapArray'
+               'basic times random mapObject mapArray filterArray '
               );
       expect(function(){
         dot();
@@ -159,6 +159,17 @@ describe('cumin utilities', function(){
     it('should map arguments if given multiple', function(){
       var answer = add3All(1, 2, 3);
       expect(answer).toEqual(Object.freeze([4, 5, 6]));
+    });
+  });
+
+  describe('filterArray and rejectArray', function(){
+    var onlyGreaterThan2;
+    beforeEach(function(){
+      onlyGreaterThan2 = filterArray(greaterThan2);
+    });
+    it('should filter an array', function(){
+      expect(onlyGreaterThan2([1, 3])).
+        toEqual([3]);
     });
   });
 

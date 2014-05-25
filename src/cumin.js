@@ -98,17 +98,40 @@ var _ = (function(){
     };
   }
 
-  function filter(operation){
-    return function(){
-      var results;
-      each(function(item, location){
-        results = this.empty;
-        if (operation.call({}, item, location)) {
-          location = isArray(results)? results.length : location;
-          results[location] = item;
-        }
-      }).apply({}, arguments);
+  function filterArray(operation){
+    return function(array){
+      var results = [];
+      eachArray(function(element, index){
+        if (operation(element, index)) { results.push(element); }
+      })(array);
       return Object.freeze(results);
+    };
+  }
+
+  var rejectArray = compose(filterArray, not);
+
+  function filterObject(operation){
+    return function(object){
+      var results = {};
+      eachObject(function(value, key){
+        if (operation(value, key)) { results[key] = value;}
+      })(object);
+      return Object.freeze(results);
+    };
+  }
+
+  var rejectObject = compose(filterObject, not);
+
+  function filter(operation){
+    return function(collection){
+      if (arguments.length > 1) {
+        collection = argsToList(arguments);
+      }
+      if (isArray(collection)) {
+        return filterArray(operation)(collection);
+      } else {
+        return filterObject(operation)(collection);
+      }
     };
   }
 
@@ -287,6 +310,11 @@ var _ = (function(){
     mapArray: mapArray,
     mapObject: mapObject,
     map: map,
+
+    filterArray: filterArray,
+    rejectArray: rejectArray,
+    filterObject: filterObject,
+    rejectObject: rejectObject,
     filter: filter,
     reject: reject,
     reduce: reduce,

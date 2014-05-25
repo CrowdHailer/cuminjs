@@ -33,7 +33,8 @@ describe('cumin utilities', function(){
       _.expose('dot map each eachArray eachObject not reduce ' +
                'compose dot extend filter eachArrayRight ' +
                'merge extend all any cyclic reject max min ' +
-               'basic times random mapObject mapArray filterArray '
+               'basic times random mapObject mapArray filterArray ' +
+               'rejectArray '
               );
       expect(function(){
         dot();
@@ -174,6 +175,10 @@ describe('cumin utilities', function(){
     it('should filter an empty array', function(){
       expect(onlyGreaterThan2([])).
         toEqual([]);
+    });
+    it('should reject values from an array', function(){
+      expect(rejectArray(greaterThan2)([1, 3])).
+        toEqual([1]);
     });
   });
 

@@ -108,6 +108,8 @@ var _ = (function(){
     };
   }
 
+  var rejectArray = compose(filterArray, not);
+
   function filter(operation){
     return function(){
       var results;
@@ -299,6 +301,7 @@ var _ = (function(){
     map: map,
 
     filterArray: filterArray,
+    rejectArray: rejectArray,
     filter: filter,
     reject: reject,
     reduce: reduce,

@@ -34,7 +34,7 @@ describe('cumin utilities', function(){
                'compose dot extend filter eachArrayRight ' +
                'merge extend all any cyclic reject max min ' +
                'basic times random mapObject mapArray filterArray ' +
-               'rejectArray '
+               'rejectArray filterObject rejectObject'
               );
       expect(function(){
         dot();
@@ -179,6 +179,17 @@ describe('cumin utilities', function(){
     it('should reject values from an array', function(){
       expect(rejectArray(greaterThan2)([1, 3])).
         toEqual(Object.freeze([1]));
+    });
+  });
+
+  describe('filterObject and rejectObject', function(){
+    var onlyGreaterThan2;
+    beforeEach(function(){
+      onlyGreaterThan2 = filterObject(greaterThan2);
+    });
+    it('should filter an object', function(){
+      expect(onlyGreaterThan2({x: 1, y: 3})).
+        toEqual(Object.freeze({y: 3}));
     });
   });
 

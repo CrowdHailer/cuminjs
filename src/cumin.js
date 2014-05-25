@@ -110,6 +110,18 @@ var _ = (function(){
 
   var rejectArray = compose(filterArray, not);
 
+  function filterObject(operation){
+    return function(object){
+      var results = {};
+      eachObject(function(value, key){
+        if (operation(value, key)) { results[key] = value;}
+      })(object);
+      return Object.freeze(results);
+    };
+  }
+
+  var rejectObject;
+
   function filter(operation){
     return function(){
       var results;
@@ -302,6 +314,8 @@ var _ = (function(){
 
     filterArray: filterArray,
     rejectArray: rejectArray,
+    filterObject: filterObject,
+    rejectObject: rejectObject,
     filter: filter,
     reject: reject,
     reduce: reduce,

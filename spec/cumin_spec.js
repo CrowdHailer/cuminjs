@@ -104,6 +104,21 @@ describe('cumin utilities', function(){
     });
   });
 
+  describe('mapArray', function(){
+    var add3Elements;
+    beforeEach(function(){
+      add3Elements = mapArray(add3);
+    });
+    it('should map an array', function(){
+      expect(add3Elements([1, 2])).
+        toEqual(Object.freeze([4, 5]));
+    });
+    it('should map an empty array', function(){
+      expect(add3Elements([])).
+        toEqual(Object.freeze([]));
+    });
+  });
+
   describe('mapObject', function(){
     var add3Values;
     beforeEach(function(){
@@ -117,20 +132,9 @@ describe('cumin utilities', function(){
       expect(add3Values({})).
         toEqual(Object.freeze({}));
     });
-  });
-
-  describe('mapArray', function(){
-    var add3Elements;
-    beforeEach(function(){
-      add3Elements = mapArray(add3);
-    });
-    it('should map an array', function(){
-      expect(add3Elements([1, 2])).
-        toEqual(Object.freeze([4, 5]));
-    });
-    it('should map an empty array', function(){
-      expect(add3Elements([])).
-        toEqual(Object.freeze([]));
+    it('may return value for array', function(){
+      expect(add3Values([1, 2])).
+        toEqual(Object.freeze({0: 4, 1: 5}));
     });
   });
 

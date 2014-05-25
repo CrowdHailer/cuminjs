@@ -123,16 +123,15 @@ var _ = (function(){
   var rejectObject = compose(filterObject, not);
 
   function filter(operation){
-    return function(){
-      var results;
-      each(function(item, location){
-        results = this.empty;
-        if (operation.call({}, item, location)) {
-          location = isArray(results)? results.length : location;
-          results[location] = item;
-        }
-      }).apply({}, arguments);
-      return Object.freeze(results);
+    return function(collection){
+      if (arguments.length > 1) {
+        collection = argsToList(arguments);
+      }
+      if (isArray(collection)) {
+        return filterArray(operation)(collection);
+      } else {
+        return filterObject(operation)(collection);
+      }
     };
   }
 

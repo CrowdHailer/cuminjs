@@ -171,6 +171,10 @@ describe('cumin utilities', function(){
       expect(onlyGreaterThan2([1, 3])).
         toEqual([3]);
     });
+    it('should filter an empty array', function(){
+      expect(onlyGreaterThan2([])).
+        toEqual([]);
+    });
   });
 
   describe('filter', function(){

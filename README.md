@@ -30,6 +30,7 @@ Maps items in a collection (array, object, arguments) to a new collection. The r
 
 **Note on maps**
 Map may not behave as expected if using cumin.js after other libraries, notably underscore.js. See examples.
+
 ```js
 function plus1 (number) {
   return number + 1;

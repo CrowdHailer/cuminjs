@@ -253,7 +253,7 @@ describe('cumin utilities', function(){
     });
     it('should take initial value from arguments if not given initial', function(){
       expect(reduce()(add)(1, 2, 3)).toEqual(6);
-    })
+    });
   });
 
   describe('all', function(){

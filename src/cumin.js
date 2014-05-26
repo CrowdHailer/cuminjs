@@ -194,6 +194,16 @@ var _ = (function(){
 
 // Array
 
+  function cleave(n){
+    return function(array){
+      var before = [];
+      times(n)(function(){
+        before.push(array.shift());
+      });
+      return [before, array];
+    };
+  }
+
   function cyclic(n){
     var results = [];
     times(n)(
@@ -323,6 +333,8 @@ var _ = (function(){
     max: max,
 
     cyclic: cyclic,
+    cleave: cleave,
+
     merge: merge,
     extend: extend,
     basic: basic,

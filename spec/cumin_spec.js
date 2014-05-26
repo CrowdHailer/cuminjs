@@ -34,7 +34,7 @@ describe('cumin utilities', function(){
                'compose dot extend filter eachArrayRight ' +
                'merge extend all any cyclic reject max min ' +
                'basic times random mapObject mapArray filterArray ' +
-               'rejectArray filterObject rejectObject'
+               'rejectArray filterObject rejectObject cleave'
               );
       expect(function(){
         dot();
@@ -372,6 +372,24 @@ describe('cumin utilities', function(){
     });
   });
 
+  describe('cleave', function(){
+    it('should split an array', function(){
+      expect(cleave(2)([0, 1, 2, 3, 4]))
+        .toEqual([[0, 1], [2, 3, 4]]);
+    });
+  });
+
+  describe('cyclic', function(){
+    it('should cyclicly fill results array', function(){
+      var answer = cyclic(3)([0, 1, 2, 3, 4, 5]);
+      expect(answer).toEqual([[0, 3], [1, 4], [2, 5]]);
+    });
+    it('should have empty arrays it array shorter than division', function(){
+      var answer = cyclic(3)([1]);
+      expect(answer).toEqual([[1], [], []]);
+    });
+  });
+
   describe('defreeze and refreeze', function(){
     beforeEach(function(){
       _.defreeze();
@@ -394,17 +412,6 @@ describe('cumin utilities', function(){
     it('should work for filterObject', function(){
       expect(filterObject(greaterThan2)({x: 1, y: 3})).
         toEqual({y: 3});
-    });
-  });
-
-  describe('cyclic', function(){
-    it('should cyclicly fill results array', function(){
-      var answer = cyclic(3)([0, 1, 2, 3, 4, 5]);
-      expect(answer).toEqual([[0, 3], [1, 4], [2, 5]]);
-    });
-    it('should have empty arrays it array shorter than division', function(){
-      var answer = cyclic(3)([1]);
-      expect(answer).toEqual([[1], [], []]);
     });
   });
 

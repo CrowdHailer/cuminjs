@@ -111,8 +111,14 @@ Returns true if all items in a collection pass the predicate truth test. Predica
 
 Returns true if any items in a collection pass the predicate truth test. Predicate is called for each item with arguments `(item, location)`
 
-- **min**
-- **max**
+**min** `_.min(operation)(collection)`
+
+Each item in the collection is valued by its return from operation and the lowest value item is returned. Operation is called for each item with arguments `(item, location)`. If no operation is passed then the values of the collection are used.
+
+**max** `_.max(operation)(collection)`
+
+Each item in the collection is valued by its return from operation and the highest value item is returned. Operation is called for each item with arguments `(item, location)`. If no operation is passed then the values of the collection are used.
+
 
 ### Notes
 ##### Curried function

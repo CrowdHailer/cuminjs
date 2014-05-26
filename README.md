@@ -69,7 +69,7 @@ Adds each item to a new collection on condition operation returns true. The retu
 Same behaviour as filter functions except adds items when condition returns false.
 
 **reduce** `_.reduce(initial)(operation)(collection)`
-Compacts a collection to a single return value. For each item operation is first called with the current value (initial for first item). It is then called with the item and the return value set as the new current value for next iteration. Operation is called each time with arguments `(memo)(item)`. Also known as inject and foldl.
+Compacts a collection to a single return value. For each item operation is first called with the current value (initial for first item). It is then called with the item and location and the return value set as the new current value for next iteration. Operation is called each time with arguments `(memo)(item, location)`. Also known as inject and foldl.
 
 **Note on reduce**
 1) If no initial is given then the first item from the collection will be used.

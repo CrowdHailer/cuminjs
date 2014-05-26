@@ -151,8 +151,8 @@ var _ = (function(){
     // The same code works here for arrays and objects so does not have varient.
     return function(operation){
       return function(){
-        each(function(item, index){
-          memo = isDefined(memo) ? operation(memo)(item) : item;
+        each(function(item, location){
+          memo = isDefined(memo) ? operation(memo)(item, location) : item;
         }).apply({}, arguments);
         return memo;
       };

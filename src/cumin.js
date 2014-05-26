@@ -170,28 +170,22 @@ var _ = (function(){
 
   function min(operation){
     operation = operation || I;
-    return function(collection){
-      if (arguments.length > 1) {
-        collection = argsToList(arguments);
-      }
-      var memo = collection.shift();
+    return function(){
+      var memo;
       each(function(item){
-        memo = operation(memo) < operation(item) ? memo : item;
-      })(collection);
+        memo = memo && (operation(memo) < operation(item)) ? memo : item;
+      }).apply({}, arguments);
       return memo;
     };
   }
 
   function max(operation){
     operation = operation || I;
-    return function(collection){
-      if (arguments.length > 1) {
-        collection = argsToList(arguments);
-      }
-      var memo = collection.shift();
+    return function(){
+      var memo;
       each(function(item){
-        memo = operation(memo) > operation(item) ? memo : item;
-      })(collection);
+        memo = memo && (operation(memo) > operation(item)) ? memo : item;
+      }).apply({}, arguments);
       return memo;
     };
   }

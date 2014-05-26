@@ -72,7 +72,9 @@ Same behaviour as filter functions except adds items when condition returns fals
 Compacts a collection to a single return value. For each item operation is first called with the current value (initial for first item). It is then called with the item and the return value set as the new current value for next iteration. Operation is called each time with arguments `(memo)(item)`. Also known as inject and foldl.
 
 **Note on reduce**
-Functions that are passed as the operation are expected to take arguments singly. e.g.
+1) If no initial is given then the first item from the collection will be used.
+
+2) Functions that are passed as the operation are expected to take arguments singly. e.g.
 
 ```js
 add(3)(4)  // Vaild

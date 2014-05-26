@@ -6,6 +6,53 @@ cumin.js
 [![Code Climate](https://codeclimate.com/github/CrowdHailer/cuminjs.png)](https://codeclimate.com/github/CrowdHailer/cuminjs)
 [![Code Climate](https://codeclimate.com/github/CrowdHailer/cuminjs/coverage.png)](https://codeclimate.com/github/CrowdHailer/cuminjs)
 
+Cumin.js adds key utilities for functional programming, such as map, reduce and compose. Key points are.
+
+ 1. All utilities are added to the `_` object.
+ 2. Type checkers such as `isDefined` are added to global namespace.
+ 3. All utilities are curried functions and will only take a single argument at a time.
+ 4. Data always comes last, to maximise power of partially filled operations.
+ 5. New Arrays and Objects are returned frozen by default. (this option can be overrun for the entire library with `defreeze()` & `refreeze`)
+
+### List of functions
+##### Main
+
+- eachArray
+- eachArrayRight
+- eachObject
+- each
+- mapArray
+- mapObject
+- map
+- filterArray
+- filterObject
+- filter
+- rejectArray
+- rejectObject
+- reject
+- reduce
+- all
+- any
+- min
+- max
+
+##### Special
+- expose
+- defreeze
+- refreeze
+
+##### Development
+- cyclic
+- merge
+- extend
+- basic
+- compose
+- not
+- Identity (I)
+- dot
+- times
+- random
+
 ### Collections
 **eachArray** `_.eachArray(operation)(array)`
 

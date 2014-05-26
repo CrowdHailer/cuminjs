@@ -201,8 +201,11 @@ dot() // valid
 ```
 
 ### Future possibilities
-Needs clarification on context
-include breaker;
+Needs clarification on context;  
+include breaker;  
+optional checking of input type to skip null steps in all, min etc.  
+delayed return of function. useful in composition eg for nth item.
+
 
 ### Inspired by
 - [underscore.js](http://underscorejs.org/)

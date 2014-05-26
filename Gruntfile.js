@@ -9,7 +9,7 @@ module.exports = function(grunt) {
         src: [
           'src/helpers.js',
           'src/cumin.js',
-          'src/compositions.js'
+          // 'src/compositions.js'
         ],
         dest: 'dist/<%= pkg.name %>.js'
       }

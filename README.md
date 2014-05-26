@@ -35,34 +35,34 @@ Maps each value in an object to the same key in a new object. New values are the
 
 Maps items in a collection (array, object, arguments) to a new collection. The returned collection is frozen by default. If given an object map will return an object. If given an array or multiple arguments map will return an array.
 
-**Note on maps**
-
-Map may not behave as expected if using cumin.js after other libraries, notably underscore.js. See examples.
-
-```js
-function plus1 (number) {
-  return number + 1;
-}
-
-// cumin.js
-var incrementItems = map(plus1)
-
-incrementItems([1, 2])
-=> [2, 3]
-
-incrementItems({a: 1, b: 2})
-=> {a: 2, b: 3}
-
-incrementItems(1, 2)
-=> [2, 3]
-
-// underscore.js
-_.map([1, 2], plus1)
-=> [2, 3]
-
-_.map({a: 1, b: 2}, plus1)
-=> [2, 3]
-```
+> **Note on maps**
+> 
+> Map may not behave as expected if using cumin.js after other libraries, notably underscore.js. See examples.
+> 
+> ```js
+> function plus1 (number) {
+  > return number + 1;
+> }
+> 
+> // cumin.js
+> var incrementItems = map(plus1)
+> 
+> incrementItems([1, 2])
+> => [2, 3]
+> 
+> incrementItems({a: 1, b: 2})
+> => {a: 2, b: 3}
+> 
+> incrementItems(1, 2)
+> => [2, 3]
+> 
+> // underscore.js
+> _.map([1, 2], plus1)
+> => [2, 3]
+> 
+> _.map({a: 1, b: 2}, plus1)
+> => [2, 3]
+> ```
 
 **filterArray** `_.filterArray(operation)(array)`
 
@@ -84,24 +84,25 @@ Same behaviour as filter functions except adds items when condition returns fals
 
 Compacts a collection to a single return value. For each item operation is first called with the current value (initial for first item). It is then called with the item and location and the return value set as the new current value for next iteration. Operation is called each time with arguments `(memo)(item, location)`. Also known as inject and foldl.
 
-**Note on reduce**
+> **Note on reduce**
 
-1) If no initial is given then the first item from the collection will be used.
+> 1) If no initial is given then the first item from the collection will be used.
+> 
+> 2) Functions that are passed as the operation are expected to > take arguments singly. e.g.
+> 
+> ```js
+> add(3)(4)  // Vaild
+> add(3, 4)  // Invalid
+> ```
+> 
+> functions for multiple arguments can then be constructed from > reduce as the passed collection may be the arguments object.
+> 
+> ```js
+> sum = reduce(0)(add);
+> sum(1, 2, 3, 4,)
+> => 10
+> ```
 
-2) Functions that are passed as the operation are expected to take arguments singly. e.g.
-
-```js
-add(3)(4)  // Vaild
-add(3, 4)  // Invalid
-```
-
-functions for multiple arguments can then be constructed from reduce as the passed collection may be the arguments object.
-
-```js
-sum = reduce(0)(add);
-sum(1, 2, 3, 4,)
-=> 10
-```
 **all** `_.all(predicate)(collection)`
 
 Returns true if all items in a collection pass the predicate truth test. Predicate is called for each item with arguments `(item, location)`

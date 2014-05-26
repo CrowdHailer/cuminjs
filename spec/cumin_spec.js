@@ -337,8 +337,8 @@ describe('cumin utilities', function(){
     it('should return minimum from an array of one', function(){
       expect(minLength(['bb'])).toEqual('bb');
     });
-    xit('should return minimum from an object', function(){
-      expect(minLength({x: 'a', y: 'bb'})).toEqual({x: 'a'});
+    it('should return minimum from an object', function(){
+      expect(minLength({x: 'a', y: 'bb'})).toEqual('a');
     });
     it('should return minimum from a selection of arguments', function(){
       expect(minLength('a', 'bb')).toEqual('a');

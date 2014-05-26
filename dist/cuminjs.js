@@ -26,6 +26,8 @@ var isDefined = function(obj) {
 // JavaScript all things? function(executable method invokable), collection, primitive, void(null undef)
 var _ = (function(){
 
+  var FROZEN = true;
+
 // basic iterators
 
   function eachArray(operation){
@@ -81,7 +83,7 @@ var _ = (function(){
       eachArray(function(element, index){
         results.push(operation(element, index));
       })(array);
-      return Object.freeze(results);
+      return FROZEN? Object.freeze(results) : results;
     };
   }
 
@@ -91,7 +93,7 @@ var _ = (function(){
       eachObject(function(value, key){
         results[key] = operation(value, key);
       })(object);
-      return Object.freeze(results);
+      return FROZEN? Object.freeze(results) : results;
     };
   }
 
@@ -114,7 +116,7 @@ var _ = (function(){
       eachArray(function(element, index){
         if (operation(element, index)) { results.push(element); }
       })(array);
-      return Object.freeze(results);
+      return FROZEN? Object.freeze(results) : results;
     };
   }
 
@@ -126,7 +128,7 @@ var _ = (function(){
       eachObject(function(value, key){
         if (operation(value, key)) { results[key] = value;}
       })(object);
-      return Object.freeze(results);
+      return FROZEN? Object.freeze(results) : results;
     };
   }
 
@@ -306,6 +308,13 @@ var _ = (function(){
     })(fNames);
   }
 
+  function defreeze(){
+    FROZEN = false;
+  }
+
+  function refreeze(){
+    FROZEN = true;
+  }
   var _ =  {
     eachArray: eachArray,
     eachArrayRight: eachArrayRight,
@@ -343,6 +352,8 @@ var _ = (function(){
     random: random,
 
     expose: expose,
+    defreeze: defreeze,
+    refreeze: refreeze,
   };
   return _;
 }());
@@ -369,13 +380,8 @@ var _ = (function(){
   var weed = _.compose(_.filter, hasNotK);
   var pluck = _.compose(_.map, _.dot);
 
-  // var every = _.reduce(true)(and);
-
-
   namespace.limit = limit;
   namespace.weed = weed;
-  // namespace.every = every;
   namespace.pluck = pluck;
   namespace.and = and;
-  // weed = _.compose(_.filter, not(hasK));
 }(_));

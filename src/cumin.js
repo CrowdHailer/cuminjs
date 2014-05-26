@@ -133,6 +133,7 @@ var _ = (function(){
   var reject = compose(filter, not);
 
   function reduce(memo){
+    // The same code works here for arrays and objects so does not have varient.
     return function(operation){
       return function(){
         each(function(item, index){

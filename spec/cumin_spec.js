@@ -245,6 +245,9 @@ describe('cumin utilities', function(){
     it('should reduce empty object', function(){
       expect(sum({})).toEqual(0);
     });
+    it('should take initial value from array if not given an initial', function(){
+      expect(reduce()(add)([1, 2, 3])).toEqual(6);
+    });
   });
 
   describe('all', function(){

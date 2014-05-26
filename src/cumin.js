@@ -137,7 +137,7 @@ var _ = (function(){
     return function(operation){
       return function(){
         each(function(item, index){
-          memo = operation(memo)(item);
+          memo = isDefined(memo) ? operation(memo)(item) : item;
         }).apply({}, arguments);
         return memo;
       };

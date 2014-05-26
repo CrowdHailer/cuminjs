@@ -9,3 +9,7 @@ var isArray = function(obj) {
 var isObj = function(obj) {
   return (typeof obj === "object" && !isArray(obj));
 };
+
+var isDefined = function(obj) {
+  return (obj !== undefined);
+};

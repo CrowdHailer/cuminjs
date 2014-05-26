@@ -182,7 +182,6 @@ var _ = (function(){
   function max(operation){
     operation = operation || I;
     return function(){
-
       var memo;
       each(function(item){
         memo = memo && (operation(memo) > operation(item)) ? memo : item;

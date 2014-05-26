@@ -102,8 +102,14 @@ sum = reduce(0)(add);
 sum(1, 2, 3, 4,)
 => 10
 ```
-- **all**
-- **any**
+**all** `_.all(predicate)(collection)`
+
+Returns true if all items in a collection pass the predicate truth test. Predicate is called for each item with arguments `(item, location)`
+
+**any** `_.any(predicate)(collection)`
+
+Returns true if any items in a collection pass the predicate truth test. Predicate is called for each item with arguments `(item, location)`
+
 - **min**
 - **max**
 

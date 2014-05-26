@@ -248,6 +248,9 @@ describe('cumin utilities', function(){
     it('should take initial value from array if not given an initial', function(){
       expect(reduce()(add)([1, 2, 3])).toEqual(6);
     });
+    it('should take initial value from object if not given initial', function(){
+      expect(reduce()(add)({x: 1, y: 3, z: 2})).toEqual(6);
+    });
   });
 
   describe('all', function(){

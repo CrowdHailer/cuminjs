@@ -78,7 +78,7 @@ var _ = (function(){
       eachObject(function(value, key){
         results[key] = operation(value, key);
       })(object);
-      return Object.freeze(results);
+      return FROZEN? Object.freeze(results) : results;
     };
   }
 

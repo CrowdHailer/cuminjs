@@ -383,6 +383,10 @@ describe('cumin utilities', function(){
       expect(mapArray(add3)([1, 2])).
         toEqual([4, 5]);
     });
+    it('should work for mapObject', function(){
+      expect(mapObject(add3)({x: 1, y: 2})).
+        toEqual({x: 4, y: 5});
+    });
   });
 
   describe('cyclic', function(){

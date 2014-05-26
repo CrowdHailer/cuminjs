@@ -7,28 +7,36 @@ cumin.js
 [![Code Climate](https://codeclimate.com/github/CrowdHailer/cuminjs/coverage.png)](https://codeclimate.com/github/CrowdHailer/cuminjs)
 
 ### Collections
-**eachArray** `_.eachArray(operation)(array)`  
+**eachArray** `_.eachArray(operation)(array)`
+
 Iterates over an array of elements, with increasing index, from index 0 to length-1. The operation is called for each element with two arguments `(element, index)`
 
-**eachArrayRight** `_.eachArrayRight(operation)(array)`  
+**eachArrayRight** `_.eachArrayRight(operation)(array)`
+
 Iterates over an array of elements, with decreasing index, from index length-1 to 0. The operation is called for each element with two arguments `(element, index)` *This is the reverse operation to eachArray*
 
-**eachObj** `_.eachObject(operation)(object)`  
+**eachObj** `_.eachObject(operation)(object)`
+
 Iterates through all key value pairs on an object. The operation is called for each pair with two arguments `(value, key)`
 
-**each** `_.each(operation)(object)`  
+**each** `_.each(operation)(object)`
+
 Iterates through a collection (array, object, arguments). No order is guarenteed. The operations is called for each item with two arguments `(item, location)`
 
 **mapArray** `_.mapArray(operation)(array)`
+
 Maps each element in an array to an element in new array. New values are the return of operation. Operation is called each time with arguments `(element, index)`. By default the return array is frozen.
 
 **mapObject** `_.mapObject(operation)(object)`
+
 Maps each value in an object to the same key in a new object. New values are the return of operation. Operation is called each time with arguments `(value, key)`. By default the return object is frozen.
 
 **map** `_.map(operation)(collection)`
+
 Maps items in a collection (array, object, arguments) to a new collection. The returned collection is frozen by default. If given an object map will return an object. If given an array or multiple arguments map will return an array.
 
 **Note on maps**
+
 Map may not behave as expected if using cumin.js after other libraries, notably underscore.js. See examples.
 
 ```js
@@ -57,21 +65,27 @@ _.map({a: 1, b: 2}, plus1)
 ```
 
 **filterArray** `_.filterArray(operation)(array)`
+
 Adds each element to a new array on condition operation returns true. Operation is called each time with arguments `(element, index)`. By default the return array is frozen.
 
 **filterObject** `_.filterObject(operation)(object)`
+
 Adds each value to a new object on condition operation returns true. Operation is called each time with arguments `(value, key)`. By default the return object is frozen.
 
 **filter** `_.filter(operation)(collection)`
+
 Adds each item to a new collection on condition operation returns true. The returned collection is frozen by default. If given an object map will return an object. If given an array or multiple arguments map will return an array.
 
 **rejectArray, rejectObject, reject**
+
 Same behaviour as filter functions except adds items when condition returns false.
 
 **reduce** `_.reduce(initial)(operation)(collection)`
+
 Compacts a collection to a single return value. For each item operation is first called with the current value (initial for first item). It is then called with the item and location and the return value set as the new current value for next iteration. Operation is called each time with arguments `(memo)(item, location)`. Also known as inject and foldl.
 
 **Note on reduce**
+
 1) If no initial is given then the first item from the collection will be used.
 
 2) Functions that are passed as the operation are expected to take arguments singly. e.g.

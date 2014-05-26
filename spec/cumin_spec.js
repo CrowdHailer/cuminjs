@@ -381,6 +381,10 @@ describe('cumin utilities', function(){
       expect(cleave(0)([0, 1]))
         .toEqual([[], [0, 1]]);
     });
+    it('should work with negative arguments', function(){
+      expect(cleave(-2)([0, 1, 2, 3, 4]))
+        .toEqual([[0, 1, 2], [3, 4]]);
+    });
   });
 
   describe('cyclic', function(){

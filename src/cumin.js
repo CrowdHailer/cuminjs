@@ -197,6 +197,7 @@ var _ = (function(){
   function cleave(n){
     return function(array){
       var before = [];
+      n = n < 0 ? array.length + n : n ;
       times(n)(function(){
         before.push(array.shift());
       });
@@ -206,8 +207,8 @@ var _ = (function(){
 
   function cyclic(n){
     var results = [];
-    times(n)(
-      function(){results.push([]);
+    times(n)(function(){
+      results.push([]);
     });
     return function(collection){
       eachArray(function(element, index){

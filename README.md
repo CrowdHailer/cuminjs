@@ -204,7 +204,10 @@ dot() // valid
 Needs clarification on context;  
 include breaker;  
 optional checking of input type to skip null steps in all, min etc.  
-delayed return of function. useful in composition eg for nth item.
+delayed return of function. useful in composition eg for nth item.  
+min and max return location  
+zip  
+mixin particularly compositions
 
 
 ### Inspired by

@@ -372,6 +372,19 @@ describe('cumin utilities', function(){
     });
   });
 
+  describe('defreeze and refreeze', function(){
+    beforeEach(function(){
+      _.defreeze();
+    });
+    afterEach(function(){
+      _.refreeze();
+    });
+    it('should work for mapArray', function(){
+      expect(mapArray(add3)([1, 2])).
+        toEqual([4, 5]);
+    });
+  });
+
   describe('cyclic', function(){
     it('should cyclicly fill results array', function(){
       var answer = cyclic(3)([0, 1, 2, 3, 4, 5]);

@@ -11,6 +11,8 @@
 // JavaScript all things? function(executable method invokable), collection, primitive, void(null undef)
 var _ = (function(){
 
+  var FROZEN = true;
+
 // basic iterators
 
   function eachArray(operation){
@@ -66,7 +68,7 @@ var _ = (function(){
       eachArray(function(element, index){
         results.push(operation(element, index));
       })(array);
-      return Object.freeze(results);
+      return FROZEN? Object.freeze(results) : results;
     };
   }
 
@@ -291,6 +293,13 @@ var _ = (function(){
     })(fNames);
   }
 
+  function defreeze(){
+    FROZEN = false;
+  }
+
+  function refreeze(){
+    FROZEN = true;
+  }
   var _ =  {
     eachArray: eachArray,
     eachArrayRight: eachArrayRight,
@@ -328,6 +337,8 @@ var _ = (function(){
     random: random,
 
     expose: expose,
+    defreeze: defreeze,
+    refreeze: refreeze,
   };
   return _;
 }());

@@ -188,9 +188,9 @@ var _ = (function(){
       if (arguments.length > 1) {
         collection = argsToList(arguments);
       }
-      var memo = collection.shift();
+      var memo;
       each(function(item){
-        memo = operation(memo) > operation(item) ? memo : item;
+        memo = memo && (operation(memo) > operation(item)) ? memo : item;
       })(collection);
       return memo;
     };

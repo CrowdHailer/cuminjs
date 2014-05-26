@@ -361,8 +361,8 @@ describe('cumin utilities', function(){
     it('should return maximum from an array of one', function(){
       expect(maxLength(['bb'])).toEqual('bb');
     });
-    xit('should return maximum from an object', function(){
-      expect(maxLength({x: 'a', y: 'bb'})).toEqual({y: 'bb'});
+    it('should return maximum from an object', function(){
+      expect(maxLength({x: 'a', y: 'bb'})).toEqual('bb');
     });
     it('should return maximum from a selection of arguments', function(){
       expect(maxLength('a', 'bb')).toEqual('bb');

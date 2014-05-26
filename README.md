@@ -35,6 +35,8 @@ Cumin.js adds key utilities for functional programming, such as map, reduce and 
 - any
 - min
 - max
+- cleave
+- cyclic
 
 ##### Special
 - expose
@@ -42,7 +44,6 @@ Cumin.js adds key utilities for functional programming, such as map, reduce and 
 - refreeze
 
 ##### Development
-- cyclic
 - merge
 - extend
 - basic
@@ -166,6 +167,15 @@ Each item in the collection is valued by its return from operation and the lowes
 
 Each item in the collection is valued by its return from operation and the highest value item is returned. Operation is called for each item with arguments `(item, location)`. If no operation is passed then the values of the collection are used.
 
+### Arrays
+
+**cleave** `_.cleave(division)(array)`
+
+Splits an array to two arrays. It returns and array containing first an array of all elements before the division and second an array containing all elements after the division.
+
+**cyclic** `_.cyclic(rotations)(array)`
+
+Returns an array containing rotation numbers of arrays. elements from the original array are added to each of these arrays in turn.
 
 ### Notes
 ##### Curried function

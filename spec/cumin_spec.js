@@ -377,6 +377,10 @@ describe('cumin utilities', function(){
       expect(cleave(2)([0, 1, 2, 3, 4]))
         .toEqual([[0, 1], [2, 3, 4]]);
     });
+    it('should split an array with arument 0', function(){
+      expect(cleave(0)([0, 1]))
+        .toEqual([[], [0, 1]]);
+    });
   });
 
   describe('cyclic', function(){

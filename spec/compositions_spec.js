@@ -54,9 +54,17 @@ describe('compositions', function(){
   });
 
   describe('pluck', function(){
-    it('should slectivly flatten array', function(){
+    it('should selectivly flatten array', function(){
       var array = [{a: 1}, {a: 3}, {a: 2}];
       expect(pluck('a')(array)).toEqual(Object.freeze([1, 3, 2]));
+    });
+  });
+
+  describe('every third', function(){
+    it('should return every third element in array', function(){
+      var everythird = compose(dot(0), cyclic(3));
+      expect(everythird([0, 1, 2, 3, 4, 5, 6, 7])).
+        toEqual([0, 3, 6]);
     });
   });
 

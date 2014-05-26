@@ -68,9 +68,26 @@ Adds each item to a new collection on condition operation returns true. The retu
 **rejectArray, rejectObject, reject**
 Same behaviour as filter functions except adds items when condition returns false.
 
+**reduce** `_.reduce(initial)(operation)(collection)`
+Compacts a collection to a single return value. For each item operation is first called with the current value (initial for first item). It is then called with the item and location and the return value set as the new current value for next iteration. Operation is called each time with arguments `(memo)(item, location)`. Also known as inject and foldl.
 
-- **reduce**
+**Note on reduce**
+1) If no initial is given then the first item from the collection will be used.
 
+2) Functions that are passed as the operation are expected to take arguments singly. e.g.
+
+```js
+add(3)(4)  // Vaild
+add(3, 4)  // Invalid
+```
+
+functions for multiple arguments can then be constructed from reduce as the passed collection may be the arguments object.
+
+```js
+sum = reduce(0)(add);
+sum(1, 2, 3, 4,)
+=> 10
+```
 - **all**
 - **any**
 - **min**
@@ -78,21 +95,6 @@ Same behaviour as filter functions except adds items when condition returns fals
 
 ### Notes
 ##### Curried function
-*Most* functions are curried and take a single argument. e.g.
-```js
-// reduce(initial)(operand)(collection)
-
-sum = reduce(0)(add);
-sum(1) 
-\> 1
-sum(1, 2, 3, 4,)
-\> 10
-```
-Functions that are passed as operand are also expected to take arguments singly. e.g.
-```js
-add(3)(4)  // Vaild
-add(3, 4)  // Invalid
-```
 
 *Exception* functions such as map, reduce, filter pass index/key as second argument with element/value
 

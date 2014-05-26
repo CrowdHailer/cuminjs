@@ -226,9 +226,14 @@ describe('cumin utilities', function(){
   });
 
   describe('reduce', function(){
-    var sum;
+    var sum, asString;
     beforeEach(function(){
       sum = reduce(0)(add);
+      asString = reduce('')(function(memo){
+        return function(item, location){
+          return memo + location + ':' + item + ',';
+        };
+      });
     });
     it('should reduce a list', function(){
       expect(sum([1, 2, 3])).toEqual(6);
@@ -238,6 +243,30 @@ describe('cumin utilities', function(){
     });
     it('should reduce arguments', function(){
       expect(sum(1, 2, 3)).toEqual(6);
+    });
+    it('should reduce empty list', function(){
+      expect(sum([])).toEqual(0);
+    });
+    it('should reduce empty object', function(){
+      expect(sum({})).toEqual(0);
+    });
+    it('should take initial value from array if not given an initial', function(){
+      expect(reduce()(add)([1, 2, 3])).toEqual(6);
+    });
+    it('should take initial value from object if not given initial', function(){
+      expect(reduce()(add)({x: 1, y: 3, z: 2})).toEqual(6);
+    });
+    it('should take initial value from arguments if not given initial', function(){
+      expect(reduce()(add)(1, 2, 3)).toEqual(6);
+    });
+    it('should be able to use array index', function(){
+      expect(asString([1, 2])).toEqual('0:1,1:2,');
+    });
+    it('should be able to use arguments index', function(){
+      expect(asString(1, 2)).toEqual('0:1,1:2,');
+    });
+    it('should be able to use object key', function(){
+      expect(asString({x: 1, y: 3})).toEqual('x:1,y:3,');
     });
   });
 

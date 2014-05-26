@@ -402,6 +402,10 @@ describe('cumin utilities', function(){
       var answer = cyclic(3)([0, 1, 2, 3, 4, 5]);
       expect(answer).toEqual([[0, 3], [1, 4], [2, 5]]);
     });
+    it('should have empty arrays it array shorter than division', function(){
+      var answer = cyclic(3)([1]);
+      expect(answer).toEqual([[1], [], []]);
+    });
   });
 
   describe('not', function(){

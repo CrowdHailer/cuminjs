@@ -196,13 +196,12 @@ var _ = (function(){
 
   function cyclic(n){
     var results = [];
+    times(n)(
+      function(){results.push([]);
+    });
     return function(collection){
       eachArray(function(element, index){
-        if (index < n) {
-          results[index] = [element];
-        } else {
-          results[index % n].push(element);
-        }
+        results[index % n].push(element);
       })(collection);
       return results;
     };

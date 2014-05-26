@@ -196,12 +196,8 @@ var _ = (function(){
 
   function cleave(n){
     return function(array){
-      var before = [];
       n = n < 0 ? array.length + n : n ;
-      times(n)(function(){
-        before.push(array.shift());
-      });
-      return [before, array];
+      return [array.slice(0, n), array.slice(n)];
     };
   }
 

@@ -239,6 +239,12 @@ describe('cumin utilities', function(){
     it('should reduce arguments', function(){
       expect(sum(1, 2, 3)).toEqual(6);
     });
+    it('should reduce empty list', function(){
+      expect(sum([])).toEqual(0);
+    });
+    it('should reduce empty object', function(){
+      expect(sum({})).toEqual(0);
+    });
   });
 
   describe('all', function(){

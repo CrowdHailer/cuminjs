@@ -101,7 +101,7 @@ var _ = (function(){
       eachArray(function(element, index){
         if (operation(element, index)) { results.push(element); }
       })(array);
-      return Object.freeze(results);
+      return FROZEN? Object.freeze(results) : results;
     };
   }
 

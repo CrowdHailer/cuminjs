@@ -387,6 +387,10 @@ describe('cumin utilities', function(){
       expect(mapObject(add3)({x: 1, y: 2})).
         toEqual({x: 4, y: 5});
     });
+    it('should work for filterArray', function(){
+      expect(filterArray(greaterThan2)([1, 3])).
+        toEqual([3]);
+    });
   });
 
   describe('cyclic', function(){

@@ -209,15 +209,25 @@ var _ = (function(){
 
 // Array
 
+  function cleave(n){
+    return function(array){
+      var before = [];
+      n = n < 0 ? array.length + n : n ;
+      times(n)(function(){
+        before.push(array.shift());
+      });
+      return [before, array];
+    };
+  }
+
   function cyclic(n){
     var results = [];
+    times(n)(function(){
+      results.push([]);
+    });
     return function(collection){
       eachArray(function(element, index){
-        if (index < n) {
-          results[index] = [element];
-        } else {
-          results[index % n].push(element);
-        }
+        results[index % n].push(element);
       })(collection);
       return results;
     };
@@ -339,6 +349,8 @@ var _ = (function(){
     max: max,
 
     cyclic: cyclic,
+    cleave: cleave,
+
     merge: merge,
     extend: extend,
     basic: basic,

@@ -113,7 +113,7 @@ var _ = (function(){
       eachObject(function(value, key){
         if (operation(value, key)) { results[key] = value;}
       })(object);
-      return Object.freeze(results);
+      return FROZEN? Object.freeze(results) : results;
     };
   }
 

@@ -391,6 +391,10 @@ describe('cumin utilities', function(){
       expect(filterArray(greaterThan2)([1, 3])).
         toEqual([3]);
     });
+    it('should work for filterObject', function(){
+      expect(filterObject(greaterThan2)({x: 1, y: 3})).
+        toEqual({y: 3});
+    });
   });
 
   describe('cyclic', function(){

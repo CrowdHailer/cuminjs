@@ -262,6 +262,12 @@ describe('cumin utilities', function(){
     it('should be able to use array index', function(){
       expect(asString([1, 2])).toEqual('0:1,1:2,');
     });
+    it('should be able to use arguments index', function(){
+      expect(asString(1, 2)).toEqual('0:1,1:2,');
+    });
+    it('should be able to use object key', function(){
+      expect(asString({x: 1, y: 3})).toEqual('x:1,y:3,');
+    });
   });
 
   describe('all', function(){

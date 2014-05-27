@@ -399,9 +399,15 @@ describe('cumin utilities', function(){
   });
 
   describe('foundation', function(){
+    var initialObj;
+    beforeEach(function(){
+    initialObj = foundation({x: 1});
+    });
     it('should add key value pairs to foundation object', function(){
-      var initialObj = foundation({x: 1});
       expect(initialObj({y: 2})).toEqual(Object.freeze({x: 1, y: 2}));
+    });
+    it('should overwrite keys in the foundation object', function(){
+      expect(initialObj({x: 2})).toEqual(Object.freeze({x: 2}));
     });
   });
   

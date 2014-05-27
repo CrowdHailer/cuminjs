@@ -227,19 +227,6 @@ var _ = (function(){
     };
   }
 
-  function merge(extention){
-    return function(obj){
-      var results = Object.create({});
-      eachArray(function(key){
-        results[key] = obj[key];
-      })(Object.keys(obj));
-      eachArray(function(key){
-        results[key] = extention[key];
-      })(Object.keys(extention));
-      return results;
-    };
-  }
-
   function extend(extra){
     return function(object){
       eachObject(function(value, key){
@@ -333,7 +320,6 @@ var _ = (function(){
     cyclic: cyclic,
     cleave: cleave,
 
-    merge: merge,
     extend: extend,
     foundation: foundation,
 

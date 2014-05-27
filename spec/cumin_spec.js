@@ -419,14 +419,6 @@ describe('cumin utilities', function(){
       expect(clone(a)).not.toEqual(a);
     });
   });
-  
-  describe('merge', function(){
-    it('should merge an object', function(){
-      var obj = {a: 1};
-      var extended = merge({e: 5})(obj);
-      expect(extended).toEqual({a: 1, e: 5});
-    });
-  });
 
   describe('extend', function(){
     it('should extend an object', function(){

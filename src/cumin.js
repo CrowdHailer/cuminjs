@@ -216,36 +216,25 @@ var _ = (function(){
 
 // Object 
 
-  function merge(extention){
-    return function(obj){
-      var results = Object.create({});
-      eachArray(function(key){
-        results[key] = obj[key];
-      })(Object.keys(obj));
-      eachArray(function(key){
-        results[key] = extention[key];
-      })(Object.keys(extention));
-      return results;
+  function foundation(object){
+    // builds a new object from the properties of a foundation object and extention object.
+    return function(extra){
+      results = {};
+      each(eachObject(function(value, key){
+        results[key] = value;
+      }))(object || {}, extra || {});
+      return FROZEN? Object.freeze(results) : results;
     };
   }
 
   function extend(extra){
+    // adds extra key vales to second passed object
     return function(object){
       eachObject(function(value, key){
         object[key] = value;
       })(extra);
     };
   }
-
-
-  function basic(object){
-    return function(extra){
-      eachObject(function(value, key){
-        object[key] = value;
-      })(extra);
-    };
-  }
-
 
 // Function operations
 
@@ -332,9 +321,8 @@ var _ = (function(){
     cyclic: cyclic,
     cleave: cleave,
 
-    merge: merge,
     extend: extend,
-    basic: basic,
+    foundation: foundation,
 
     compose: compose,
     not: not,

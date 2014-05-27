@@ -37,6 +37,8 @@ Cumin.js adds key utilities for functional programming, such as map, reduce and 
 - max
 - cleave
 - cyclic
+- foundation
+- extend
 
 ##### Special
 - expose
@@ -44,9 +46,6 @@ Cumin.js adds key utilities for functional programming, such as map, reduce and 
 - refreeze
 
 ##### Development
-- merge
-- extend
-- basic
 - compose
 - not
 - Identity (I)
@@ -176,6 +175,16 @@ Splits an array to two arrays. It returns and array containing first an array of
 **cyclic** `_.cyclic(rotations)(array)`
 
 Returns an array containing rotation numbers of arrays. elements from the original array are added to each of these arrays in turn.
+
+### Objects
+
+**foundation** `_.foundation(defaults)(extensions)`
+
+Creates a new object with all key value pairs of both defaults and extension object. In case of clash extension keys overwrite default keys. Will treat no arguments passed as empty object passed. 
+
+**extend** `_.foundation(initial)(extensions)`
+
+All key value pairs from extensions object are added to the initial object. NOTE this is not a clone and the initial object is modified. ALSO returned object is not frozen. This is used for creating complex objects in multiple steps to be frozen/passed as necessary. 
 
 ### Notes
 ##### Curried function

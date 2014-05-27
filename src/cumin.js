@@ -224,7 +224,7 @@ var _ = (function(){
       })(object);
       eachObject(function(value, key){
         results[key] = value;
-      })(extra);
+      })(extra || {});
       return Object.freeze(results);
     };
   }

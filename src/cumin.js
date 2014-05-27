@@ -217,14 +217,12 @@ var _ = (function(){
 // Object 
 
   function foundation(object){
+    // builds a new object from the properties of a foundation object and extention object.
     return function(extra){
       results = {};
-      eachObject(function(value, key){
+      each(eachObject(function(value, key){
         results[key] = value;
-      })(object);
-      eachObject(function(value, key){
-        results[key] = value;
-      })(extra || {});
+      }))(object, extra || {});
       return Object.freeze(results);
     };
   }

@@ -183,6 +183,10 @@ Returns an array containing rotation numbers of arrays. elements from the origin
 
 Creates a new object with all key value pairs of both defaults and extension object. In case of clash extension keys overwrite default keys. Will treat no arguments passed as empty object passed. 
 
+**extend** `_.foundation(initial)(extensions)`
+
+All key value pairs from extensions object are added to the initial object. NOTE this is not a clone and the initial object is modified. ALSO returned object is not frozen. This is used for creating complex objects in multiple steps to be frozen/passed as necessary. 
+
 ### Notes
 ##### Curried function
 

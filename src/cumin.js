@@ -228,6 +228,7 @@ var _ = (function(){
   }
 
   function extend(extra){
+    // adds extra key vales to second passed object
     return function(object){
       eachObject(function(value, key){
         object[key] = value;

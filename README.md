@@ -177,6 +177,12 @@ Splits an array to two arrays. It returns and array containing first an array of
 
 Returns an array containing rotation numbers of arrays. elements from the original array are added to each of these arrays in turn.
 
+### Objects
+
+**foundation** `_.foundation(defaults)(extensions)`
+
+Creates a new object with all key value pairs of both defaults and extension object. In case of clash extension keys overwrite default keys. Will treat no arguments passed as empty object passed. 
+
 ### Notes
 ##### Curried function
 

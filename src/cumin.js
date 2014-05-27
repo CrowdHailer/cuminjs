@@ -223,7 +223,7 @@ var _ = (function(){
       each(eachObject(function(value, key){
         results[key] = value;
       }))(object || {}, extra || {});
-      return Object.freeze(results);
+      return FROZEN? Object.freeze(results) : results;
     };
   }
 

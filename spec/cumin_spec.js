@@ -469,6 +469,10 @@ describe('cumin utilities', function(){
       expect(filterObject(greaterThan2)({x: 1, y: 3})).
         toEqual({y: 3});
     });
+    it('should work for foundation', function(){
+      expect(foundation({x: 1})({y: 2})).
+        toEqual({x: 1, y: 2});
+    });
   });
 
   describe('not', function(){

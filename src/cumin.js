@@ -216,6 +216,19 @@ var _ = (function(){
 
 // Object 
 
+  function foundation(object){
+    return function(extra){
+      results = {};
+      eachObject(function(value, key){
+        results[key] = value;
+      })(object);
+      eachObject(function(value, key){
+        results[key] = value;
+      })(extra);
+      return Object.freeze(results);
+    };
+  }
+
   function merge(extention){
     return function(obj){
       var results = Object.create({});
@@ -236,16 +249,6 @@ var _ = (function(){
       })(extra);
     };
   }
-
-
-  function basic(object){
-    return function(extra){
-      eachObject(function(value, key){
-        object[key] = value;
-      })(extra);
-    };
-  }
-
 
 // Function operations
 
@@ -334,7 +337,7 @@ var _ = (function(){
 
     merge: merge,
     extend: extend,
-    basic: basic,
+    foundation: foundation,
 
     compose: compose,
     not: not,

@@ -33,7 +33,7 @@ describe('cumin utilities', function(){
       _.expose('dot map each eachArray eachObject not reduce ' +
                'compose dot extend filter eachArrayRight ' +
                'merge extend all any cyclic reject max min ' +
-               'basic times random mapObject mapArray filterArray ' +
+               'foundation times random mapObject mapArray filterArray ' +
                'rejectArray filterObject rejectObject cleave'
               );
       expect(function(){
@@ -398,6 +398,39 @@ describe('cumin utilities', function(){
     });
   });
 
+  describe('foundation', function(){
+    it('should add key value pairs to foundation object', function(){
+      var initialObj = foundation({x: 1});
+      expect(initialObj({y: 2})).toEqual(Object.freeze({x: 1, y: 2}));
+    });
+  });
+  
+  describe('merge', function(){
+    it('should merge an object', function(){
+      var obj = {a: 1};
+      var extended = merge({e: 5})(obj);
+      expect(extended).toEqual({a: 1, e: 5});
+    });
+  });
+
+  describe('extend', function(){
+    it('should extend an object', function(){
+      var a = function(a){ return true; };
+      var b = {x: 5};
+      extend(b)(a);
+      expect(a()).toBe(true);
+      expect(a.x).toEqual(5);
+    });
+    it('should overwrite second object', function(){
+      var a = {x: 5};
+      var b = {x: 7};
+      extend(b)(a);
+      expect(a.x).toEqual(7);
+    });
+  });
+
+  
+
   describe('defreeze and refreeze', function(){
     beforeEach(function(){
       _.defreeze();
@@ -430,38 +463,6 @@ describe('cumin utilities', function(){
     });
   });
 
-  describe('merge', function(){
-    it('should merge an object', function(){
-      var obj = {a: 1};
-      var extended = merge({e: 5})(obj);
-      expect(extended).toEqual({a: 1, e: 5});
-    });
-  });
-
-  describe('extend', function(){
-    it('should extend an object', function(){
-      var a = function(a){ return true; };
-      var b = {x: 5};
-      extend(b)(a);
-      expect(a()).toBe(true);
-      expect(a.x).toEqual(5);
-    });
-    it('should overwrite second object', function(){
-      var a = {x: 5};
-      var b = {x: 7};
-      extend(b)(a);
-      expect(a.x).toEqual(7);
-    });
-  });
-
-  describe('basic', function(){
-    it('should build an object from defaults', function(){
-      var basicObj = {x: 5};
-      var b = {x: 7};
-      basic(basicObj)(b);
-      expect(basicObj.x).toEqual(7);
-    });
-  });
 
   describe('compose', function(){
     it('should combine functions', function(){

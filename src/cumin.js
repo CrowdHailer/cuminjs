@@ -222,7 +222,7 @@ var _ = (function(){
       results = {};
       each(eachObject(function(value, key){
         results[key] = value;
-      }))(object, extra || {});
+      }))(object || {}, extra || {});
       return Object.freeze(results);
     };
   }

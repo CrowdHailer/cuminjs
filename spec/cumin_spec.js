@@ -412,6 +412,12 @@ describe('cumin utilities', function(){
     it('should return the initial object if given no futher keys', function(){
       expect(initialObj()).toEqual(Object.freeze({x: 1}));
     });
+    it('should work as clone given no initial', function(){
+      var clone = foundation();
+      var a = {x: 5};
+      expect(clone(a)).toEqual(Object.freeze({x: 5}));
+      expect(clone(a)).not.toEqual(a);
+    });
   });
   
   describe('merge', function(){

@@ -37,6 +37,8 @@ Cumin.js adds key utilities for functional programming, such as map, reduce and 
 - max
 - cleave
 - cyclic
+- foundation
+- extend
 
 ##### Special
 - expose
@@ -44,9 +46,6 @@ Cumin.js adds key utilities for functional programming, such as map, reduce and 
 - refreeze
 
 ##### Development
-- merge
-- extend
-- basic
 - compose
 - not
 - Identity (I)

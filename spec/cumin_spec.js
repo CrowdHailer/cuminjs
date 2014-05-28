@@ -525,6 +525,13 @@ describe('cumin utilities', function(){
       times(-1)(dummy);
       expect(dummy.calls.length).toEqual(0);
     });
+    it('should call the function with the indecies', function(){
+      var twice = times(2);
+      twice(dummy);
+      expect(dummy).toHaveBeenCalledWith(0);
+      expect(dummy).toHaveBeenCalledWith(1);
+      expect(dummy).not.toHaveBeenCalledWith(2);
+    });
   });
 
   describe('random', function(){

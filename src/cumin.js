@@ -251,8 +251,13 @@ var _ = (function(){
 
   function debounce(wait){
     return function(func){
+      var timeout, args;
       return function(){
-        func.apply({}, arguments)
+        args = arguments;
+        clearTimeout(timeout);
+        timeout = setTimeout(function(){
+          func.apply({}, args);
+        }, wait);
       };
     };
   }

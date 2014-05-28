@@ -490,6 +490,13 @@ describe('cumin utilities', function(){
     });
   });
 
+  describe('now', function(){
+    it('should call date object', function(){
+      _.expose('now');
+      expect(now()).toEqual(Date.now());
+    });
+  });
+
   describe('times', function(){
     it('should call a function n times', function(){
       var thrice = times(3);
@@ -502,6 +509,7 @@ describe('cumin utilities', function(){
       expect(dummy.calls.length).toEqual(0);
     });
   });
+
   describe('random', function(){
     it('should return a number from 0 up to but not including max', function(){
       var val = random()();

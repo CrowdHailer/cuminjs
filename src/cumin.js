@@ -267,6 +267,8 @@ var _ = (function(){
     };
   }
 
+  var now = Date.now || function() { return new Date().getTime(); };
+
   function times(n){
     return function(operation){
       for (var i = 0; i < n; i++){
@@ -329,6 +331,7 @@ var _ = (function(){
 
     I: I,
     dot: dot,
+    now: now,
     times: times,
     random: random,
 

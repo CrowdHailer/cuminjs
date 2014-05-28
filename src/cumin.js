@@ -249,6 +249,14 @@ var _ = (function(){
     };
   }
 
+  function debounce(wait){
+    return function(func){
+      return function(){
+        func.apply({}, arguments)
+      };
+    };
+  }
+
   function not(func){
     return function(){
       return !func.apply({}, arguments);
@@ -327,6 +335,7 @@ var _ = (function(){
     foundation: foundation,
 
     compose: compose,
+    debounce: debounce,
     not: not,
 
     I: I,

@@ -34,7 +34,8 @@ describe('cumin utilities', function(){
                'compose dot extend filter eachArrayRight ' +
                'merge extend all any cyclic reject max min ' +
                'foundation times random mapObject mapArray filterArray ' +
-               'rejectArray filterObject rejectObject cleave'
+               'rejectArray filterObject rejectObject cleave ' + 
+               'now debounce'
               );
       expect(function(){
         dot();
@@ -494,6 +495,14 @@ describe('cumin utilities', function(){
     it('should call date object', function(){
       _.expose('now');
       expect(now()).toEqual(Date.now());
+    });
+  });
+
+  describe('debounce', function(){
+    it('should call with the latest arguments', function(){
+      var late = debounce(0)(dummy);
+      late(3);
+      expect(dummy).toHaveBeenCalledWith(3);
     });
   });
 

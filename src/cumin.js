@@ -262,6 +262,28 @@ var _ = (function(){
     };
   }
 
+  function throttle(wait){
+    return function(func){
+      var timeout, args;
+      return function(){
+        args = arguments;
+        if (timeout) { return; }
+        timeout = setTimeout(function(){
+          timeout = null;
+          func.apply({}, args);
+        }, wait);
+      };
+    };
+  }
+
+  function times(n){
+    return function(operation){
+      for (var i = 0; i < n; i++){
+        operation();
+      }
+    };
+  }
+
   function not(func){
     return function(){
       return !func.apply({}, arguments);
@@ -281,14 +303,6 @@ var _ = (function(){
   }
 
   var now = Date.now || function() { return new Date().getTime(); };
-
-  function times(n){
-    return function(operation){
-      for (var i = 0; i < n; i++){
-        operation();
-      }
-    };
-  }
 
   function random(max){
     return function(){
@@ -341,6 +355,7 @@ var _ = (function(){
 
     compose: compose,
     debounce: debounce,
+    throttle: throttle,
     not: not,
 
     I: I,

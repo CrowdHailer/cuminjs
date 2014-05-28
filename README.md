@@ -13,6 +13,7 @@ Cumin.js adds key utilities for functional programming, such as map, reduce and 
  3. All utilities are curried functions and will only take a single argument at a time.
  4. Data always comes last, to maximise power of partially filled operations.
  5. New Arrays and Objects are returned frozen by default. (this option can be overrun for the entire library with `defreeze()` & `refreeze`)
+ 6. Does not carry any concept of context
 
 ### List of functions
 ##### Main
@@ -39,6 +40,14 @@ Cumin.js adds key utilities for functional programming, such as map, reduce and 
 - cyclic
 - foundation
 - extend
+- compose
+- debounce
+- throttle
+- not
+- Identity (I)
+- dot
+- times
+- random
 
 ##### Special
 - expose
@@ -46,12 +55,10 @@ Cumin.js adds key utilities for functional programming, such as map, reduce and 
 - refreeze
 
 ##### Development
-- compose
-- not
-- Identity (I)
-- dot
-- times
-- random
+- and
+- pluck
+- weed
+- limit
 
 ### Collections
 **eachArray** `_.eachArray(operation)(array)`
@@ -185,6 +192,29 @@ Creates a new object with all key value pairs of both defaults and extension obj
 **extend** `_.foundation(initial)(extensions)`
 
 All key value pairs from extensions object are added to the initial object. NOTE this is not a clone and the initial object is modified. ALSO returned object is not frozen. This is used for creating complex objects in multiple steps to be frozen/passed as necessary. 
+
+### Functions
+
+**compose** `_.compose(funcA, funcB)`
+
+Compose returns the combined function of all passed in functions. The return value of each function is passed to the left function. `compose(f, g)(x) == f(g(x))`
+
+**debounce** `_.debounce(wait)(operation)`
+
+Returns a new function that only calls the passed function *wait* milliseconds after the last call.
+
+**throttle** `_.throttle(wait)(operation)`
+
+Returns a new throttled copy of the passed function. When invoked repeatedly it will only call the original function at most once per every *wait* milliseconds.
+
+**times** `_.times(n)(operations)`
+
+Calls the passed operation *n* times. Operation is called each time with a single argument of the current index `(index)`, running from 0 to n-1,
+
+- not
+- Identity (I)
+- dot
+- random
 
 ### Notes
 ##### Curried function

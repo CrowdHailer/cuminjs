@@ -34,7 +34,8 @@ describe('cumin utilities', function(){
                'compose dot extend filter eachArrayRight ' +
                'merge extend all any cyclic reject max min ' +
                'foundation times random mapObject mapArray filterArray ' +
-               'rejectArray filterObject rejectObject cleave'
+               'rejectArray filterObject rejectObject cleave ' + 
+               'now debounce'
               );
       expect(function(){
         dot();
@@ -490,6 +491,29 @@ describe('cumin utilities', function(){
     });
   });
 
+  describe('now', function(){
+    it('should call date object', function(){
+      _.expose('now');
+      expect(now()).toEqual(Date.now());
+    });
+  });
+
+  xdescribe('debounce', function(){
+    it('should call with the latest arguments', function(){
+      var late = debounce(0)(dummy);
+      late(3);
+      expect(dummy).toHaveBeenCalledWith(3);
+    });
+    it('should call after activity', function(){
+      var late = debounce(2)(dummy);
+      var time = spyOn(_, 'now').andReturn(0);
+      late(3);
+      time.andReturn(1);
+      late(4);
+      expect(dummy.calls.length).toEqual(1);
+    });
+  });
+
   describe('times', function(){
     it('should call a function n times', function(){
       var thrice = times(3);
@@ -501,7 +525,15 @@ describe('cumin utilities', function(){
       times(-1)(dummy);
       expect(dummy.calls.length).toEqual(0);
     });
+    it('should call the function with the indecies', function(){
+      var twice = times(2);
+      twice(dummy);
+      expect(dummy).toHaveBeenCalledWith(0);
+      expect(dummy).toHaveBeenCalledWith(1);
+      expect(dummy).not.toHaveBeenCalledWith(2);
+    });
   });
+
   describe('random', function(){
     it('should return a number from 0 up to but not including max', function(){
       var val = random()();

@@ -264,6 +264,41 @@ var _ = (function(){
     };
   }
 
+  function debounce(wait){
+    return function(func){
+      var timeout, args;
+      return function(){
+        args = arguments;
+        clearTimeout(timeout);
+        timeout = setTimeout(function(){
+          func.apply({}, args);
+        }, wait);
+      };
+    };
+  }
+
+  function throttle(wait){
+    return function(func){
+      var timeout, args;
+      return function(){
+        args = arguments;
+        if (timeout) { return; }
+        timeout = setTimeout(function(){
+          timeout = null;
+          func.apply({}, args);
+        }, wait);
+      };
+    };
+  }
+
+  function times(n){
+    return function(operation){
+      for (var i = 0; i < n; i++){
+        operation(i);
+      }
+    };
+  }
+
   function not(func){
     return function(){
       return !func.apply({}, arguments);
@@ -282,13 +317,7 @@ var _ = (function(){
     };
   }
 
-  function times(n){
-    return function(operation){
-      for (var i = 0; i < n; i++){
-        operation();
-      }
-    };
-  }
+  var now = Date.now || function() { return new Date().getTime(); };
 
   function random(max){
     return function(){
@@ -340,10 +369,13 @@ var _ = (function(){
     foundation: foundation,
 
     compose: compose,
+    debounce: debounce,
+    throttle: throttle,
     not: not,
 
     I: I,
     dot: dot,
+    now: now,
     times: times,
     random: random,
 

@@ -285,6 +285,13 @@ var _ = (function(){
     };
   }
 
+  function invoke(){
+    var args = arguments;
+    return function(func){
+      func.apply({}, args);
+    };
+  }
+
   function debounce(wait){
     return function(func){
       var timeout, args;
@@ -392,6 +399,7 @@ var _ = (function(){
     overlay: overlay,
 
     compose: compose,
+    invoke: invoke,
     debounce: debounce,
     throttle: throttle,
     not: not,

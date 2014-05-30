@@ -4,6 +4,7 @@ module.exports = function(config) {
     frameworks: ['jasmine'],
     files: [
       'dist/cumin.min.js',
+      'spec/setup.js',
       'spec/cumin_spec.js',
       // 'spec/compositions_spec.js'
     ],

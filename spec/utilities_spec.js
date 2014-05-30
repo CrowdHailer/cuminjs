@@ -1,5 +1,5 @@
 describe('provided utility functions', function(){
-  _.expose('defreeze refreeze');
+  _.expose('defreeze refreeze size');
 
   describe('defreeze and refreeze', function(){
     beforeEach(function(){
@@ -32,6 +32,12 @@ describe('provided utility functions', function(){
     it('should work for overlay', function(){
       expect(overlay({x: 1})({y: 2})).
         toEqual({x: 1, y: 2});
+    });
+  });
+
+  describe('size', function(){
+    it('should number of elements in an array', function(){
+      expect(size([1, 2])).toEqual(2);
     });
   });
 });

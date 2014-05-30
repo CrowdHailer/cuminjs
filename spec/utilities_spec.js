@@ -36,8 +36,11 @@ describe('provided utility functions', function(){
   });
 
   describe('size', function(){
-    it('should number of elements in an array', function(){
+    it('should return number of elements in an array', function(){
       expect(size([1, 2])).toEqual(2);
+    });
+    it('should return number of values on an object', function(){
+      expect(size({x: 1})).toEqual(1);
     });
   });
 });

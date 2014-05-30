@@ -354,7 +354,7 @@ var _ = (function(){
   }
 
   function size(collection){
-    return collection.length
+    return collection.length || Object.keys(collection).length;
   }
   var _ =  {
     eachArray: eachArray,

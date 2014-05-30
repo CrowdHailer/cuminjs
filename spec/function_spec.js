@@ -1,10 +1,22 @@
 describe('function "ahem" functions', function(){
-  _.expose('compose times not');
+  _.expose('compose invoke times not');
 
   describe('compose', function(){
     it('should combine functions', function(){
       var compound = compose(add3, multiply2);
       expect(compound(2)).toEqual(7);
+    });
+  });
+
+  describe('invoke', function(){
+    var dummy;
+    beforeEach(function(){
+      dummy = jasmine.createSpy();
+    });
+    it('should hold arguments for a passed function', function(){
+      var pass3 = invoke(3);
+      pass3(dummy);
+      expect(dummy).toHaveBeenCalledWith(3);
     });
   });
 

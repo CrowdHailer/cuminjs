@@ -231,23 +231,13 @@ var _ = (function(){
 
 // Object 
 
-  function foundation(object){
-    // builds a new object from the properties of a foundation object and extention object.
-    return function(extra){
-      results = {};
-      each(eachObject(function(value, key){
-        results[key] = value;
-      }))(object || {}, extra || {});
-      return FROZEN? Object.freeze(results) : results;
-    };
-  }
-
   function extend(extra){
     // adds extra key vales to second passed object
     return function(object){
       eachObject(function(value, key){
         object[key] = value;
       })(extra);
+      return object;
     };
   }
 
@@ -259,6 +249,28 @@ var _ = (function(){
       return object;
     };
   }
+
+  function foundation(object){
+    // builds a new object from the properties of a foundation object and extention object.
+    return function(extra){
+      results = {};
+      each(eachObject(function(value, key){
+        results[key] = value;
+      }))(object || {}, extra || {});
+      return FROZEN? Object.freeze(results) : results;
+    };
+  }
+
+  function overlay(extra){
+    // builds a new object from the properties of a foundation object and extention object.
+    return function(object){
+      results = {};
+      each(eachObject(function(value, key){
+        results[key] = value;
+      }))(object || {}, extra || {});
+      return FROZEN? Object.freeze(results) : results;
+    };
+  }  
 
 // Function operations
 
@@ -377,6 +389,7 @@ var _ = (function(){
     extend: extend,
     augment: augment,
     foundation: foundation,
+    overlay: overlay,
 
     compose: compose,
     debounce: debounce,

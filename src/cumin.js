@@ -356,6 +356,10 @@ var _ = (function(){
   function size(collection){
     return collection.length || Object.keys(collection).length;
   }
+
+  function log(){
+    console.log.apply(console, arguments);
+  }
   var _ =  {
     eachArray: eachArray,
     eachArrayRight: eachArrayRight,
@@ -403,6 +407,7 @@ var _ = (function(){
     defreeze: defreeze,
     refreeze: refreeze,
     size: size,
+    log: log,
   };
   return _;
 }());

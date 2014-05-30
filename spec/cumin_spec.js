@@ -31,9 +31,9 @@ describe('cumin utilities', function(){
     });
     it('should make functions available on top namespace', function(){
       _.expose('dot map each eachArray eachObject not reduce ' +
-               'compose dot extend filter eachArrayRight ' +
-               'merge extend all any cyclic reject max min ' +
-               'foundation times random mapObject mapArray filterArray ' +
+               'compose dot filter eachArrayRight ' +
+               'merge all any cyclic reject max min ' +
+               'times random mapObject mapArray filterArray ' +
                'rejectArray filterObject rejectObject cleave ' + 
                'now debounce'
               );
@@ -399,74 +399,7 @@ describe('cumin utilities', function(){
     });
   });
 
-  describe('foundation', function(){
-    var initialObj;
-    beforeEach(function(){
-      initialObj = foundation({x: 1});
-    });
-    it('should add key value pairs to foundation object', function(){
-      expect(initialObj({y: 2})).toEqual(Object.freeze({x: 1, y: 2}));
-    });
-    it('should overwrite keys in the foundation object', function(){
-      expect(initialObj({x: 2})).toEqual(Object.freeze({x: 2}));
-    });
-    it('should return the initial object if given no futher keys', function(){
-      expect(initialObj()).toEqual(Object.freeze({x: 1}));
-    });
-    it('should work as clone given no initial', function(){
-      var clone = foundation();
-      var a = {x: 5};
-      expect(clone(a)).toEqual(Object.freeze({x: 5}));
-      expect(clone(a)).not.toEqual(a);
-    });
-  });
-
-  describe('extend', function(){
-    it('should extend an object', function(){
-      var a = function(a){ return true; };
-      var b = {x: 5};
-      extend(b)(a);
-      expect(a()).toBe(true);
-      expect(a.x).toEqual(5);
-    });
-    it('should overwrite second object', function(){
-      var a = {x: 5};
-      var b = {x: 7};
-      extend(b)(a);
-      expect(a.x).toEqual(7);
-    });
-  });
-
   
-
-  describe('defreeze and refreeze', function(){
-    beforeEach(function(){
-      _.defreeze();
-    });
-    afterEach(function(){
-      _.refreeze();
-    });
-    it('should work for mapArray', function(){
-      expect(mapArray(add3)([1, 2])).
-        toEqual([4, 5]);
-    });
-    it('should work for mapObject', function(){
-      expect(mapObject(add3)({x: 1, y: 2})).
-        toEqual({x: 4, y: 5});
-    });
-    it('should work for filterArray', function(){
-      expect(filterArray(greaterThan2)([1, 3])).
-        toEqual([3]);
-    });
-    it('should work for filterObject', function(){
-      expect(filterObject(greaterThan2)({x: 1, y: 3})).
-        toEqual({y: 3});
-    });
-    it('should work for foundation', function(){
-      expect(foundation({x: 1})({y: 2})).
-        toEqual({x: 1, y: 2});
-    });
-  });
 
   describe('not', function(){
     it('should late eval truthy statments', function(){

@@ -2,25 +2,8 @@ describe('provided utility functions', function(){
   _.expose('defreeze refreeze');
 
   describe('defreeze and refreeze', function(){
-    var add3, greaterThan2;
-
     beforeEach(function(){
       defreeze();
-
-      add = function(a){
-        return function(b){
-          return a + b;
-        };
-      };
-
-      greater = function(a){
-        return function(b){
-          return b > a;
-        };
-      };
-
-      add3 = add(3);
-      greaterThan2 = greater(2);
     });
     afterEach(function(){
       refreeze();

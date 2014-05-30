@@ -30,7 +30,7 @@ describe('cumin utilities', function(){
       }).toThrow("Can't find variable: dot");
     });
     it('should make functions available on top namespace', function(){
-      _.expose('dot map each eachArray eachObject not reduce ' +
+      _.expose('dot map each eachArray eachObject reduce ' +
                'dot filter eachArrayRight ' +
                'merge all any cyclic reject max min ' +
                'times random mapObject mapArray filterArray ' +
@@ -396,15 +396,6 @@ describe('cumin utilities', function(){
     it('should have empty arrays it array shorter than division', function(){
       var answer = cyclic(3)([1]);
       expect(answer).toEqual([[1], [], []]);
-    });
-  });
-
-  
-
-  describe('not', function(){
-    it('should late eval truthy statments', function(){
-      lessThan2 = not(greaterThan2);
-      expect(lessThan2(1)).toBe(true);
     });
   });
 

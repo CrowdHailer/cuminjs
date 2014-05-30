@@ -1,5 +1,5 @@
 describe('provided utility functions', function(){
-  _.expose('defreeze refreeze');
+  _.expose('defreeze refreeze size log');
 
   describe('defreeze and refreeze', function(){
     beforeEach(function(){
@@ -32,6 +32,23 @@ describe('provided utility functions', function(){
     it('should work for overlay', function(){
       expect(overlay({x: 1})({y: 2})).
         toEqual({x: 1, y: 2});
+    });
+  });
+
+  describe('size', function(){
+    it('should return number of elements in an array', function(){
+      expect(size([1, 2])).toEqual(2);
+    });
+    it('should return number of values on an object', function(){
+      expect(size({x: 1})).toEqual(1);
+    });
+  });
+
+  describe('log', function(){
+    it('should log to console', function(){
+      spyOn(console, 'log');
+      log(3);
+      expect(console.log).toHaveBeenCalledWith(3);
     });
   });
 });

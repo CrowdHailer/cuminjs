@@ -1,12 +1,31 @@
 describe('provided utility functions', function(){
   _.expose('defreeze refreeze');
+
   describe('defreeze and refreeze', function(){
+    var add3, greaterThan2;
+
     beforeEach(function(){
-      _.defreeze();
+      defreeze();
+
+      add = function(a){
+        return function(b){
+          return a + b;
+        };
+      };
+
+      greater = function(a){
+        return function(b){
+          return b > a;
+        };
+      };
+      
+      add3 = add(3);
+      greaterThan2 = greater(2);
     });
     afterEach(function(){
-      _.refreeze();
+      refreeze();
     });
+
     it('should work for mapArray', function(){
       expect(mapArray(add3)([1, 2])).
         toEqual([4, 5]);

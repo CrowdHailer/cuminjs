@@ -1,24 +1,6 @@
 describe('cumin utilities', function(){
-  var add, add3, multiply, multiply2, greater, greaterThan2, dummy;
+  var dummy;
   beforeEach(function(){
-    add = function(a){
-      return function(b){
-        return a + b;
-      };
-    };
-    multiply = function(a){
-      return function(b){
-        return a * b;
-      };
-    };
-    greater = function(a){
-      return function(b){
-        return b > a;
-      };
-    };
-    add3 = add(3);
-    multiply2 = multiply(2);
-    greaterThan2 = greater(2);
     dummy = jasmine.createSpy();
   });
 
@@ -30,10 +12,10 @@ describe('cumin utilities', function(){
       }).toThrow("Can't find variable: dot");
     });
     it('should make functions available on top namespace', function(){
-      _.expose('dot map each eachArray eachObject not reduce ' +
-               'compose dot filter eachArrayRight ' +
+      _.expose('dot map each eachArray eachObject reduce ' +
+               'dot filter eachArrayRight ' +
                'merge all any cyclic reject max min ' +
-               'times random mapObject mapArray filterArray ' +
+               'random mapObject mapArray filterArray ' +
                'rejectArray filterObject rejectObject cleave ' + 
                'now debounce'
               );
@@ -399,23 +381,6 @@ describe('cumin utilities', function(){
     });
   });
 
-  
-
-  describe('not', function(){
-    it('should late eval truthy statments', function(){
-      lessThan2 = not(greaterThan2);
-      expect(lessThan2(1)).toBe(true);
-    });
-  });
-
-
-  describe('compose', function(){
-    it('should combine functions', function(){
-      var compound = compose(add3, multiply2);
-      expect(compound(2)).toEqual(7);
-    });
-  });
-  
   describe('dot', function(){
     it('should pull an objects value', function(){
       var person = {name: 'Mike'};
@@ -444,26 +409,6 @@ describe('cumin utilities', function(){
       time.andReturn(1);
       late(4);
       expect(dummy.calls.length).toEqual(1);
-    });
-  });
-
-  describe('times', function(){
-    it('should call a function n times', function(){
-      var thrice = times(3);
-      thrice(dummy);
-      expect(dummy.calls.length).toEqual(3);
-    });
-    it('should not call the function given 0 or less', function(){
-      times(0)(dummy);
-      times(-1)(dummy);
-      expect(dummy.calls.length).toEqual(0);
-    });
-    it('should call the function with the indecies', function(){
-      var twice = times(2);
-      twice(dummy);
-      expect(dummy).toHaveBeenCalledWith(0);
-      expect(dummy).toHaveBeenCalledWith(1);
-      expect(dummy).not.toHaveBeenCalledWith(2);
     });
   });
 

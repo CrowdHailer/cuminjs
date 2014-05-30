@@ -367,6 +367,14 @@ var _ = (function(){
   function refreeze(){
     FROZEN = true;
   }
+
+  function size(collection){
+    return collection.length || Object.keys(collection).length;
+  }
+
+  function log(){
+    console.log.apply(console, arguments);
+  }
   var _ =  {
     eachArray: eachArray,
     eachArrayRight: eachArrayRight,
@@ -413,6 +421,8 @@ var _ = (function(){
     expose: expose,
     defreeze: defreeze,
     refreeze: refreeze,
+    size: size,
+    log: log,
   };
   return _;
 }());

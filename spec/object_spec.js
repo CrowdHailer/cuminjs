@@ -12,5 +12,9 @@ describe('Object only operations', function(){
       _.augment(obj)({x: 2});
       expect(obj).toEqual({x: 2, y: 2});
     });
+    it('should return the augmented object', function(){
+      var obj = {x: 1};
+      expect(_.augment(obj)({x: 2})).toBe(obj);
+    });
   });
 });

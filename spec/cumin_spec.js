@@ -408,14 +408,6 @@ describe('cumin utilities', function(){
     });
   });
 
-
-  describe('compose', function(){
-    it('should combine functions', function(){
-      var compound = compose(add3, multiply2);
-      expect(compound(2)).toEqual(7);
-    });
-  });
-  
   describe('dot', function(){
     it('should pull an objects value', function(){
       var person = {name: 'Mike'};

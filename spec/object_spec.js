@@ -1,5 +1,5 @@
 describe('Object only operations', function(){
-  _.expose('extend augment foundation');
+  _.expose('extend augment foundation overlay');
 
   describe('extend', function(){
     // augment attachemts
@@ -56,6 +56,28 @@ describe('Object only operations', function(){
     });
     it('should work as clone given no initial', function(){
       var clone = foundation();
+      var a = {x: 5};
+      expect(clone(a)).toEqual(Object.freeze({x: 5}));
+      expect(clone(a)).not.toEqual(a);
+    });
+  });
+
+  describe('overlay', function(){
+    var overlays;
+    beforeEach(function(){
+      overlays = overlay({x: 1});
+    });
+    it('should add key value pairs to passed object object', function(){
+      expect(overlays({y: 2})).toEqual(Object.freeze({x: 1, y: 2}));
+    });
+    it('should overwrite keys in the passed object', function(){
+      expect(overlays({x: 2})).toEqual(Object.freeze({x: 1}));
+    });
+    it('should return the overlay object if given no futher keys', function(){
+      expect(overlays()).toEqual(Object.freeze({x: 1}));
+    });
+    it('should work as clone given no initial', function(){
+      var clone = overlay();
       var a = {x: 5};
       expect(clone(a)).toEqual(Object.freeze({x: 5}));
       expect(clone(a)).not.toEqual(a);

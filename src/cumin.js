@@ -236,6 +236,14 @@ var _ = (function(){
     };
   }
 
+  function augment(object){
+    return function(extra){
+      eachObject(function(value, key){
+        object[key] = value;
+      })(extra);
+    };
+  }
+
 // Function operations
 
   function compose(){
@@ -351,6 +359,7 @@ var _ = (function(){
     cleave: cleave,
 
     extend: extend,
+    augment: augment,
     foundation: foundation,
 
     compose: compose,

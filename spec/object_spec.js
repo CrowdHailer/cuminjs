@@ -16,6 +16,10 @@ describe('Object only operations', function(){
       extend(b)(a);
       expect(a.x).toEqual(7);
     });
+    it('should return the extended object', function(){
+      var obj = {x: 1};
+      expect(_.extend({x: 2})(obj)).toBe(obj);
+    });
   });
 
   describe('augment', function(){

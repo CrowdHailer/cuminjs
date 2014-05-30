@@ -31,7 +31,7 @@ describe('cumin utilities', function(){
     });
     it('should make functions available on top namespace', function(){
       _.expose('dot map each eachArray eachObject not reduce ' +
-               'compose dot filter eachArrayRight ' +
+               'dot filter eachArrayRight ' +
                'merge all any cyclic reject max min ' +
                'times random mapObject mapArray filterArray ' +
                'rejectArray filterObject rejectObject cleave ' + 

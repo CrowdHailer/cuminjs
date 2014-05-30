@@ -1,24 +1,6 @@
 describe('cumin utilities', function(){
-  var add, add3, multiply, multiply2, greater, greaterThan2, dummy;
+  var dummy;
   beforeEach(function(){
-    add = function(a){
-      return function(b){
-        return a + b;
-      };
-    };
-    multiply = function(a){
-      return function(b){
-        return a * b;
-      };
-    };
-    greater = function(a){
-      return function(b){
-        return b > a;
-      };
-    };
-    add3 = add(3);
-    multiply2 = multiply(2);
-    greaterThan2 = greater(2);
     dummy = jasmine.createSpy();
   });
 

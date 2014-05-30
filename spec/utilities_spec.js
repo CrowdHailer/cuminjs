@@ -18,7 +18,7 @@ describe('provided utility functions', function(){
           return b > a;
         };
       };
-      
+
       add3 = add(3);
       greaterThan2 = greater(2);
     });
@@ -44,6 +44,10 @@ describe('provided utility functions', function(){
     });
     it('should work for foundation', function(){
       expect(foundation({x: 1})({y: 2})).
+        toEqual({x: 1, y: 2});
+    });
+    it('should work for overlay', function(){
+      expect(overlay({x: 1})({y: 2})).
         toEqual({x: 1, y: 2});
     });
   });

@@ -18,7 +18,7 @@ describe('Object only operations', function(){
     });
     it('should return the extended object', function(){
       var obj = {x: 1};
-      expect(_.extend({x: 2})(obj)).toBe(obj);
+      expect(extend({x: 2})(obj)).toBe(obj);
     });
   });
 
@@ -36,7 +36,7 @@ describe('Object only operations', function(){
     });
     it('should return the augmented object', function(){
       var obj = {x: 1};
-      expect(_.augment(obj)({x: 2})).toBe(obj);
+      expect(augment(obj)({x: 2})).toBe(obj);
     });
   });
 

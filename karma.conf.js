@@ -11,7 +11,8 @@ module.exports = function(config) {
       'spec/object_spec.js',
       'spec/function_spec.js',
       'spec/utilities_spec.js',
-      'spec/compositions_spec.js'
+      'spec/compositions_spec.js',
+      'spec/examples_spec.js'
     ],
     exclude: [
     ],

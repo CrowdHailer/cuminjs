@@ -273,7 +273,7 @@ var _ = (function(){
   function invoke(){
     var args = arguments;
     return function(func){
-      func.apply({}, args);
+      return func.apply({}, args);
     };
   }
 

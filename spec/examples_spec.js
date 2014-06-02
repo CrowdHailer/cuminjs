@@ -58,10 +58,18 @@ describe('Atlas Demonstration of Object manipulations', function(){
     canada    = {canada:    {area: 400, population: 800}};
     denmark   = {denmark:   {area: 4500, population: 5000}};
   });
+
   it('should be possible to squash many objects with reduce and foundation', function(){
+    // possible capitalise
     atlas = reduce({})(foundation)(argentina, belize, canada, denmark);
     expect(atlas.argentina.area).toEqual(200);
     expect(atlas.canada.population).toEqual(800);
+  });
+
+  it('should be possible to filter by population', function(){
+    var populationGreaterThan1000 = compose(greater(1000), dot('population'));
+    expect(filter(populationGreaterThan1000)(atlas)).
+      toEqual({belize: {area: 2000, population: 1200}, denmark: {area: 4500, population: 5000}});
   });
 });
 

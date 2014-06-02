@@ -50,6 +50,21 @@ describe('Demonstrating usage with mathematical operations', function(){
   });
 });
 
+describe('Atlas Demonstration of Object manipulations', function(){
+  var atlas, argentina, belize, canada, denmark;
+  beforeEach(function(){
+    argentina = {argentina: {area: 200, population: 500}};
+    belize    = {belize:    {area: 2000, population: 1200}};
+    canada    = {canada:    {area: 400, population: 800}};
+    denmark   = {denmark:   {area: 4500, population: 5000}};
+  });
+  it('should be possible to squash many objects with reduce and foundation', function(){
+    atlas = reduce({})(foundation)(argentina, belize, canada, denmark);
+    expect(atlas.argentina.area).toEqual(200);
+    expect(atlas.canada.population).toEqual(800);
+  });
+});
+
 
   // area pop country
 

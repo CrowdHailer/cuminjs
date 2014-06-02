@@ -149,10 +149,11 @@ var _ = (function(){
 
   var reject = compose(filter, not);
 
-  function reduce(memo){
+  function reduce(initial){
     // The same code works here for arrays and objects so does not have varient.
     return function(operation){
       return function(){
+        var memo = initial;
         each(function(item, location){
           memo = isDefined(memo) ? operation(memo)(item, location) : item;
         }).apply({}, arguments);
@@ -288,7 +289,7 @@ var _ = (function(){
   function invoke(){
     var args = arguments;
     return function(func){
-      func.apply({}, args);
+      return func.apply({}, args);
     };
   }
 

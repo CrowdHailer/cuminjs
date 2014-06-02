@@ -10,7 +10,7 @@ function add(a){
 }
 
 describe('Demonstrating usage with mathematical operations', function(){
-  var square, cube, increment;
+  var square, cube, increment, sum;
   it('From a curried power function, build a function that always squares/cubes a number', function(){
     square = power(2);
     cube = power(3);
@@ -29,8 +29,11 @@ describe('Demonstrating usage with mathematical operations', function(){
     var incrementEvery = map(increment);
     expect(incrementEvery(array)).toEqual([1, 2, 3]);
   });
-    // var arr =[1, 2, 3];
-    // expect(map(square)(arr)).toEqual([1, 4, 9]);
+
+  it('General combination operations can be built from curried function and reduce. In this case to create a sum function', function(){
+    sum = reduce(0)(add);
+    expect(sum(1, 2, 3)).toEqual(6);
+  });
 
   xit('should do this too', function(){
     var arr =[1, 2, 3];

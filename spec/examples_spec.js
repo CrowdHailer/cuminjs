@@ -79,6 +79,9 @@ describe('Atlas Demonstration of Object manipulations', function(){
     expect(filter(populationGreaterThan1000)(atlas)).
       toEqual({belize: {area: 2000, population: 1200}, denmark: {area: 4500, population: 5000}});
   });
+
+  //dot as setter
+  // pop density
 });
 
 

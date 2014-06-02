@@ -11,6 +11,9 @@ function add(a){
 
 describe('Demonstrating usage with mathematical operations', function(){
   var square, cube, increment, sum;
+  beforeEach(function(){
+    defreeze();
+  });
   it('From a curried power function, build a function that always squares/cubes a number', function(){
     square = power(2);
     cube = power(3);
@@ -32,7 +35,12 @@ describe('Demonstrating usage with mathematical operations', function(){
 
   it('General combination operations can be built from curried function and reduce. In this case to create a sum function', function(){
     sum = reduce(0)(add);
-    expect(sum(1, 2, 3)).toEqual(6);
+    expect(sum([1, 2, 3])).toEqual(6);
+  });
+
+  it('Trivially create complex operations in this case calculate the distance to a point in n-dimensional space', function(){
+    var hypotetunesLength = compose(power(0.5), sum, map(square));
+    expect(hypotetunesLength([2, 3, 6])).toEqual(7);
   });
 
   xit('should do this too', function(){

@@ -221,6 +221,9 @@ describe('cumin utilities', function(){
     it('should reduce a list', function(){
       expect(sum([1, 2, 3])).toEqual(6);
     });
+    it('should reduce a list without an initial value', function(){
+      expect(reduce()(add)([1, 2, 3])).toEqual(6);
+    });
     it('should reduce an object', function(){
       expect(sum({x: 1, y: 3, z: 2})).toEqual(6);
     });
@@ -250,6 +253,10 @@ describe('cumin utilities', function(){
     });
     it('should be able to use object key', function(){
       expect(asString({x: 1, y: 3})).toEqual('x:1,y:3,');
+    });
+    it('should reset memory each time it is used', function(){
+      expect(sum([1, 2, 3])).toEqual(6);
+      expect(sum([1, 2, 3])).toEqual(6);
     });
   });
 

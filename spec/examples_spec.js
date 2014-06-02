@@ -43,21 +43,14 @@ describe('Demonstrating usage with mathematical operations', function(){
     expect(hypotetunesLength([2, 3, 6])).toEqual(7);
   });
 
-  xit('should do this too', function(){
-    var arr =[1, 2, 3];
-    var funcs = map(power)(arr);
-    var newstest = map(invoke(2))(funcs);
-    expect(newstest).toEqual();
+  it('Apply reverse order of calls to function with invoke, here raise to the power of each array element', function(){
+    var array =[0, 1, 2, 3];
+    var TwoToTheNth = compose(invoke(2), power);
+    expect(map(TwoToTheNth)(array)).toEqual([1, 2, 4, 8]);
   });
+});
 
-  xit('should also do this', function(){
-    var arr = [2, 3, 6];
-    var sq = power(2);
-    var total = reduce(0)(add)(map(sq)(arr));
-    expect(total).toEqual(sq(7))
-  });
 
   // area pop country
 
   // shopping list
-});

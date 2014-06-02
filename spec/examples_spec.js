@@ -18,10 +18,16 @@ describe('Demonstrating usage with mathematical operations', function(){
     expect(cube(3)).toEqual(27);
   });
 
-  it('combining functions to create new functions', function(){
+  it('Combining functions to create new functions, In this case square then plus 1', function(){
     increment = add(1);
     var squarePlusOne = compose(increment, square);
     expect(squarePlusOne(4)).toEqual(17);
+  });
+
+  it('Arrays can be mapped by any function, in this case increment', function(){
+    var array = [0, 1, 2];
+    var incrementEvery = map(increment);
+    expect(incrementEvery(array)).toEqual([1, 2, 3]);
   });
     // var arr =[1, 2, 3];
     // expect(map(square)(arr)).toEqual([1, 4, 9]);

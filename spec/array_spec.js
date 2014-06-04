@@ -32,5 +32,16 @@ describe('Array only operations', function(){
       expect(withinRange(2)).toBe(true);
       expect(withinRange(1)).toBe(false);
     });
+    
+  });
+
+  describe('includes', function(){
+    it('can be composed from primatives', function(){
+      var includes = compose(any, equals);
+      var includes2 = includes(2);
+      // LARGE ISSUE WITH ANY ALL MEMORY BETWEEN RUNS
+      expect(includes2([1,3])).toBe(false);
+      expect(includes2([1,2,3])).toBe(true);
+    });
   });
 });

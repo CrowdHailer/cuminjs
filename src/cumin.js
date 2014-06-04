@@ -158,6 +158,7 @@ var _ = (function(){
       }).apply({}, arguments);
       return memo;
     };
+    // return location of first fail or length as location??
   }
 
   function any(operation){
@@ -169,6 +170,7 @@ var _ = (function(){
       }).apply({}, arguments);
       return memo;
     };
+    // return location of first success or length as location??
   }
 
   function min(operation){

@@ -58,5 +58,11 @@ describe('provided utility functions', function(){
       expect(isThree(3)).toBe(true);
       expect(isThree(2)).toBe(false);
     });
+    it('can be used as a defined test', function(){
+      var a, b = 3;
+      var defined = not(equals(undefined));
+      expect(defined(a)).toBe(false);
+      expect(defined(b)).toBe(true);
+    });
   });
 });

@@ -215,6 +215,12 @@ var _ = (function(){
     };
   }
 
+  function within(array){
+    return function(item){
+      return array.indexOf(item) != -1;
+    };
+  }
+
 // Object 
 
   function extend(extra){
@@ -386,6 +392,7 @@ var _ = (function(){
 
     cyclic: cyclic,
     cleave: cleave,
+    within: within,
 
     extend: extend,
     augment: augment,

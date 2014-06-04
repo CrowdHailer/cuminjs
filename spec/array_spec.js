@@ -1,5 +1,5 @@
 describe('Array only operations', function(){
-  _.expose('cleave cyclic ');
+  _.expose('cleave cyclic within');
   describe('cleave', function(){
     it('should split an array', function(){
       expect(cleave(2)([0, 1, 2, 3, 4]))
@@ -23,6 +23,14 @@ describe('Array only operations', function(){
     it('should have empty arrays it array shorter than division', function(){
       var answer = cyclic(3)([1]);
       expect(answer).toEqual([[1], [], []]);
+    });
+  });
+
+  describe('within', function(){
+    it('should keep test if elements are within an array', function(){
+      var withinRange = within([2, 3, 4]);
+      expect(withinRange(2)).toBe(true);
+      expect(withinRange(1)).toBe(false);
     });
   });
 });

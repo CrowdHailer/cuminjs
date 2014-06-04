@@ -369,6 +369,12 @@ var _ = (function(){
   function log(){
     console.log.apply(console, arguments);
   }
+
+  function equals(a){
+    return function(b){
+      return a === b;
+    };
+  }
   var _ =  {
     eachArray: eachArray,
     eachArrayRight: eachArrayRight,
@@ -418,6 +424,7 @@ var _ = (function(){
     refreeze: refreeze,
     size: size,
     log: log,
+    equals: equals,
   };
   return _;
 }());

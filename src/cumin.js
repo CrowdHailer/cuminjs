@@ -162,9 +162,10 @@ var _ = (function(){
   }
 
   function any(operation){
-    var memo = false;
+    var memo;
     operation = operation || I;
     return function(){
+      memo = false;
       each(function(item, location){
         memo = memo || operation(item, location);
       }).apply({}, arguments);

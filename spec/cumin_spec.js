@@ -317,6 +317,11 @@ describe('cumin utilities', function(){
       expect(any()(true, false)).toEqual(true);
       expect(any()({x: false})).toEqual(false);
     });
+    it('should reset internal memo each time it is used', function(){
+      var anyGreaterThan2 = any(greaterThan2);
+      expect(anyGreaterThan2([1, 3])).toBe(true);
+      expect(anyGreaterThan2([1, 1])).toBe(false);
+    });
   });
 
   describe('min', function(){

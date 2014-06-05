@@ -150,9 +150,10 @@ var _ = (function(){
 // Higher collection operations
 
   function all(operation){
-    var memo = true;
+    var memo;
     operation = operation || I;
     return function(){
+      memo = true;
       each(function(item, location){
         memo = memo && operation(item, location);
       }).apply({}, arguments);

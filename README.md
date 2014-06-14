@@ -257,7 +257,7 @@ invoke with and expose using exec!! expose local
 
 dot function to take multiple structures array, object,
 syntactic sugar add .dot as method of object
-object addition through closure
+addition to main object throughout closure
 
 
 ### Inspired by

@@ -253,7 +253,11 @@ conditional execution
 pass hash with key options and value processess
 would work with true false as implicitly turned to strings
 
-invoke with and expose using exec!!
+invoke with and expose using exec!! expose local
+
+dot function to take multiple structures array, object,
+syntactic sugar add .dot as method of object
+object addition through closure
 
 
 ### Inspired by

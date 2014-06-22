@@ -386,7 +386,7 @@ describe('cumin utilities', function(){
     it('should return an object given an object', function(){
       var person = {name: 'Mike', age: 25, city: 'boston'};
       var greeting = dot({hello: 'name', age: 'age'});
-      expect(greeting(person)).toEqual(Object.freeze({hello: 'Mike', age: 25}))
+      expect(greeting(person)).toEqual(Object.freeze({hello: 'Mike', age: 25}));
     });
 
   });

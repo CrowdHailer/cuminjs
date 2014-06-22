@@ -21,9 +21,11 @@
   var weed = _.compose(_.filter, hasNotK);
   var pluck = _.compose(_.map, _.dot);
   var select = _.compose(_.filter, _.position, _.within);
+  var omit = _.compose(_.filter, _.position, _.not, _.within);
 
   namespace.limit = limit;
   namespace.select = select;
+  namespace.omit = omit;
   namespace.weed = weed;
   namespace.pluck = pluck;
   namespace.and = and;

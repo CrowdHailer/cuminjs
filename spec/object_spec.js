@@ -83,19 +83,4 @@ describe('Object only operations', function(){
       expect(clone(a)).not.toEqual(a);
     });
   });
-
-  describe('select', function(){
-    it('should create an object with present keys only', function(){
-      var obj = {a: 1, b: 2};
-      var chosen = select(['a', 'p']);
-      expect(chosen(obj)).toEqual(Object.freeze({a: 1}));
-    });
-  });
-  describe('omit', function(){
-    it('should create an object with present keys only', function(){
-      var obj = {a: 1, b: 2};
-      var chosen = omit(['a', 'p']);
-      expect(chosen(obj)).toEqual(Object.freeze({b: 2}));
-    });
-  });
 });

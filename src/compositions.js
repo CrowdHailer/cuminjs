@@ -1,11 +1,6 @@
-(function(namespace){
-  var pluck = _.compose(_.map, _.dot);
+(function(_){
+  _.pluck = _.compose(_.map, _.dot);
   
-  var pick = _.compose(_.filter, _.position, _.within);
-  var omit = _.compose(_.filter, _.position, _.not, _.within);
-
-  namespace.pluck = pluck;
-
-  namespace.pick = pick;
-  namespace.omit = omit;
+  _.pick = _.compose(_.filter, _.position, _.within);
+  _.omit = _.compose(_.filter, _.position, _.not, _.within);
 }(_));

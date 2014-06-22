@@ -6,7 +6,7 @@ describe('compositions', function(){
       }).toThrow("Can't find variable: pluck");
     });
     it('should make functions available on top namespace', function(){
-      _.expose('every pluck pick omit');
+      _.expose('every pluck pick omit cyclic');
       expect(function(){
         pick();
         omit();

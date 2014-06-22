@@ -27,6 +27,10 @@ describe('compositions', function(){
       var picked = pick(['a', 'b'])(obj);
       expect(picked).toEqual(Object.freeze({a: 1, b: 2}));
     });
+    it('should restrict on multiple argument keys', function(){
+      var picked = pick('a', 'b')(obj);
+      expect(picked).toEqual(Object.freeze({a: 1, b: 2}));
+    });
     it('should not add values not on original', function(){
       var picked = pick(['a', 'd'])(obj);
       expect(picked).toEqual(Object.freeze({a: 1}));
@@ -44,6 +48,10 @@ describe('compositions', function(){
     });
     it('should restrict on multiple keys', function(){
       var omitted = omit(['a', 'b'])(obj);
+      expect(omitted).toEqual(Object.freeze({c: 3}));
+    });
+    it('should restrict on multiple argument keys', function(){
+      var omitted = omit('a', 'b')(obj);
       expect(omitted).toEqual(Object.freeze({c: 3}));
     });
     it('should not add values not on original', function(){

@@ -1,5 +1,5 @@
 describe('Object only operations', function(){
-  _.expose('extend augment foundation overlay');
+  _.expose('extend augment foundation overlay select omit');
 
   describe('extend', function(){
     // augment attachemts

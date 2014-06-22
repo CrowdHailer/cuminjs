@@ -378,6 +378,11 @@ describe('cumin utilities', function(){
       var name = dot('name');
       expect(name(person)).toEqual('Mike');
     });
+    it('should return an array given an array', function(){
+      var person = {name: 'Mike', age: 25, city: 'boston'};
+      var publicDetails = dot(['name', 'city']);
+      expect(publicDetails(person)).toEqual(Object.freeze(['Mike', 'boston']));
+    });
   });
 
   describe('now', function(){

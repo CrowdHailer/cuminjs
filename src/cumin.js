@@ -335,6 +335,9 @@ var _ = (function(){
 
   function dot(key){
     return function(obj){
+      if (isArray(key)) {
+        return map(invoke(obj))(map(dot)(key));
+      }
       return obj[key];
     };
   }

@@ -218,6 +218,9 @@ var _ = (function(){
   }
 
   function within(array){
+    if (arguments.length > 1) {
+      array = argsToList(arguments);
+    }
     return function(item){
       return array.indexOf(item) != -1;
     };

@@ -14,9 +14,9 @@ describe('cumin utilities', function(){
     it('should make functions available on top namespace', function(){
       _.expose('dot map each eachArray eachObject reduce ' +
                'dot filter eachArrayRight ' +
-               'merge all any cyclic reject max min ' +
+               'merge all any reject max min ' +
                'random mapObject mapArray filterArray ' +
-               'rejectArray filterObject rejectObject cleave ' + 
+               'rejectArray filterObject rejectObject ' + 
                'now debounce'
               );
       expect(function(){
@@ -359,32 +359,6 @@ describe('cumin utilities', function(){
     });
     it('should work from values', function(){
       expect(max()(1, 2, 3)).toEqual(3);
-    });
-  });
-
-  describe('cleave', function(){
-    it('should split an array', function(){
-      expect(cleave(2)([0, 1, 2, 3, 4]))
-        .toEqual([[0, 1], [2, 3, 4]]);
-    });
-    it('should split an array with arument 0', function(){
-      expect(cleave(0)([0, 1]))
-        .toEqual([[], [0, 1]]);
-    });
-    it('should work with negative arguments', function(){
-      expect(cleave(-2)([0, 1, 2, 3, 4]))
-        .toEqual([[0, 1, 2], [3, 4]]);
-    });
-  });
-
-  describe('cyclic', function(){
-    it('should cyclicly fill results array', function(){
-      var answer = cyclic(3)([0, 1, 2, 3, 4, 5]);
-      expect(answer).toEqual([[0, 3], [1, 4], [2, 5]]);
-    });
-    it('should have empty arrays it array shorter than division', function(){
-      var answer = cyclic(3)([1]);
-      expect(answer).toEqual([[1], [], []]);
     });
   });
 

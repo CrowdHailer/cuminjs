@@ -20,8 +20,10 @@
   var limit = _.compose(_.filter, hasK);
   var weed = _.compose(_.filter, hasNotK);
   var pluck = _.compose(_.map, _.dot);
+  var select = _.compose(_.filter, _.position, _.within);
 
   namespace.limit = limit;
+  namespace.select = select;
   namespace.weed = weed;
   namespace.pluck = pluck;
   namespace.and = and;

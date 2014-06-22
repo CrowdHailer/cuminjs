@@ -1,5 +1,5 @@
 describe('Object only operations', function(){
-  _.expose('extend augment foundation overlay');
+  _.expose('extend augment foundation overlay select');
 
   describe('extend', function(){
     // augment attachemts
@@ -81,6 +81,15 @@ describe('Object only operations', function(){
       var a = {x: 5};
       expect(clone(a)).toEqual(Object.freeze({x: 5}));
       expect(clone(a)).not.toEqual(a);
+    });
+  });
+
+  describe('select', function(){
+    it('should create an object with present keys only', function(){
+      
+      var obj = {a: 1, b: 2};
+      var chosen = select(['a', 'p']);
+      expect(chosen(obj)).toEqual(Object.freeze({a: 1}));
     });
   });
 });

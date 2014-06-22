@@ -373,6 +373,12 @@ var _ = (function(){
     console.log.apply(console, arguments);
   }
 
+  function position(func){
+    return function(item, position){
+      return func(position);
+    };
+  }
+
   function equals(a){
     return function(b){
       return a === b;
@@ -427,6 +433,7 @@ var _ = (function(){
     refreeze: refreeze,
     size: size,
     log: log,
+    position: position,
     equals: equals,
   };
   return _;

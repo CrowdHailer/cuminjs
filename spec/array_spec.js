@@ -27,12 +27,12 @@ describe('Array only operations', function(){
   });
 
   describe('within', function(){
+    // could return object {value: true/false, location: first occurance}
     it('should keep test if elements are within an array', function(){
       var withinRange = within([2, 3, 4]);
       expect(withinRange(2)).toBe(true);
       expect(withinRange(1)).toBe(false);
     });
-    
   });
 
   describe('includes', function(){

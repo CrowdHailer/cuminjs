@@ -173,6 +173,7 @@ var _ = (function(){
       }).apply({}, arguments);
       return memo;
     };
+    // return location of first fail or length as location??
   }
 
   function any(operation){
@@ -184,6 +185,7 @@ var _ = (function(){
       }).apply({}, arguments);
       return memo;
     };
+    // return location of first success or length as location??
   }
 
   function min(operation){
@@ -227,6 +229,12 @@ var _ = (function(){
         results[index % n].push(element);
       })(collection);
       return results;
+    };
+  }
+
+  function within(array){
+    return function(item){
+      return array.indexOf(item) != -1;
     };
   }
 
@@ -342,6 +350,9 @@ var _ = (function(){
 
   function dot(key){
     return function(obj){
+      if (isArray(key) || isObj(key)) {
+        return map(invoke(obj))(map(dot)(key));
+      }
       return obj[key];
     };
   }
@@ -376,6 +387,12 @@ var _ = (function(){
   function log(){
     console.log.apply(console, arguments);
   }
+
+  function equals(a){
+    return function(b){
+      return a === b;
+    };
+  }
   var _ =  {
     eachArray: eachArray,
     eachArrayRight: eachArrayRight,
@@ -401,6 +418,7 @@ var _ = (function(){
 
     cyclic: cyclic,
     cleave: cleave,
+    within: within,
 
     extend: extend,
     augment: augment,
@@ -424,6 +442,7 @@ var _ = (function(){
     refreeze: refreeze,
     size: size,
     log: log,
+    equals: equals,
   };
   return _;
 }());

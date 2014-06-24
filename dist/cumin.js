@@ -173,6 +173,7 @@ var _ = (function(){
       }).apply({}, arguments);
       return memo;
     };
+    // return location of first fail or length as location??
   }
 
   function any(operation){
@@ -184,6 +185,7 @@ var _ = (function(){
       }).apply({}, arguments);
       return memo;
     };
+    // return location of first success or length as location??
   }
 
   function min(operation){
@@ -230,6 +232,15 @@ var _ = (function(){
     };
   }
 
+  function within(array){
+    if (arguments.length > 1) {
+      array = argsToList(arguments);
+    }
+    return function(item){
+      return array.indexOf(item) !== -1;
+    };
+  }
+
 // Object 
 
   function extend(extra){
@@ -254,7 +265,7 @@ var _ = (function(){
   function foundation(object){
     // builds a new object from the properties of a foundation object and extention object.
     return function(extra){
-      results = {};
+      var results = {};
       each(eachObject(function(value, key){
         results[key] = value;
       }))(object || {}, extra || {});
@@ -265,7 +276,7 @@ var _ = (function(){
   function overlay(extra){
     // builds a new object from the properties of a foundation object and extention object.
     return function(object){
-      results = {};
+      var results = {};
       each(eachObject(function(value, key){
         results[key] = value;
       }))(object || {}, extra || {});
@@ -342,6 +353,9 @@ var _ = (function(){
 
   function dot(key){
     return function(obj){
+      if (isArray(key) || isObj(key)) {
+        return map(invoke(obj))(map(dot)(key));
+      }
       return obj[key];
     };
   }
@@ -376,6 +390,18 @@ var _ = (function(){
   function log(){
     console.log.apply(console, arguments);
   }
+
+  function position(func){
+    return function(item, position){
+      return func(position);
+    };
+  }
+
+  function equals(a){
+    return function(b){
+      return a === b;
+    };
+  }
   var _ =  {
     eachArray: eachArray,
     eachArrayRight: eachArrayRight,
@@ -401,6 +427,7 @@ var _ = (function(){
 
     cyclic: cyclic,
     cleave: cleave,
+    within: within,
 
     extend: extend,
     augment: augment,
@@ -424,6 +451,8 @@ var _ = (function(){
     refreeze: refreeze,
     size: size,
     log: log,
+    position: position,
+    equals: equals,
   };
   return _;
 }());

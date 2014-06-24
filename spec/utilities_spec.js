@@ -1,5 +1,5 @@
 describe('provided utility functions', function(){
-  _.expose('defreeze refreeze size log');
+  _.expose('defreeze refreeze size log equals');
 
   describe('defreeze and refreeze', function(){
     beforeEach(function(){
@@ -49,6 +49,20 @@ describe('provided utility functions', function(){
       spyOn(console, 'log');
       log(3);
       expect(console.log).toHaveBeenCalledWith(3);
+    });
+  });
+
+  describe('equals', function(){
+    it('should test equality for values', function(){
+      var isThree = equals(3);
+      expect(isThree(3)).toBe(true);
+      expect(isThree(2)).toBe(false);
+    });
+    it('can be used as a defined test', function(){
+      var a, b = 3;
+      var defined = not(equals(undefined));
+      expect(defined(a)).toBe(false);
+      expect(defined(b)).toBe(true);
     });
   });
 });

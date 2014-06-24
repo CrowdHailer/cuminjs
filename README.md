@@ -56,8 +56,8 @@ Cumin.js adds key utilities for functional programming, such as map, reduce and 
 
 ##### Development
 - and
-- pluck
-- weed
+- pick
+- omit
 - limit
 
 ### Collections

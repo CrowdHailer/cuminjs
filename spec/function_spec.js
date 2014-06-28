@@ -55,6 +55,11 @@ describe('function "ahem" functions', function(){
       later();    
       expect(dummy.calls.count()).toEqual(1);
     });
+    it('should pass arguments', function(){
+      var later = postpone(dummy, 2, 3);
+      later();    
+      expect(dummy.calls.mostRecent().args).toEqual([2, 3]);
+    });
   });
 
   describe('not', function(){

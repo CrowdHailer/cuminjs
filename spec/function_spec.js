@@ -20,30 +20,6 @@ describe('function "ahem" functions', function(){
     });
   });
 
-  describe('times', function(){
-    var dummy;
-    beforeEach(function(){
-      dummy = jasmine.createSpy();
-    });
-    it('should call a function n times', function(){
-      var thrice = times(3);
-      thrice(dummy);
-      expect(dummy.calls.count()).toEqual(3);
-    });
-    it('should not call the function given 0 or less', function(){
-      times(0)(dummy);
-      times(-1)(dummy);
-      expect(dummy.calls.count()).toEqual(0);
-    });
-    it('should call the function with the indecies', function(){
-      var twice = times(2);
-      twice(dummy);
-      expect(dummy).toHaveBeenCalledWith(0);
-      expect(dummy).toHaveBeenCalledWith(1);
-      expect(dummy).not.toHaveBeenCalledWith(2);
-    });
-  });
-
   describe('postpone', function(){
     var dummy;
     beforeEach(function(){
@@ -91,6 +67,30 @@ describe('function "ahem" functions', function(){
       var delayed = postpone(returnContext);
       var b = delayed.call(obj);
       expect(b).toBe(obj);
+    });
+  });
+
+  describe('times', function(){
+    var dummy;
+    beforeEach(function(){
+      dummy = jasmine.createSpy();
+    });
+    it('should call a function n times', function(){
+      var thrice = times(3);
+      thrice(dummy);
+      expect(dummy.calls.count()).toEqual(3);
+    });
+    it('should not call the function given 0 or less', function(){
+      times(0)(dummy);
+      times(-1)(dummy);
+      expect(dummy.calls.count()).toEqual(0);
+    });
+    it('should call the function with the indecies', function(){
+      var twice = times(2);
+      twice(dummy);
+      expect(dummy).toHaveBeenCalledWith(0);
+      expect(dummy).toHaveBeenCalledWith(1);
+      expect(dummy).not.toHaveBeenCalledWith(2);
     });
   });
 

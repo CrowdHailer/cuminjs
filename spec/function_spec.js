@@ -20,6 +20,19 @@ describe('function "ahem" functions', function(){
       pass3(dummy);
       expect(dummy).toHaveBeenCalledWith(3);
     });
+    it('should keep context when operating unbound', function(){
+      var pass3 = invoke(3);
+      var a = pass3(returnContext);
+      expect(a).toEqual(returnContext());
+    });
+    it('should keep context when bound to object', function(){
+      obj.pass3 = invoke(3);
+      expect(obj.pass3(returnContext)).toBe(obj);
+    });
+    it('should keep context when specifically set', function(){
+      var pass3 = invoke(3);
+      expect(pass3.call(obj, returnContext)).toBe(obj);
+    });
   });
 
   describe('postpone', function(){
@@ -44,10 +57,10 @@ describe('function "ahem" functions', function(){
       var b = postpone(returnContext)();
       expect(a).toEqual(b);
     });
-    it('should keep context when bound unbound', function(){
+    it('should keep context when bound to object', function(){
       obj.returnContext = returnContext;
       obj.delayed = postpone(obj.returnContext);
-      expect(obj.delayed()).toEqual(obj);
+      expect(obj.delayed()).toBe(obj);
     });
     it('should keep context when specifically set', function(){
       var delayed = postpone(returnContext);

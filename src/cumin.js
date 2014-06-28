@@ -285,7 +285,7 @@ var _ = (function(){
   function invoke(){
     var args = arguments;
     return function(func){
-      return func.apply({}, args);
+      return func.apply(this, args);
     };
   }
 

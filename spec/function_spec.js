@@ -1,5 +1,9 @@
 describe('function "ahem" functions', function(){
   _.expose('compose invoke times not postpone');
+  var dummy;
+  beforeEach(function(){
+    dummy = jasmine.createSpy();
+  });
 
   describe('compose', function(){
     it('should combine functions', function(){
@@ -9,10 +13,6 @@ describe('function "ahem" functions', function(){
   });
 
   describe('invoke', function(){
-    var dummy;
-    beforeEach(function(){
-      dummy = jasmine.createSpy();
-    });
     it('should hold arguments for a passed function', function(){
       var pass3 = invoke(3);
       pass3(dummy);
@@ -21,10 +21,6 @@ describe('function "ahem" functions', function(){
   });
 
   describe('postpone', function(){
-    var dummy;
-    beforeEach(function(){
-      dummy = jasmine.createSpy().and.returnValue(2);
-    });
     it('should call a function passed it', function(){
       var later = postpone(dummy);
       expect(dummy.calls.count()).toEqual(0);
@@ -37,6 +33,7 @@ describe('function "ahem" functions', function(){
       expect(dummy.calls.mostRecent().args).toEqual([2, 3]);
     });
     it('should return function result', function(){
+      dummy.and.returnValue(2);
       var later = postpone(dummy);
       expect(later()).toEqual(2);
     });
@@ -71,10 +68,6 @@ describe('function "ahem" functions', function(){
   });
 
   describe('times', function(){
-    var dummy;
-    beforeEach(function(){
-      dummy = jasmine.createSpy();
-    });
     it('should call a function n times', function(){
       var thrice = times(3);
       thrice(dummy);

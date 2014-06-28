@@ -1,8 +1,10 @@
 describe('function "ahem" functions', function(){
   _.expose('compose invoke times not postpone');
-  var dummy;
+  var dummy, returnContext, obj;
   beforeEach(function(){
     dummy = jasmine.createSpy();
+    returnContext = function(){ return this; };
+    obj = {};
   });
 
   describe('compose', function(){
@@ -38,32 +40,18 @@ describe('function "ahem" functions', function(){
       expect(later()).toEqual(2);
     });
     it('should keep context when operating unbound', function(){
-      var returnContext = function(){
-        return this;
-      };
       var a = returnContext();
       var b = postpone(returnContext)();
       expect(a).toEqual(b);
     });
     it('should keep context when bound unbound', function(){
-      var obj = {};
-      obj.returnContext = function(){
-        return this;
-      };
-      var a = obj.returnContext();
+      obj.returnContext = returnContext;
       obj.delayed = postpone(obj.returnContext);
-      var b = obj.delayed();
-      expect(a).toEqual(b);
+      expect(obj.delayed()).toEqual(obj);
     });
     it('should keep context when specifically set', function(){
-      var obj = {};
-      var returnContext = function(){
-        return this;
-      };
-      var a = returnContext.call(obj);
       var delayed = postpone(returnContext);
-      var b = delayed.call(obj);
-      expect(b).toBe(obj);
+      expect(delayed.call(obj)).toBe(obj);
     });
   });
 

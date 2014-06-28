@@ -3,7 +3,7 @@ describe('compositions', function(){
     it('should leave main namespace clear', function(){
       expect(function(){
         pluck();
-      }).toThrow("Can't find variable: pluck");
+      }).toThrowError("Can't find variable: pluck");
     });
     it('should make functions available on top namespace', function(){
       _.expose('every pluck pick omit cyclic');

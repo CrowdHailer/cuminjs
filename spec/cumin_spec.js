@@ -9,7 +9,7 @@ describe('cumin utilities', function(){
     it('should leave main namespace clear', function(){
       expect(function(){
         dot();
-      }).toThrow("Can't find variable: dot");
+      }).toThrowError("Can't find variable: dot");
     });
     it('should make functions available on top namespace', function(){
       _.expose('dot map each eachArray eachObject reduce ' +
@@ -30,7 +30,7 @@ describe('cumin utilities', function(){
     it('should each all values in an array', function(){
       eachArray(dummy)([1, 2]);
       expect(dummy).toHaveBeenCalledWith(1, 0);
-      expect(dummy.mostRecentCall.args).toEqual([2, 1]);
+      expect(dummy.calls.mostRecent().args).toEqual([2, 1]);
     });
     it('should not call for an empty array', function(){
       eachArray(dummy)([]);
@@ -42,7 +42,7 @@ describe('cumin utilities', function(){
     it('should call with each value from last', function(){
       eachArrayRight(dummy)([1, 2]);
       expect(dummy).toHaveBeenCalledWith(2, 1);
-      expect(dummy.mostRecentCall.args).toEqual([1, 0]);
+      expect(dummy.calls.mostRecent().args).toEqual([1, 0]);
     });
     it('should not call for an empty array', function(){
       eachArrayRight(dummy)([]);

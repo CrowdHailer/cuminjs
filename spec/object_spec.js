@@ -58,7 +58,7 @@ describe('Object only operations', function(){
       var clone = foundation();
       var a = {x: 5};
       expect(clone(a)).toEqual(Object.freeze({x: 5}));
-      expect(clone(a)).not.toEqual(a);
+      expect(clone(a)).not.toBe(a);
     });
   });
 
@@ -80,7 +80,7 @@ describe('Object only operations', function(){
       var clone = overlay();
       var a = {x: 5};
       expect(clone(a)).toEqual(Object.freeze({x: 5}));
-      expect(clone(a)).not.toEqual(a);
+      expect(clone(a)).not.toBe(a);
     });
   });
 });

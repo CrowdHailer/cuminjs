@@ -28,12 +28,12 @@ describe('function "ahem" functions', function(){
     it('should call a function n times', function(){
       var thrice = times(3);
       thrice(dummy);
-      expect(dummy.calls.length).toEqual(3);
+      expect(dummy.calls.count()).toEqual(3);
     });
     it('should not call the function given 0 or less', function(){
       times(0)(dummy);
       times(-1)(dummy);
-      expect(dummy.calls.length).toEqual(0);
+      expect(dummy.calls.count()).toEqual(0);
     });
     it('should call the function with the indecies', function(){
       var twice = times(2);

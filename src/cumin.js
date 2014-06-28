@@ -319,7 +319,7 @@ var _ = (function(){
   function postpone(func){
     var args = Array.prototype.slice.call(arguments, 1);
     return function(){
-      func.apply(this, args);
+      return func.apply(this, args);
     };
   }
 

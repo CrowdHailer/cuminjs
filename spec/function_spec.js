@@ -47,7 +47,7 @@ describe('function "ahem" functions', function(){
   describe('postpone', function(){
     var dummy;
     beforeEach(function(){
-      dummy = jasmine.createSpy();
+      dummy = jasmine.createSpy().and.returnValue(2);
     });
     it('should call a function passed it', function(){
       var later = postpone(dummy);
@@ -59,6 +59,10 @@ describe('function "ahem" functions', function(){
       var later = postpone(dummy, 2, 3);
       later();    
       expect(dummy.calls.mostRecent().args).toEqual([2, 3]);
+    });
+    it('should return function result', function(){
+      var later = postpone(dummy);
+      expect(later()).toEqual(2);
     });
   });
 

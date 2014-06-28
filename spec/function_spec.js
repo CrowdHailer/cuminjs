@@ -1,5 +1,5 @@
 describe('function "ahem" functions', function(){
-  _.expose('compose invoke times not');
+  _.expose('compose invoke times not postpone');
 
   describe('compose', function(){
     it('should combine functions', function(){
@@ -41,6 +41,19 @@ describe('function "ahem" functions', function(){
       expect(dummy).toHaveBeenCalledWith(0);
       expect(dummy).toHaveBeenCalledWith(1);
       expect(dummy).not.toHaveBeenCalledWith(2);
+    });
+  });
+
+  describe('postpone', function(){
+    var dummy;
+    beforeEach(function(){
+      dummy = jasmine.createSpy();
+    });
+    it('should call a function passed it', function(){
+      var later = postpone(dummy);
+      expect(dummy.calls.count()).toEqual(0);
+      later();    
+      expect(dummy.calls.count()).toEqual(1);
     });
   });
 

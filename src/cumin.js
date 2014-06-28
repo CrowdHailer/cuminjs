@@ -316,6 +316,12 @@ var _ = (function(){
     };
   }
 
+  function postpone(func){
+    return function(){
+      func();
+    };
+  }
+
   function times(n){
     return function(operation){
       for (var i = 0; i < n; i++){
@@ -421,6 +427,7 @@ var _ = (function(){
 
     compose: compose,
     invoke: invoke,
+    postpone: postpone,
     debounce: debounce,
     throttle: throttle,
     not: not,

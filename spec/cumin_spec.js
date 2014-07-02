@@ -26,30 +26,6 @@ describe('cumin utilities', function(){
     });
   });
 
-  describe('filter', function(){
-    it('should filter from array', function(){
-      expect(filter(greaterThan2)([1, 3, 2])).toEqual(Object.freeze([3]));
-    });
-    it('should filter from object', function(){
-      expect(filter(greaterThan2)({x: 1, y: 3, z: 2})).toEqual(Object.freeze({y: 3}));
-    });
-    it('should filter from arguments', function(){
-      expect(filter(greaterThan2)(1, 3, 2)).toEqual(Object.freeze([3]));
-    });
-  });
-
-  describe('reject', function(){
-    it('should reject from array', function(){
-      expect(reject(greaterThan2)([1, 3, 2])).toEqual(Object.freeze([1, 2]));
-    });
-    it('should reject from object', function(){
-      expect(reject(greaterThan2)({x: 1, y: 3, z: 4})).toEqual(Object.freeze({x: 1}));
-    });
-    it('should reject from arguments', function(){
-      expect(reject(greaterThan2)(1, 3, 2)).toEqual(Object.freeze([1, 2]));
-    });
-  });
-
   describe('reduce', function(){
     var sum, asString;
     beforeEach(function(){

@@ -127,9 +127,9 @@ var _ = (function(){
         collection = argsToList(arguments);
       }
       if (isArray(collection)) {
-        return filterArray(operation)(collection);
+        return filterArray(operation).call(this, collection);
       } else {
-        return filterObject(operation)(collection);
+        return filterObject(operation).call(this, collection);
       }
     };
   }

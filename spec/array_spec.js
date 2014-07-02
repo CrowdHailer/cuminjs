@@ -1,5 +1,25 @@
-describe('Array only operations', function(){
-  _.expose('cleave cyclic within');
+describe('Cumin array operations', function(){
+  'use strict';
+
+  var dummy;
+  beforeEach(function(){
+    dummy = jasmine.createSpy();
+  });
+
+  _.expose('eachArray cleave cyclic within');
+
+  ddescribe('eachArray', function(){
+    it('should call the function with every element and corresponding index', function(){
+      eachArray(dummy)([1, 2]);
+      expect(dummy).toHaveBeenCalledWith(1, 0);
+      expect(dummy.calls.mostRecent().args).toEqual([2, 1]);
+    });
+    it('should not call the function when passed an empty array', function(){
+      eachArray(dummy)([]);
+      expect(dummy).not.toHaveBeenCalled();
+    });
+  });
+
   describe('cleave', function(){
     it('should split an array', function(){
       expect(cleave(2)([0, 1, 2, 3, 4]))

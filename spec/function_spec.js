@@ -1,5 +1,11 @@
 describe('function "ahem" functions', function(){
-  _.expose('compose invoke times not postpone');
+  _.expose('compose invoke times not postpone debounce');
+  var dummy, returnContext, obj;
+  beforeEach(function(){
+    dummy = jasmine.createSpy();
+    returnContext = function(){ return this; };
+    obj = {};
+  });
 
   describe('compose', function(){
     it('should combine functions', function(){
@@ -9,22 +15,60 @@ describe('function "ahem" functions', function(){
   });
 
   describe('invoke', function(){
-    var dummy;
-    beforeEach(function(){
-      dummy = jasmine.createSpy();
-    });
     it('should hold arguments for a passed function', function(){
       var pass3 = invoke(3);
       pass3(dummy);
       expect(dummy).toHaveBeenCalledWith(3);
     });
+    it('should keep context when operating unbound', function(){
+      var pass3 = invoke(3);
+      var a = pass3(returnContext);
+      expect(a).toEqual(returnContext());
+    });
+    it('should keep context when bound to object', function(){
+      obj.pass3 = invoke(3);
+      expect(obj.pass3(returnContext)).toBe(obj);
+    });
+    it('should keep context when specifically set', function(){
+      var pass3 = invoke(3);
+      expect(pass3.call(obj, returnContext)).toBe(obj);
+    });
+  });
+
+  describe('postpone', function(){
+    it('should call a function passed it', function(){
+      var later = postpone(dummy);
+      expect(dummy.calls.count()).toEqual(0);
+      later();    
+      expect(dummy.calls.count()).toEqual(1);
+    });
+    it('should pass arguments', function(){
+      var later = postpone(dummy, 2, 3);
+      later();    
+      expect(dummy.calls.mostRecent().args).toEqual([2, 3]);
+    });
+    it('should return function result', function(){
+      dummy.and.returnValue(2);
+      var later = postpone(dummy);
+      expect(later()).toEqual(2);
+    });
+    it('should keep context when operating unbound', function(){
+      var a = returnContext();
+      var b = postpone(returnContext)();
+      expect(a).toEqual(b);
+    });
+    it('should keep context when bound to object', function(){
+      obj.returnContext = returnContext;
+      obj.delayed = postpone(obj.returnContext);
+      expect(obj.delayed()).toBe(obj);
+    });
+    it('should keep context when specifically set', function(){
+      var delayed = postpone(returnContext);
+      expect(delayed.call(obj)).toBe(obj);
+    });
   });
 
   describe('times', function(){
-    var dummy;
-    beforeEach(function(){
-      dummy = jasmine.createSpy();
-    });
     it('should call a function n times', function(){
       var thrice = times(3);
       thrice(dummy);
@@ -44,25 +88,23 @@ describe('function "ahem" functions', function(){
     });
   });
 
-  describe('postpone', function(){
-    var dummy;
-    beforeEach(function(){
-      dummy = jasmine.createSpy().and.returnValue(2);
+  describe('debounce', function(){
+    xit('should call with the latest arguments', function(done){
+      var late = debounce(1)(dummy);
+      late(3);
+      setTimeout(function() {
+        expect(dummy).toHaveBeenCalledWith(3);
+        done();
+      }, 2);
+      expect(dummy).not.toHaveBeenCalledWith(3);
     });
-    it('should call a function passed it', function(){
-      var later = postpone(dummy);
-      expect(dummy.calls.count()).toEqual(0);
-      later();    
-      expect(dummy.calls.count()).toEqual(1);
-    });
-    it('should pass arguments', function(){
-      var later = postpone(dummy, 2, 3);
-      later();    
-      expect(dummy.calls.mostRecent().args).toEqual([2, 3]);
-    });
-    it('should return function result', function(){
-      var later = postpone(dummy);
-      expect(later()).toEqual(2);
+    xit('should call after activity', function(){
+      var late = debounce(2)(dummy);
+      var time = spyOn(_, 'now').andReturn(0);
+      late(3);
+      time.andReturn(1);
+      late(4);
+      expect(dummy.calls.length).toEqual(1);
     });
   });
 

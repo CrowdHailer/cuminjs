@@ -285,7 +285,22 @@ var _ = (function(){
   function invoke(){
     var args = arguments;
     return function(func){
-      return func.apply({}, args);
+      return func.apply(this, args);
+    };
+  }
+
+  function postpone(func){
+    var args = Array.prototype.slice.call(arguments, 1);
+    return function(){
+      return func.apply(this, args);
+    };
+  }
+
+  function times(n){
+    return function(operation){
+      for (var i = 0; i < n; i++){
+        operation(i);
+      }
     };
   }
 
@@ -313,21 +328,6 @@ var _ = (function(){
           func.apply({}, args);
         }, wait);
       };
-    };
-  }
-
-  function postpone(func){
-    var args = Array.prototype.slice.call(arguments, 1);
-    return function(){
-      return func.apply(this, args);
-    };
-  }
-
-  function times(n){
-    return function(operation){
-      for (var i = 0; i < n; i++){
-        operation(i);
-      }
     };
   }
 

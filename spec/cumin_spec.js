@@ -4,7 +4,7 @@ describe('cumin utilities', function(){
     dummy = jasmine.createSpy();
   });
 
-  _.expose('all any min max now random');
+  _.expose('all any min max random');
 
   describe('all', function(){
     it('should check elements of an array', function(){
@@ -115,13 +115,6 @@ describe('cumin utilities', function(){
     });
     it('should work from values', function(){
       expect(max()(1, 2, 3)).toEqual(3);
-    });
-  });
-
-  describe('now', function(){
-    it('should call date object', function(){
-      _.expose('now');
-      expect(now()).toEqual(Date.now());
     });
   });
 

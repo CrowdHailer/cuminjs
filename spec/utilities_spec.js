@@ -9,10 +9,24 @@ describe('Cumin utility operations', function(){
       }).toThrowError("Can't find variable: log");
     });
     it('should make functions available on top namespace', function(){
-      _.expose('dot method defreeze refreeze size log equals');
+      _.expose('equals dot method size now log defreeze refreeze');
       expect(function(){
         log();
       }).not.toThrow();
+    });
+  });
+
+  describe('equals', function(){
+    it('should test equality for values', function(){
+      var isThree = equals(3);
+      expect(isThree(3)).toBe(true);
+      expect(isThree(2)).toBe(false);
+    });
+    it('can be used as a defined test', function(){
+      var a, b = 3;
+      var defined = not(equals(undefined));
+      expect(defined(a)).toBe(false);
+      expect(defined(b)).toBe(true);
     });
   });
 
@@ -52,6 +66,30 @@ describe('Cumin utility operations', function(){
     });
   });
 
+  describe('size', function(){
+    it('should return number of elements in an array', function(){
+      expect(size([1, 2])).toEqual(2);
+    });
+    it('should return number of values on an object', function(){
+      expect(size({x: 1})).toEqual(1);
+    });
+  });
+
+  describe('now', function(){
+    it('should call date object', function(){
+      _.expose('now');
+      expect(now()).toEqual(Date.now());
+    });
+  });
+
+  describe('log', function(){
+    it('should log to console', function(){
+      spyOn(console, 'log');
+      log(3);
+      expect(console.log).toHaveBeenCalledWith(3);
+    });
+  });
+
   describe('defreeze and refreeze', function(){
     beforeEach(function(){
       defreeze();
@@ -83,37 +121,6 @@ describe('Cumin utility operations', function(){
     it('should work for overlay', function(){
       expect(overlay({x: 1})({y: 2})).
         toEqual({x: 1, y: 2});
-    });
-  });
-
-  describe('size', function(){
-    it('should return number of elements in an array', function(){
-      expect(size([1, 2])).toEqual(2);
-    });
-    it('should return number of values on an object', function(){
-      expect(size({x: 1})).toEqual(1);
-    });
-  });
-
-  describe('log', function(){
-    it('should log to console', function(){
-      spyOn(console, 'log');
-      log(3);
-      expect(console.log).toHaveBeenCalledWith(3);
-    });
-  });
-
-  describe('equals', function(){
-    it('should test equality for values', function(){
-      var isThree = equals(3);
-      expect(isThree(3)).toBe(true);
-      expect(isThree(2)).toBe(false);
-    });
-    it('can be used as a defined test', function(){
-      var a, b = 3;
-      var defined = not(equals(undefined));
-      expect(defined(a)).toBe(false);
-      expect(defined(b)).toBe(true);
     });
   });
 });

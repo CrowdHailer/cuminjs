@@ -29,9 +29,14 @@ describe('Cumin core functions', function () {
       each(dummy)({});
       expect(dummy).not.toHaveBeenCalled();
     });
-    it('should be able to break out of the execution', function () {
+    it('should be able to break out of the execution with an array', function () {
       dummy.and.returnValue(_.BREAK());
       each(dummy)([4, 2]);
+      expect(dummy.calls.count()).toEqual(1);
+    });
+    it('should be able to break out of the execution with an object', function () {
+      dummy.and.returnValue(_.BREAK());
+      each(dummy)({x: 4, y: 2});
       expect(dummy.calls.count()).toEqual(1);
     });
   });

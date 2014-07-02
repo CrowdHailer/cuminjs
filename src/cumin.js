@@ -41,7 +41,7 @@ var _ = (function(){
   // no order assumed
     return function(object){
       eachArray(function(key){
-        operation(object[key], key);
+        return operation(object[key], key);
       })(Object.keys(object));
     };
   }

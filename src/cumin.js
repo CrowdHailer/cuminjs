@@ -101,8 +101,8 @@ var _ = (function(){
     return function(array){
       var results = [];
       eachArray(function(element, index){
-        if (operation(element, index)) { results.push(element); }
-      })(array);
+        if (operation.call(this, element, index)) { results.push(element); }
+      }).call(this, array);
       return FROZEN? Object.freeze(results) : results;
     };
   }

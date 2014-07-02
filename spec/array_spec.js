@@ -82,6 +82,10 @@ describe('Cumin array operations', function () {
       expect(onlyGreaterThan2([])).
         toEqual(Object.freeze([]));
     });
+    it('should maintain context', function () {
+      filterArray(dummy).call(obj, [4, 2]);
+      expect(dummy.calls.mostRecent().object).toBe(obj);
+    });
     it('should reject values from an array', function(){
       expect(rejectArray(greaterThan2)([1, 3])).
         toEqual(Object.freeze([1]));

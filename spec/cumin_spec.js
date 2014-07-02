@@ -13,7 +13,7 @@ describe('cumin utilities', function(){
     });
     it('should make functions available on top namespace', function(){
       _.expose('dot map each eachObject reduce ' +
-               'dot filter eachArrayRight ' +
+               'dot filter ' +
                'merge all any reject max min ' +
                'random mapObject mapArray filterArray ' +
                'rejectArray filterObject rejectObject ' + 
@@ -23,18 +23,6 @@ describe('cumin utilities', function(){
         dot();
         map();
       }).not.toThrow();
-    });
-  });
-
-  describe('eachArrayRight', function(){
-    it('should call with each value from last', function(){
-      eachArrayRight(dummy)([1, 2]);
-      expect(dummy).toHaveBeenCalledWith(2, 1);
-      expect(dummy.calls.mostRecent().args).toEqual([1, 0]);
-    });
-    it('should not call for an empty array', function(){
-      eachArrayRight(dummy)([]);
-      expect(dummy).not.toHaveBeenCalled();
     });
   });
 

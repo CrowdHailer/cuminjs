@@ -6,15 +6,26 @@ describe('Cumin array operations', function () {
     dummy = jasmine.createSpy();
   });
 
-  _.expose('eachArray cleave cyclic within');
+  _.expose('eachArray eachArrayRight cleave cyclic within');
 
-  ddescribe('eachArray', function () {
+  describe('eachArray', function () {
     it('should call the function with every element and corresponding index', function () {
       eachArray(dummy)([4, 2]);
       expect(dummy.calls.allArgs()).toEqual([[4, 0], [2, 1]]);
     });
     it('should not call the function when passed an empty array', function () {
       eachArray(dummy)([]);
+      expect(dummy).not.toHaveBeenCalled();
+    });
+  });
+
+  describe('eachArrayRight', function () {
+    it('should call with each value from last', function () {
+      eachArrayRight(dummy)([4, 2]);
+      expect(dummy.calls.allArgs()).toEqual([[2, 1], [4, 0]]);
+    });
+    it('should not call for an empty array', function () {
+      eachArrayRight(dummy)([]);
       expect(dummy).not.toHaveBeenCalled();
     });
   });

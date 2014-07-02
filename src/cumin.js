@@ -10,6 +10,7 @@
 
 // JavaScript all things? function(executable method invokable), collection, primitive, void(null undef)
 var _ = (function(){
+  'use strict';
 
   var FROZEN = true;
   var BREAKER = {};
@@ -21,7 +22,7 @@ var _ = (function(){
   // assumes array type
     return function(array){
       for (var i = 0; i < array.length; i++) {
-        if (operation.call(this, array[i], i) === BREAKER) return;
+        if (operation.call(this, array[i], i) === BREAKER) { return; }
       }
     };
   }
@@ -31,7 +32,7 @@ var _ = (function(){
   // assumes array type
     return function(array){
       for (var i = array.length - 1; i > -1; i--) {
-        if (operation.call(this, array[i], i) === BREAKER) return;
+        if (operation.call(this, array[i], i) === BREAKER) { return; }
       }
     };
   }

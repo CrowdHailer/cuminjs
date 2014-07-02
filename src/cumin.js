@@ -68,8 +68,8 @@ var _ = (function(){
     return function(array){
       var results = [];
       eachArray(function(element, index){
-        results.push(operation(element, index));
-      })(array);
+        results.push(operation.call(this, element, index));
+      }).call(this, array);
       return FROZEN? Object.freeze(results) : results;
     };
   }
@@ -78,8 +78,8 @@ var _ = (function(){
     return function(object){
       var results = {};
       eachObject(function(value, key){
-        results[key] = operation(value, key);
-      })(object);
+        results[key] = operation.call(this, value, key);
+      }).call(this, object);
       return FROZEN? Object.freeze(results) : results;
     };
   }
@@ -90,9 +90,9 @@ var _ = (function(){
         collection = argsToList(arguments);
       }
       if (isArray(collection)) {
-        return mapArray(operation)(collection);
+        return mapArray(operation).call(this, collection);
       } else {
-        return mapObject(operation)(collection);
+        return mapObject(operation).call(this, collection);
       }
     };
   }
@@ -101,8 +101,8 @@ var _ = (function(){
     return function(array){
       var results = [];
       eachArray(function(element, index){
-        if (operation(element, index)) { results.push(element); }
-      })(array);
+        if (operation.call(this, element, index)) { results.push(element); }
+      }).call(this, array);
       return FROZEN? Object.freeze(results) : results;
     };
   }
@@ -113,8 +113,8 @@ var _ = (function(){
     return function(object){
       var results = {};
       eachObject(function(value, key){
-        if (operation(value, key)) { results[key] = value;}
-      })(object);
+        if (operation.call(this, value, key)) { results[key] = value;}
+      }).call(this, object);
       return FROZEN? Object.freeze(results) : results;
     };
   }
@@ -127,9 +127,9 @@ var _ = (function(){
         collection = argsToList(arguments);
       }
       if (isArray(collection)) {
-        return filterArray(operation)(collection);
+        return filterArray(operation).call(this, collection);
       } else {
-        return filterObject(operation)(collection);
+        return filterObject(operation).call(this, collection);
       }
     };
   }

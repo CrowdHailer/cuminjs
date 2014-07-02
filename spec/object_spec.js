@@ -1,5 +1,72 @@
 describe('Object only operations', function(){
-  _.expose('extend augment foundation overlay select omit');
+  'use strict';
+
+  var dummy, obj;
+  beforeEach(function () {
+    dummy = jasmine.createSpy();
+    obj = {};
+  });
+
+  _.expose('eachObject mapObject filterObject rejectObject extend augment foundation overlay select omit');
+
+
+  describe('eachObject', function(){
+    it('should each all values of an object', function(){
+      eachObject(dummy)({x: 1, y: 2});
+      expect(dummy).toHaveBeenCalledWith(1, 'x');
+      expect(dummy).toHaveBeenCalledWith(2, 'y');
+    });
+    it('should not have been called for an empty object', function(){
+      eachObject(dummy)({});
+      expect(dummy).not.toHaveBeenCalled();
+    });
+    it('should maintain context when calling an object', function () {
+      eachObject(dummy).call(obj, {x: 4, y: 2});
+      expect(dummy.calls.mostRecent().object).toBe(obj);
+    });
+  });
+
+  describe('mapObject', function(){
+    var add3Values;
+    beforeEach(function(){
+      add3Values = mapObject(add3);
+    });
+    it('should map an object', function(){
+      expect(add3Values({x: 1, y: 2})).
+        toEqual(Object.freeze({x: 4, y: 5}));
+    });
+    it('should map an empty object', function(){
+      expect(add3Values({})).
+        toEqual(Object.freeze({}));
+    });
+    it('should maintain context when mapping an object', function () {
+      mapObject(dummy).call(obj, {x: 4, y: 2});
+      expect(dummy.calls.mostRecent().object).toBe(obj);
+    });
+  });
+
+  describe('filterObject and rejectObject', function(){
+    var onlyGreaterThan2;
+    beforeEach(function(){
+      onlyGreaterThan2 = filterObject(greaterThan2);
+    });
+    it('should filter an object', function(){
+      expect(onlyGreaterThan2({x: 1, y: 3})).
+        toEqual(Object.freeze({y: 3}));
+    });
+    it('should filter an empty object', function(){
+      expect(onlyGreaterThan2({})).
+        toEqual(Object.freeze({}));
+    });
+    it('should maintain context when filtering an object', function () {
+      filterObject(dummy).call(obj, {x: 4, y: 2});
+      expect(dummy.calls.mostRecent().object).toBe(obj);
+    });
+    it('should reject an object', function(){
+      expect(rejectObject(greaterThan2)({x: 1, y: 3})).
+        toEqual(Object.freeze({x: 1}));
+    });
+  });
 
   describe('extend', function(){
     // augment attachemts

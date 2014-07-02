@@ -12,149 +12,17 @@ describe('cumin utilities', function(){
       }).toThrowError("Can't find variable: dot");
     });
     it('should make functions available on top namespace', function(){
-      _.expose('dot map each eachObject reduce ' +
+      _.expose('dot map each reduce ' +
                'dot filter ' +
                'merge all any reject max min ' +
-               'random mapObject mapArray filterArray ' +
-               'rejectArray filterObject rejectObject ' + 
+               'random  ' +
+               ' ' + 
                'now debounce'
               );
       expect(function(){
         dot();
         map();
       }).not.toThrow();
-    });
-  });
-
-  describe('eachObject', function(){
-    it('should each all values of an object', function(){
-      eachObject(dummy)({x: 1, y: 2});
-      expect(dummy).toHaveBeenCalledWith(1, 'x');
-      expect(dummy).toHaveBeenCalledWith(2, 'y');
-    });
-    it('should not have been called for an empty object', function(){
-      eachObject(dummy)({});
-      expect(dummy).not.toHaveBeenCalled();
-    });
-  });
-
-  describe('mapArray', function(){
-    var add3Elements;
-    beforeEach(function(){
-      add3Elements = mapArray(add3);
-    });
-    it('should map an array', function(){
-      expect(add3Elements([1, 2])).
-        toEqual(Object.freeze([4, 5]));
-    });
-    it('should map an empty array', function(){
-      expect(add3Elements([])).
-        toEqual(Object.freeze([]));
-    });
-    xit('may return value for an object', function(){
-      // possible to implement requires mapArray calling each NOT eachArray. unsure.
-      expect(add3Elements({x: 1, y: 2})).
-        toEqual([4, 5]);
-    });
-  });
-
-  describe('mapObject', function(){
-    var add3Values;
-    beforeEach(function(){
-      add3Values = mapObject(add3);
-    });
-    it('should map an object', function(){
-      expect(add3Values({x: 1, y: 2})).
-        toEqual(Object.freeze({x: 4, y: 5}));
-    });
-    it('should map an empty object', function(){
-      expect(add3Values({})).
-        toEqual(Object.freeze({}));
-    });
-    it('may return value for array', function(){
-      expect(add3Values([1, 2])).
-        toEqual(Object.freeze({0: 4, 1: 5}));
-    });
-  });
-
-  describe('map', function(){
-    var add3All;
-    beforeEach(function(){
-      add3All = map(add3);
-    });
-    it('should map arrays', function(){
-      var answer = add3All([1, 2, 3]);
-      expect(answer).toEqual(Object.freeze([4, 5, 6]));
-    });
-    it('should map objects', function(){
-      var answer = add3All({x: 1, y: 2});
-      expect(answer).toEqual(Object.freeze({x: 4, y: 5}));
-    });
-    it('should map arguments if given multiple', function(){
-      var answer = add3All(1, 2, 3);
-      expect(answer).toEqual(Object.freeze([4, 5, 6]));
-    });
-  });
-
-  describe('filterArray and rejectArray', function(){
-    var onlyGreaterThan2;
-    beforeEach(function(){
-      onlyGreaterThan2 = filterArray(greaterThan2);
-    });
-    it('should filter an array', function(){
-      expect(onlyGreaterThan2([1, 3])).
-        toEqual(Object.freeze([3]));
-    });
-    it('should filter an empty array', function(){
-      expect(onlyGreaterThan2([])).
-        toEqual(Object.freeze([]));
-    });
-    it('should reject values from an array', function(){
-      expect(rejectArray(greaterThan2)([1, 3])).
-        toEqual(Object.freeze([1]));
-    });
-  });
-
-  describe('filterObject and rejectObject', function(){
-    var onlyGreaterThan2;
-    beforeEach(function(){
-      onlyGreaterThan2 = filterObject(greaterThan2);
-    });
-    it('should filter an object', function(){
-      expect(onlyGreaterThan2({x: 1, y: 3})).
-        toEqual(Object.freeze({y: 3}));
-    });
-    it('should filter an empty object', function(){
-      expect(onlyGreaterThan2({})).
-        toEqual(Object.freeze({}));
-    });
-    it('should reject an object', function(){
-      expect(rejectObject(greaterThan2)({x: 1, y: 3})).
-        toEqual(Object.freeze({x: 1}));
-    });
-  });
-
-  describe('filter', function(){
-    it('should filter from array', function(){
-      expect(filter(greaterThan2)([1, 3, 2])).toEqual(Object.freeze([3]));
-    });
-    it('should filter from object', function(){
-      expect(filter(greaterThan2)({x: 1, y: 3, z: 2})).toEqual(Object.freeze({y: 3}));
-    });
-    it('should filter from arguments', function(){
-      expect(filter(greaterThan2)(1, 3, 2)).toEqual(Object.freeze([3]));
-    });
-  });
-
-  describe('reject', function(){
-    it('should reject from array', function(){
-      expect(reject(greaterThan2)([1, 3, 2])).toEqual(Object.freeze([1, 2]));
-    });
-    it('should reject from object', function(){
-      expect(reject(greaterThan2)({x: 1, y: 3, z: 4})).toEqual(Object.freeze({x: 1}));
-    });
-    it('should reject from arguments', function(){
-      expect(reject(greaterThan2)(1, 3, 2)).toEqual(Object.freeze([1, 2]));
     });
   });
 

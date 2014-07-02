@@ -8,6 +8,8 @@ module.exports = function(config) {
       'dist/compositions.min.js',
       'spec/setup.js',
       'spec/cumin_spec.js',
+      'spec/core_spec.js',
+      'spec/array_spec.js',
       'spec/object_spec.js',
       'spec/function_spec.js',
       'spec/utilities_spec.js',

@@ -66,19 +66,10 @@ describe('Cumin function operations', function () {
       var later = postpone(dummy);
       expect(later()).toEqual(2);
     });
-    it('should keep context when operating unbound', function () {
-      var a = returnContext();
-      var b = postpone(returnContext)();
-      expect(a).toEqual(b);
-    });
-    it('should keep context when bound to object', function () {
-      obj.returnContext = returnContext;
-      obj.delayed = postpone(obj.returnContext);
-      expect(obj.delayed()).toBe(obj);
-    });
     it('should keep context when specifically set', function () {
-      var delayed = postpone(returnContext);
-      expect(delayed.call(obj)).toBe(obj);
+      var delayed = postpone(dummy);
+      delayed.call(obj);
+      expect(dummy.calls.mostRecent().object).toBe(obj);
     });
   });
 

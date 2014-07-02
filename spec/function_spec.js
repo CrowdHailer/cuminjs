@@ -10,7 +10,7 @@ describe('Cumin function operations', function () {
 
   _.expose('adjoin compose invoke times not postpone debounce');
 
-  ddescribe('adjoin', function () {
+  describe('adjoin', function () {
     it('should combine two functions', function () {
       var compound = adjoin(add3)(multiply2);
       expect(compound(2)).toEqual(7);
@@ -132,7 +132,7 @@ describe('Cumin function operations', function () {
 
   describe('not', function () {
     it('should late eval truthy statments', function () {
-      lessThan2 = not(greaterThan2);
+      var lessThan2 = not(greaterThan2);
       expect(lessThan2(1)).toBe(true);
     });
   });

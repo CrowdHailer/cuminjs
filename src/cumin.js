@@ -282,16 +282,7 @@ var _ = (function(){
     };
   }
 
-  function compose(){
-    var funcs = arguments;
-    return function(){
-      var args = arguments;
-      eachArrayRight(function(func){
-        args = [func.apply(this, args)];
-      })(funcs);
-      return args[0];
-    };
-  }
+  compose = reduce()(adjoin);
 
   function invoke(){
     var args = arguments;

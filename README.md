@@ -244,6 +244,8 @@ conditional execution
 pass hash with key options and value processess
 would work with true false as implicitly turned to strings
 
+each object and each array now only tested for correct input
+
 invoke with and expose using exec!! expose local
 
 dot function to take multiple structures array, object,

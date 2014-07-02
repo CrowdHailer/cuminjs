@@ -39,11 +39,6 @@ describe('cumin utilities', function(){
       expect(add3Elements([])).
         toEqual(Object.freeze([]));
     });
-    xit('may return value for an object', function(){
-      // possible to implement requires mapArray calling each NOT eachArray. unsure.
-      expect(add3Elements({x: 1, y: 2})).
-        toEqual([4, 5]);
-    });
   });
 
   describe('mapObject', function(){
@@ -58,10 +53,6 @@ describe('cumin utilities', function(){
     it('should map an empty object', function(){
       expect(add3Values({})).
         toEqual(Object.freeze({}));
-    });
-    it('may return value for array', function(){
-      expect(add3Values([1, 2])).
-        toEqual(Object.freeze({0: 4, 1: 5}));
     });
   });
 

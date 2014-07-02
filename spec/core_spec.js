@@ -7,7 +7,7 @@ describe('Cumin core functions', function () {
     obj = {};
   });
 
-  _.expose('each map filter reject');
+  _.expose('each map filter reject reduce');
 
   describe('each', function () {
     it('should call the operation with every element and index of an array', function () {
@@ -114,6 +114,58 @@ describe('Cumin core functions', function () {
     xit('should maintain context when calling an object', function () {
       reject(dummy).call(obj, {x: 4, y: 2});
       expect(dummy.calls.mostRecent().object).toBe(obj);
+    });
+  });
+
+  describe('reduce', function(){
+    var sum, asString;
+    beforeEach(function(){
+      sum = reduce(0)(add);
+      asString = reduce('')(function(memo){
+        return function(item, location){
+          return memo + location + ':' + item + ',';
+        };
+      });
+    });
+    it('should reduce a list', function(){
+      expect(sum([1, 2, 3])).toEqual(6);
+    });
+    it('should reduce a list without an initial value', function(){
+      expect(reduce()(add)([1, 2, 3])).toEqual(6);
+    });
+    it('should reduce an object', function(){
+      expect(sum({x: 1, y: 3, z: 2})).toEqual(6);
+    });
+    it('should reduce arguments', function(){
+      expect(sum(1, 2, 3)).toEqual(6);
+    });
+    it('should reduce empty list', function(){
+      expect(sum([])).toEqual(0);
+    });
+    it('should reduce empty object', function(){
+      expect(sum({})).toEqual(0);
+    });
+    it('should take initial value from array if not given an initial', function(){
+      expect(reduce()(add)([1, 2, 3])).toEqual(6);
+    });
+    it('should take initial value from object if not given initial', function(){
+      expect(reduce()(add)({x: 1, y: 3, z: 2})).toEqual(6);
+    });
+    it('should take initial value from arguments if not given initial', function(){
+      expect(reduce()(add)(1, 2, 3)).toEqual(6);
+    });
+    it('should be able to use array index', function(){
+      expect(asString([1, 2])).toEqual('0:1,1:2,');
+    });
+    it('should be able to use arguments index', function(){
+      expect(asString(1, 2)).toEqual('0:1,1:2,');
+    });
+    it('should be able to use object key', function(){
+      expect(asString({x: 1, y: 3})).toEqual('x:1,y:3,');
+    });
+    it('should reset memory each time it is used', function(){
+      expect(sum([1, 2, 3])).toEqual(6);
+      expect(sum([1, 2, 3])).toEqual(6);
     });
   });
 });

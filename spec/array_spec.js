@@ -10,9 +10,8 @@ describe('Cumin array operations', function(){
 
   ddescribe('eachArray', function(){
     it('should call the function with every element and corresponding index', function(){
-      eachArray(dummy)([1, 2]);
-      expect(dummy).toHaveBeenCalledWith(1, 0);
-      expect(dummy.calls.mostRecent().args).toEqual([2, 1]);
+      eachArray(dummy)([4, 2]);
+      expect(dummy.calls.allArgs()).toEqual([[4, 0], [2, 1]]);
     });
     it('should not call the function when passed an empty array', function(){
       eachArray(dummy)([]);

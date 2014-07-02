@@ -1,9 +1,10 @@
 describe('Cumin array operations', function () {
   'use strict';
 
-  var dummy;
+  var dummy, obj;
   beforeEach(function () {
     dummy = jasmine.createSpy();
+    obj = {};
   });
 
   _.expose('eachArray eachArrayRight cleave cyclic within');
@@ -22,6 +23,10 @@ describe('Cumin array operations', function () {
       eachArray(dummy)([4, 2]);
       expect(dummy.calls.count()).toEqual(1);
     });
+    it('should maintain context', function () {
+      eachArray(dummy).call(obj, [4, 2]);
+      expect(dummy.calls.mostRecent().object).toBe(obj);
+    });
   });
 
   describe('eachArrayRight', function () {
@@ -37,6 +42,10 @@ describe('Cumin array operations', function () {
       dummy.and.returnValue(_.BREAK());
       eachArrayRight(dummy)([4, 2]);
       expect(dummy.calls.count()).toEqual(1);
+    });
+    it('should maintain context', function () {
+      eachArrayRight(dummy).call(obj, [4, 2]);
+      expect(dummy.calls.mostRecent().object).toBe(obj);
     });
   });
 

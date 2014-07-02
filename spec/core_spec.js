@@ -1,9 +1,10 @@
 describe('Cumin core functions', function () {
   'use strict';
 
-  var dummy;
+  var dummy, obj;
   beforeEach(function () {
     dummy = jasmine.createSpy();
+    obj = {};
   });
 
   _.expose('each ');
@@ -38,6 +39,10 @@ describe('Cumin core functions', function () {
       dummy.and.returnValue(_.BREAK());
       each(dummy)({x: 4, y: 2});
       expect(dummy.calls.count()).toEqual(1);
+    });
+    it('should maintain context', function () {
+      each(dummy).call(obj, [4, 2]);
+      expect(dummy.calls.mostRecent().object).toBe(obj);
     });
   });
 });

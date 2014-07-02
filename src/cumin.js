@@ -21,7 +21,7 @@ var _ = (function(){
   // assumes array type
     return function(array){
       for (var i = 0; i < array.length; i++) {
-        if (operation(array[i], i) === BREAKER) return;
+        if (operation.call(this, array[i], i) === BREAKER) return;
       }
     };
   }
@@ -31,7 +31,7 @@ var _ = (function(){
   // assumes array type
     return function(array){
       for (var i = array.length - 1; i > -1; i--) {
-        if (operation(array[i], i) === BREAKER) return;
+        if (operation.call(this, array[i], i) === BREAKER) return;
       }
     };
   }
@@ -54,7 +54,7 @@ var _ = (function(){
         collection = argsToList(arguments);
       }
       if (isArray(collection)) {
-        eachArray(operation)(collection);
+        eachArray(operation).call(this, collection);
       } else {
         eachObject(operation)(collection);
       }

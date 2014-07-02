@@ -27,6 +27,7 @@ var isDefined = function(obj) {
 var _ = (function(){
 
   var FROZEN = true;
+  var BREAKER = {};
 
 // basic iterators
 
@@ -35,7 +36,7 @@ var _ = (function(){
   // assumes array type
     return function(array){
       for (var i = 0; i < array.length; i++) {
-        operation(array[i], i);
+        if (operation.call(this, array[i], i) === BREAKER) return;
       }
     };
   }
@@ -45,7 +46,7 @@ var _ = (function(){
   // assumes array type
     return function(array){
       for (var i = array.length - 1; i > -1; i--) {
-        operation(array[i], i);
+        if (operation.call(this, array[i], i) === BREAKER) return;
       }
     };
   }
@@ -54,8 +55,9 @@ var _ = (function(){
   // iterates through object key/value pairs
   // no order assumed
     return function(object){
+      var context = this;
       eachArray(function(key){
-        operation(object[key], key);
+        return operation.call(context, object[key], key);
       })(Object.keys(object));
     };
   }
@@ -68,9 +70,9 @@ var _ = (function(){
         collection = argsToList(arguments);
       }
       if (isArray(collection)) {
-        eachArray(operation)(collection);
+        eachArray(operation).call(this, collection);
       } else {
-        eachObject(operation)(collection);
+        eachObject(operation).call(this, collection);
       }
     };
   }
@@ -81,8 +83,8 @@ var _ = (function(){
     return function(array){
       var results = [];
       eachArray(function(element, index){
-        results.push(operation(element, index));
-      })(array);
+        results.push(operation.call(this, element, index));
+      }).call(this, array);
       return FROZEN? Object.freeze(results) : results;
     };
   }
@@ -91,8 +93,8 @@ var _ = (function(){
     return function(object){
       var results = {};
       eachObject(function(value, key){
-        results[key] = operation(value, key);
-      })(object);
+        results[key] = operation.call(this, value, key);
+      }).call(this, object);
       return FROZEN? Object.freeze(results) : results;
     };
   }
@@ -103,9 +105,9 @@ var _ = (function(){
         collection = argsToList(arguments);
       }
       if (isArray(collection)) {
-        return mapArray(operation)(collection);
+        return mapArray(operation).call(this, collection);
       } else {
-        return mapObject(operation)(collection);
+        return mapObject(operation).call(this, collection);
       }
     };
   }
@@ -114,8 +116,8 @@ var _ = (function(){
     return function(array){
       var results = [];
       eachArray(function(element, index){
-        if (operation(element, index)) { results.push(element); }
-      })(array);
+        if (operation.call(this, element, index)) { results.push(element); }
+      }).call(this, array);
       return FROZEN? Object.freeze(results) : results;
     };
   }
@@ -126,8 +128,8 @@ var _ = (function(){
     return function(object){
       var results = {};
       eachObject(function(value, key){
-        if (operation(value, key)) { results[key] = value;}
-      })(object);
+        if (operation.call(this, value, key)) { results[key] = value;}
+      }).call(this, object);
       return FROZEN? Object.freeze(results) : results;
     };
   }
@@ -140,9 +142,9 @@ var _ = (function(){
         collection = argsToList(arguments);
       }
       if (isArray(collection)) {
-        return filterArray(operation)(collection);
+        return filterArray(operation).call(this, collection);
       } else {
-        return filterObject(operation)(collection);
+        return filterObject(operation).call(this, collection);
       }
     };
   }
@@ -300,7 +302,22 @@ var _ = (function(){
   function invoke(){
     var args = arguments;
     return function(func){
-      return func.apply({}, args);
+      return func.apply(this, args);
+    };
+  }
+
+  function postpone(func){
+    var args = Array.prototype.slice.call(arguments, 1);
+    return function(){
+      return func.apply(this, args);
+    };
+  }
+
+  function times(n){
+    return function(operation){
+      for (var i = 0; i < n; i++){
+        operation(i);
+      }
     };
   }
 
@@ -328,21 +345,6 @@ var _ = (function(){
           func.apply({}, args);
         }, wait);
       };
-    };
-  }
-
-  function postpone(func){
-    var args = Array.prototype.slice.call(arguments, 1);
-    return function(){
-      return func.apply(this, args);
-    };
-  }
-
-  function times(n){
-    return function(operation){
-      for (var i = 0; i < n; i++){
-        operation(i);
-      }
     };
   }
 
@@ -388,6 +390,10 @@ var _ = (function(){
 
   function refreeze(){
     FROZEN = true;
+  }
+
+  function BREAK(){
+    return BREAKER;
   }
 
   function size(collection){
@@ -461,6 +467,7 @@ var _ = (function(){
     log: log,
     position: position,
     equals: equals,
+    BREAK: BREAK
   };
   return _;
 }());

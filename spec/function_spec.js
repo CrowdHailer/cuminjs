@@ -15,6 +15,13 @@ describe('Cumin function operations', function () {
       var compound = adjoin(add3)(multiply2);
       expect(compound(2)).toEqual(7);
     });
+    it('should keep maintain context', function () {
+      var dummer = jasmine.createSpy();
+      var compound = adjoin(dummer)(dummy);
+      compound.call(obj);
+      expect(dummy.calls.mostRecent().object).toBe(obj);
+      expect(dummer.calls.mostRecent().object).toBe(obj);
+    });
   });
 
   describe('compose', function () {

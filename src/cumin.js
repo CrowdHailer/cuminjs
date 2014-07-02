@@ -276,8 +276,8 @@ var _ = (function(){
 
   function adjoin(f){
     return function (g) {
-      return function(){
-        return f(g.apply({}, arguments));
+      return function(x){
+        return f.call(this, (g.call(this, x)));
       };
     };
   }

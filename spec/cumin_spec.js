@@ -4,27 +4,7 @@ describe('cumin utilities', function(){
     dummy = jasmine.createSpy();
   });
 
-  describe('expose', function(){
-    // forceful, as, expose defaults such as filling missing keys with 0
-    it('should leave main namespace clear', function(){
-      expect(function(){
-        dot();
-      }).toThrowError("Can't find variable: dot");
-    });
-    it('should make functions available on top namespace', function(){
-      _.expose('dot  ' +
-               'dot  ' +
-               'merge all any reject max min ' +
-               'random  ' +
-               ' ' + 
-               'now debounce'
-              );
-      expect(function(){
-        dot();
-        map();
-      }).not.toThrow();
-    });
-  });
+  _.expose('all any min max now random');
 
   describe('all', function(){
     it('should check elements of an array', function(){
@@ -136,25 +116,6 @@ describe('cumin utilities', function(){
     it('should work from values', function(){
       expect(max()(1, 2, 3)).toEqual(3);
     });
-  });
-
-  describe('dot', function(){
-    it('should pull an objects value', function(){
-      var person = {name: 'Mike'};
-      var name = dot('name');
-      expect(name(person)).toEqual('Mike');
-    });
-    it('should return an array given an array', function(){
-      var person = {name: 'Mike', age: 25, city: 'boston'};
-      var publicDetails = dot(['name', 'city']);
-      expect(publicDetails(person)).toEqual(Object.freeze(['Mike', 'boston']));
-    });
-    it('should return an object given an object', function(){
-      var person = {name: 'Mike', age: 25, city: 'boston'};
-      var greeting = dot({hello: 'name', age: 'age'});
-      expect(greeting(person)).toEqual(Object.freeze({hello: 'Mike', age: 25}));
-    });
-
   });
 
   describe('now', function(){

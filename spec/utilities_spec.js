@@ -1,4 +1,4 @@
-describe('provided utility functions', function(){
+describe('Cumin utility operations', function(){
   'use strict';
 
   describe('expose', function(){
@@ -9,10 +9,28 @@ describe('provided utility functions', function(){
       }).toThrowError("Can't find variable: log");
     });
     it('should make functions available on top namespace', function(){
-      _.expose('defreeze refreeze size log equals');
+      _.expose('dot defreeze refreeze size log equals');
       expect(function(){
         log();
       }).not.toThrow();
+    });
+  });
+
+  describe('dot', function(){
+    it('should pull an objects value', function(){
+      var person = {name: 'Mike'};
+      var name = dot('name');
+      expect(name(person)).toEqual('Mike');
+    });
+    it('should return an array given an array', function(){
+      var person = {name: 'Mike', age: 25, city: 'boston'};
+      var publicDetails = dot(['name', 'city']);
+      expect(publicDetails(person)).toEqual(Object.freeze(['Mike', 'boston']));
+    });
+    it('should return an object given an object', function(){
+      var person = {name: 'Mike', age: 25, city: 'boston'};
+      var greeting = dot({hello: 'name', age: 'age'});
+      expect(greeting(person)).toEqual(Object.freeze({hello: 'Mike', age: 25}));
     });
   });
 

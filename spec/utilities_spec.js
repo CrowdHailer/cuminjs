@@ -8,7 +8,7 @@ describe('Cumin utility operations', function(){
         log();
       }).toThrowError("Can't find variable: log");
     });
-    iit('should make functions available on top namespace', function(){
+    it('should make functions available on top namespace', function(){
       _.expose('dot method defreeze refreeze size log equals');
       expect(function(){
         log();
@@ -35,15 +35,20 @@ describe('Cumin utility operations', function(){
   });
 
   describe('method', function(){
-    iit('should get result of named method from and object', function(){
+    var name;
+    beforeEach(function(){
+      name = method('getName');
+    });
+    it('should get result of named method from and object', function(){
       var person = {getName: jasmine.createSpy().and.returnValue('Neil')};
-      var name = method('getName');
       expect(name(person)).toEqual('Neil');
     });
-    iit('should return undefined if there is no method', function(){
+    it('should return undefined if there is no method', function(){
       var person = {};
-      var name = method('getName');
       expect(name(person)).toEqual();
+    });
+    it('should return undefined when looking on undefined', function(){
+      expect(name()).toEqual();
     });
   });
 

@@ -8,7 +8,7 @@ describe('Cumin core functions', function () {
 
   _.expose('each ');
 
-  ddescribe('each', function () {
+  describe('each', function () {
     it('should call the operation with every element and index of an array', function () {
       each(dummy)([4, 2]);
       expect(dummy.calls.allArgs()).toEqual([[4, 0], [2, 1]]);
@@ -28,6 +28,11 @@ describe('Cumin core functions', function () {
     it('should not call the operation for an empty object', function () {
       each(dummy)({});
       expect(dummy).not.toHaveBeenCalled();
+    });
+    it('should be able to break out of the execution', function () {
+      dummy.and.returnValue(_.BREAK());
+      each(dummy)([4, 2]);
+      expect(dummy.calls.count()).toEqual(1);
     });
   });
 });

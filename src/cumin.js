@@ -12,6 +12,7 @@
 var _ = (function(){
 
   var FROZEN = true;
+  var BREAKER = {};
 
 // basic iterators
 
@@ -20,7 +21,7 @@ var _ = (function(){
   // assumes array type
     return function(array){
       for (var i = 0; i < array.length; i++) {
-        operation(array[i], i);
+        if (operation(array[i], i) == BREAKER) return;
       }
     };
   }
@@ -375,6 +376,10 @@ var _ = (function(){
     FROZEN = true;
   }
 
+  function BREAK(){
+    return BREAKER;
+  }
+
   function size(collection){
     return collection.length || Object.keys(collection).length;
   }
@@ -446,6 +451,7 @@ var _ = (function(){
     log: log,
     position: position,
     equals: equals,
+    BREAK: BREAK
   };
   return _;
 }());

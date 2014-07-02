@@ -17,6 +17,11 @@ describe('Cumin array operations', function () {
       eachArray(dummy)([]);
       expect(dummy).not.toHaveBeenCalled();
     });
+    it('should be able to break out of the execution', function () {
+      dummy.and.returnValue(_.BREAK());
+      eachArray(dummy)([4, 2]);
+      expect(dummy.calls.count()).toEqual(1);
+    });
   });
 
   describe('eachArrayRight', function () {

@@ -68,8 +68,8 @@ var _ = (function(){
     return function(array){
       var results = [];
       eachArray(function(element, index){
-        results.push(operation(element, index));
-      })(array);
+        results.push(operation.call(this, element, index));
+      }).call(this, array);
       return FROZEN? Object.freeze(results) : results;
     };
   }

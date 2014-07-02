@@ -62,6 +62,10 @@ describe('Cumin array operations', function () {
       expect(add3Elements([])).
         toEqual(Object.freeze([]));
     });
+    it('should maintain context', function () {
+      mapArray(dummy).call(obj, [4, 2]);
+      expect(dummy.calls.mostRecent().object).toBe(obj);
+    });
   });
 
   describe('cleave', function () {

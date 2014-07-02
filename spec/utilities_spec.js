@@ -1,5 +1,20 @@
 describe('provided utility functions', function(){
-  _.expose('defreeze refreeze size log equals');
+  'use strict';
+
+  describe('expose', function(){
+    // forceful, as, expose defaults such as filling missing keys with 0
+    it('should leave main namespace clear', function(){
+      expect(function(){
+        log();
+      }).toThrowError("Can't find variable: log");
+    });
+    it('should make functions available on top namespace', function(){
+      _.expose('defreeze refreeze size log equals');
+      expect(function(){
+        log();
+      }).not.toThrow();
+    });
+  });
 
   describe('defreeze and refreeze', function(){
     beforeEach(function(){

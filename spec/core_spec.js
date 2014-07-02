@@ -167,5 +167,13 @@ describe('Cumin core functions', function () {
       expect(sum([1, 2, 3])).toEqual(6);
       expect(sum([1, 2, 3])).toEqual(6);
     });
+    it('should maintain context', function(){
+      var dummer = jasmine.createSpy();
+      dummer.and.returnValue(2);
+      dummy.and.returnValue(dummer);
+      reduce(0)(dummy).call(obj, [1, 2, 3]);
+      expect(dummy.calls.mostRecent().object).toBe(obj);
+      expect(dummer.calls.mostRecent().object).toBe(obj);
+    });
   });
 });

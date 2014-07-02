@@ -26,7 +26,6 @@ describe('cumin utilities', function(){
     });
   });
 
-
   describe('all', function(){
     it('should check elements of an array', function(){
       expect(all(greaterThan2)([3, 4])).toBe(true);

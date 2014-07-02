@@ -113,8 +113,8 @@ var _ = (function(){
     return function(object){
       var results = {};
       eachObject(function(value, key){
-        if (operation(value, key)) { results[key] = value;}
-      })(object);
+        if (operation.call(this, value, key)) { results[key] = value;}
+      }).call(this, object);
       return FROZEN? Object.freeze(results) : results;
     };
   }

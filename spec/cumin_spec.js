@@ -15,33 +15,14 @@ describe('cumin utilities', function(){
       _.expose('dot map each reduce ' +
                'dot filter ' +
                'merge all any reject max min ' +
-               'random mapObject mapArray filterArray ' +
-               'rejectArray filterObject rejectObject ' + 
+               'random  ' +
+               ' ' + 
                'now debounce'
               );
       expect(function(){
         dot();
         map();
       }).not.toThrow();
-    });
-  });
-
-  describe('filterObject and rejectObject', function(){
-    var onlyGreaterThan2;
-    beforeEach(function(){
-      onlyGreaterThan2 = filterObject(greaterThan2);
-    });
-    it('should filter an object', function(){
-      expect(onlyGreaterThan2({x: 1, y: 3})).
-        toEqual(Object.freeze({y: 3}));
-    });
-    it('should filter an empty object', function(){
-      expect(onlyGreaterThan2({})).
-        toEqual(Object.freeze({}));
-    });
-    it('should reject an object', function(){
-      expect(rejectObject(greaterThan2)({x: 1, y: 3})).
-        toEqual(Object.freeze({x: 1}));
     });
   });
 

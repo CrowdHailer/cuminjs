@@ -7,7 +7,7 @@ describe('Object only operations', function(){
     obj = {};
   });
 
-  _.expose('eachObject mapObject extend augment foundation overlay select omit');
+  _.expose('eachObject mapObject filterObject rejectObject extend augment foundation overlay select omit');
 
 
   describe('eachObject', function(){
@@ -39,9 +39,32 @@ describe('Object only operations', function(){
       expect(add3Values({})).
         toEqual(Object.freeze({}));
     });
-    it('should maintain context when calling an object', function () {
+    it('should maintain context when mapping an object', function () {
       mapObject(dummy).call(obj, {x: 4, y: 2});
       expect(dummy.calls.mostRecent().object).toBe(obj);
+    });
+  });
+
+  describe('filterObject and rejectObject', function(){
+    var onlyGreaterThan2;
+    beforeEach(function(){
+      onlyGreaterThan2 = filterObject(greaterThan2);
+    });
+    it('should filter an object', function(){
+      expect(onlyGreaterThan2({x: 1, y: 3})).
+        toEqual(Object.freeze({y: 3}));
+    });
+    it('should filter an empty object', function(){
+      expect(onlyGreaterThan2({})).
+        toEqual(Object.freeze({}));
+    });
+    it('should maintain context when filtering an object', function () {
+      filterObject(dummy).call(obj, {x: 4, y: 2});
+      expect(dummy.calls.mostRecent().object).toBe(obj);
+    });
+    it('should reject an object', function(){
+      expect(rejectObject(greaterThan2)({x: 1, y: 3})).
+        toEqual(Object.freeze({x: 1}));
     });
   });
 

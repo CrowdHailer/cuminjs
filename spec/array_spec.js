@@ -69,7 +69,7 @@ describe('Cumin array operations', function () {
     });
   });
 
-  ddescribe('filterArray and rejectArray', function(){
+  describe('filterArray and rejectArray', function(){
     var onlyGreaterThan2;
     beforeEach(function(){
       onlyGreaterThan2 = filterArray(greaterThan2);

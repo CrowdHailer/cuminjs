@@ -15,6 +15,11 @@ describe('Cumin function operations', function () {
       var compound = adjoin(add3)(multiply2);
       expect(compound(2)).toEqual(7);
     });
+    it('should pass all arguments to first function', function () {
+      var sum = _.reduce(0)(add);
+      var compound = adjoin(multiply2)(sum);
+      expect(compound(2, 3, 4)).toEqual(18);
+    });
     it('should keep maintain context', function () {
       var dummer = jasmine.createSpy();
       var compound = adjoin(dummer)(dummy);

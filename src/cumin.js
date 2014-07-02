@@ -363,12 +363,6 @@ var _ = (function(){
 
   var now = Date.now || function() { return new Date().getTime(); };
 
-  function random(max){
-    return function(){
-      return Math.random()*max|0;
-    };
-  }
-
   function expose(nameList){
     var fNames = nameList.split(' ');
     eachArray(function(fName){
@@ -451,7 +445,6 @@ var _ = (function(){
     method: method,
     now: now,
     times: times,
-    random: random,
 
     expose: expose,
     defreeze: defreeze,

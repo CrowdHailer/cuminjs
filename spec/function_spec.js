@@ -8,7 +8,14 @@ describe('Cumin function operations', function () {
     obj = {};
   });
 
-  _.expose('compose invoke times not postpone debounce');
+  _.expose('adjoin compose invoke times not postpone debounce');
+
+  ddescribe('adjoin', function () {
+    it('should combine two functions', function () {
+      var compound = adjoin(add3)(multiply2);
+      expect(compound(2)).toEqual(7);
+    });
+  });
 
   describe('compose', function () {
     it('should combine functions', function () {

@@ -274,6 +274,14 @@ var _ = (function(){
 
 // Function operations
 
+  function adjoin(f){
+    return function (g) {
+      return function(){
+        return f(g.apply({}, arguments));
+      };
+    };
+  }
+
   function compose(){
     var funcs = arguments;
     return function(){
@@ -433,6 +441,7 @@ var _ = (function(){
     foundation: foundation,
     overlay: overlay,
 
+    adjoin: adjoin,
     compose: compose,
     invoke: invoke,
     postpone: postpone,

@@ -355,13 +355,13 @@ var _ = (function(){
     };
   }
 
-  var now = Date.now || function() { return new Date().getTime(); };
-
-  function random(max){
-    return function(){
-      return Math.random()*max|0;
+  function method(key){
+    return function(obj){
+      return obj && obj[key] && obj[key]();
     };
   }
+
+  var now = Date.now || function() { return new Date().getTime(); };
 
   function expose(nameList){
     var fNames = nameList.split(' ');
@@ -442,9 +442,9 @@ var _ = (function(){
 
     I: I,
     dot: dot,
+    method: method,
     now: now,
     times: times,
-    random: random,
 
     expose: expose,
     defreeze: defreeze,

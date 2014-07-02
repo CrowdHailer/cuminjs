@@ -25,6 +25,7 @@ var isDefined = function(obj) {
 
 // JavaScript all things? function(executable method invokable), collection, primitive, void(null undef)
 var _ = (function(){
+  'use strict';
 
   var FROZEN = true;
   var BREAKER = {};
@@ -36,7 +37,7 @@ var _ = (function(){
   // assumes array type
     return function(array){
       for (var i = 0; i < array.length; i++) {
-        if (operation.call(this, array[i], i) === BREAKER) return;
+        if (operation.call(this, array[i], i) === BREAKER) { return; }
       }
     };
   }
@@ -46,7 +47,7 @@ var _ = (function(){
   // assumes array type
     return function(array){
       for (var i = array.length - 1; i > -1; i--) {
-        if (operation.call(this, array[i], i) === BREAKER) return;
+        if (operation.call(this, array[i], i) === BREAKER) { return; }
       }
     };
   }
@@ -157,8 +158,8 @@ var _ = (function(){
       return function(){
         var memo = initial;
         each(function(item, location){
-          memo = isDefined(memo) ? operation(memo)(item, location) : item;
-        }).apply({}, arguments);
+          memo = isDefined(memo) ? operation.call(this, memo).call(this, item, location) : item;
+        }).apply(this, arguments);
         return memo;
       };
     };
@@ -369,13 +370,13 @@ var _ = (function(){
     };
   }
 
-  var now = Date.now || function() { return new Date().getTime(); };
-
-  function random(max){
-    return function(){
-      return Math.random()*max|0;
+  function method(key){
+    return function(obj){
+      return obj && obj[key] && obj[key]();
     };
   }
+
+  var now = Date.now || function() { return new Date().getTime(); };
 
   function expose(nameList){
     var fNames = nameList.split(' ');
@@ -456,9 +457,9 @@ var _ = (function(){
 
     I: I,
     dot: dot,
+    method: method,
     now: now,
     times: times,
-    random: random,
 
     expose: expose,
     defreeze: defreeze,

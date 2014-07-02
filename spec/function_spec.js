@@ -38,9 +38,9 @@ describe('Cumin function operations', function () {
 
   describe('invoke', function () {
     it('should hold arguments for a passed function', function () {
-      var pass3 = invoke(3);
+      var pass3 = invoke(3, 5);
       pass3(dummy);
-      expect(dummy).toHaveBeenCalledWith(3);
+      expect(dummy).toHaveBeenCalledWith(3, 5);
     });
     it('should keep context when operating unbound', function () {
       var pass3 = invoke(3);

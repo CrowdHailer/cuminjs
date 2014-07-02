@@ -26,21 +26,6 @@ describe('cumin utilities', function(){
     });
   });
 
-  describe('mapObject', function(){
-    var add3Values;
-    beforeEach(function(){
-      add3Values = mapObject(add3);
-    });
-    it('should map an object', function(){
-      expect(add3Values({x: 1, y: 2})).
-        toEqual(Object.freeze({x: 4, y: 5}));
-    });
-    it('should map an empty object', function(){
-      expect(add3Values({})).
-        toEqual(Object.freeze({}));
-    });
-  });
-
   describe('map', function(){
     var add3All;
     beforeEach(function(){

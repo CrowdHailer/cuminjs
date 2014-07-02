@@ -7,7 +7,7 @@ describe('Object only operations', function(){
     obj = {};
   });
 
-  _.expose('eachObject extend augment foundation overlay select omit');
+  _.expose('eachObject mapObject extend augment foundation overlay select omit');
 
 
   describe('eachObject', function(){
@@ -21,7 +21,26 @@ describe('Object only operations', function(){
       expect(dummy).not.toHaveBeenCalled();
     });
     it('should maintain context when calling an object', function () {
-      each(dummy).call(obj, {x: 4, y: 2});
+      eachObject(dummy).call(obj, {x: 4, y: 2});
+      expect(dummy.calls.mostRecent().object).toBe(obj);
+    });
+  });
+
+  describe('mapObject', function(){
+    var add3Values;
+    beforeEach(function(){
+      add3Values = mapObject(add3);
+    });
+    it('should map an object', function(){
+      expect(add3Values({x: 1, y: 2})).
+        toEqual(Object.freeze({x: 4, y: 5}));
+    });
+    it('should map an empty object', function(){
+      expect(add3Values({})).
+        toEqual(Object.freeze({}));
+    });
+    it('should maintain context when calling an object', function () {
+      mapObject(dummy).call(obj, {x: 4, y: 2});
       expect(dummy.calls.mostRecent().object).toBe(obj);
     });
   });

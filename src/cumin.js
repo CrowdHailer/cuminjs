@@ -78,8 +78,8 @@ var _ = (function(){
     return function(object){
       var results = {};
       eachObject(function(value, key){
-        results[key] = operation(value, key);
-      })(object);
+        results[key] = operation.call(this, value, key);
+      }).call(this, object);
       return FROZEN? Object.freeze(results) : results;
     };
   }

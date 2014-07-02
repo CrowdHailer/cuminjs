@@ -12,6 +12,7 @@
 var _ = (function(){
 
   var FROZEN = true;
+  var BREAKER = {};
 
 // basic iterators
 
@@ -20,7 +21,7 @@ var _ = (function(){
   // assumes array type
     return function(array){
       for (var i = 0; i < array.length; i++) {
-        operation(array[i], i);
+        if (operation.call(this, array[i], i) === BREAKER) return;
       }
     };
   }
@@ -30,7 +31,7 @@ var _ = (function(){
   // assumes array type
     return function(array){
       for (var i = array.length - 1; i > -1; i--) {
-        operation(array[i], i);
+        if (operation.call(this, array[i], i) === BREAKER) return;
       }
     };
   }
@@ -39,8 +40,9 @@ var _ = (function(){
   // iterates through object key/value pairs
   // no order assumed
     return function(object){
+      var context = this;
       eachArray(function(key){
-        operation(object[key], key);
+        return operation.call(context, object[key], key);
       })(Object.keys(object));
     };
   }
@@ -53,9 +55,9 @@ var _ = (function(){
         collection = argsToList(arguments);
       }
       if (isArray(collection)) {
-        eachArray(operation)(collection);
+        eachArray(operation).call(this, collection);
       } else {
-        eachObject(operation)(collection);
+        eachObject(operation).call(this, collection);
       }
     };
   }
@@ -375,6 +377,10 @@ var _ = (function(){
     FROZEN = true;
   }
 
+  function BREAK(){
+    return BREAKER;
+  }
+
   function size(collection){
     return collection.length || Object.keys(collection).length;
   }
@@ -446,6 +452,7 @@ var _ = (function(){
     log: log,
     position: position,
     equals: equals,
+    BREAK: BREAK
   };
   return _;
 }());

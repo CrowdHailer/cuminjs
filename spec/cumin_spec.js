@@ -12,8 +12,8 @@ describe('cumin utilities', function(){
       }).toThrowError("Can't find variable: dot");
     });
     it('should make functions available on top namespace', function(){
-      _.expose('dot map each eachArray eachObject reduce ' +
-               'dot filter eachArrayRight ' +
+      _.expose('dot map each eachObject reduce ' +
+               'dot filter ' +
                'merge all any reject max min ' +
                'random mapObject mapArray filterArray ' +
                'rejectArray filterObject rejectObject ' + 
@@ -26,30 +26,6 @@ describe('cumin utilities', function(){
     });
   });
 
-  describe('eachArray', function(){
-    it('should each all values in an array', function(){
-      eachArray(dummy)([1, 2]);
-      expect(dummy).toHaveBeenCalledWith(1, 0);
-      expect(dummy.calls.mostRecent().args).toEqual([2, 1]);
-    });
-    it('should not call for an empty array', function(){
-      eachArray(dummy)([]);
-      expect(dummy).not.toHaveBeenCalled();
-    });
-  });
-
-  describe('eachArrayRight', function(){
-    it('should call with each value from last', function(){
-      eachArrayRight(dummy)([1, 2]);
-      expect(dummy).toHaveBeenCalledWith(2, 1);
-      expect(dummy.calls.mostRecent().args).toEqual([1, 0]);
-    });
-    it('should not call for an empty array', function(){
-      eachArrayRight(dummy)([]);
-      expect(dummy).not.toHaveBeenCalled();
-    });
-  });
-
   describe('eachObject', function(){
     it('should each all values of an object', function(){
       eachObject(dummy)({x: 1, y: 2});
@@ -58,32 +34,6 @@ describe('cumin utilities', function(){
     });
     it('should not have been called for an empty object', function(){
       eachObject(dummy)({});
-      expect(dummy).not.toHaveBeenCalled();
-    });
-  });
-
-  describe('each', function(){
-    it('should call every element over an array', function(){
-      each(dummy)([1, 2]);
-      expect(dummy).toHaveBeenCalledWith(1, 0);
-      expect(dummy).toHaveBeenCalledWith(2, 1);
-    });
-    it('should call every value in an object', function(){
-      each(dummy)({x: 1, y: 2});
-      expect(dummy).toHaveBeenCalledWith(1, 'x');
-      expect(dummy).toHaveBeenCalledWith(2, 'y');
-    });
-    it('should call operation for a list of arguments', function(){
-      each(dummy)(1, 2);
-      expect(dummy).toHaveBeenCalledWith(1, 0);
-      expect(dummy).toHaveBeenCalledWith(2, 1);
-    });
-    it('should not call operation for an empty array', function(){
-      each(dummy)([]);
-      expect(dummy).not.toHaveBeenCalled();
-    });
-    it('should not call operation for an empty object', function(){
-      each(dummy)({});
       expect(dummy).not.toHaveBeenCalled();
     });
   });

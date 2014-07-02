@@ -1,4 +1,4 @@
-module.exports = function(config) {
+module.exports = function (config) {
   config.set({
     basePath: '',
     frameworks: ['jasmine'],
@@ -9,6 +9,7 @@ module.exports = function(config) {
       'src/compositions.js',
       'spec/setup.js',
       'spec/cumin_spec.js',
+      'spec/core_spec.js',
       'spec/object_spec.js',
       'spec/array_spec.js',
       'spec/function_spec.js',

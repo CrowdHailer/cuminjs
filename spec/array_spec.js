@@ -1,34 +1,83 @@
-describe('Array only operations', function(){
-  _.expose('cleave cyclic within');
-  describe('cleave', function(){
-    it('should split an array', function(){
+describe('Cumin array operations', function () {
+  'use strict';
+
+  var dummy, obj;
+  beforeEach(function () {
+    dummy = jasmine.createSpy();
+    obj = {};
+  });
+
+  _.expose('eachArray eachArrayRight cleave cyclic within');
+
+  describe('eachArray', function () {
+    it('should call the function with every element and corresponding index', function () {
+      eachArray(dummy)([4, 2]);
+      expect(dummy.calls.allArgs()).toEqual([[4, 0], [2, 1]]);
+    });
+    it('should not call the function when passed an empty array', function () {
+      eachArray(dummy)([]);
+      expect(dummy).not.toHaveBeenCalled();
+    });
+    it('should be able to break out of the execution', function () {
+      dummy.and.returnValue(_.BREAK());
+      eachArray(dummy)([4, 2]);
+      expect(dummy.calls.count()).toEqual(1);
+    });
+    it('should maintain context', function () {
+      eachArray(dummy).call(obj, [4, 2]);
+      expect(dummy.calls.mostRecent().object).toBe(obj);
+    });
+  });
+
+  describe('eachArrayRight', function () {
+    it('should call with each value from last', function () {
+      eachArrayRight(dummy)([4, 2]);
+      expect(dummy.calls.allArgs()).toEqual([[2, 1], [4, 0]]);
+    });
+    it('should not call for an empty array', function () {
+      eachArrayRight(dummy)([]);
+      expect(dummy).not.toHaveBeenCalled();
+    });
+    it('should be able to break out of the execution', function () {
+      dummy.and.returnValue(_.BREAK());
+      eachArrayRight(dummy)([4, 2]);
+      expect(dummy.calls.count()).toEqual(1);
+    });
+    it('should maintain context', function () {
+      eachArrayRight(dummy).call(obj, [4, 2]);
+      expect(dummy.calls.mostRecent().object).toBe(obj);
+    });
+  });
+
+  describe('cleave', function () {
+    it('should split an array', function () {
       expect(cleave(2)([0, 1, 2, 3, 4]))
         .toEqual([[0, 1], [2, 3, 4]]);
     });
-    it('should split an array with arument 0', function(){
+    it('should split an array with arument 0', function () {
       expect(cleave(0)([0, 1]))
         .toEqual([[], [0, 1]]);
     });
-    it('should work with negative arguments', function(){
+    it('should work with negative arguments', function () {
       expect(cleave(-2)([0, 1, 2, 3, 4]))
         .toEqual([[0, 1, 2], [3, 4]]);
     });
   });
 
-  describe('cyclic', function(){
-    it('should cyclicly fill results array', function(){
+  describe('cyclic', function () {
+    it('should cyclicly fill results array', function () {
       var answer = cyclic(3)([0, 1, 2, 3, 4, 5]);
       expect(answer).toEqual([[0, 3], [1, 4], [2, 5]]);
     });
-    it('should have empty arrays it array shorter than division', function(){
+    it('should have empty arrays it array shorter than division', function () {
       var answer = cyclic(3)([1]);
       expect(answer).toEqual([[1], [], []]);
     });
   });
 
-  describe('within', function(){
+  describe('within', function () {
     // could return object {value: true/false, location: first occurance}
-    it('return true if test element is in  array', function(){
+    it('return true if test element is in  array', function () {
       var withinRange = within([2, 3, 4]);
       expect(withinRange(2)).toBe(true);
       expect(withinRange(1)).toBe(false);
@@ -40,8 +89,8 @@ describe('Array only operations', function(){
     });
   });
 
-  describe('includes', function(){
-    it('can be composed from primatives', function(){
+  describe('includes', function () {
+    it('can be composed from primatives', function () {
       var includes = compose(any, equals);
       var includes2 = includes(2);
       // LARGE ISSUE WITH ANY ALL MEMORY BETWEEN RUNS

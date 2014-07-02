@@ -21,7 +21,7 @@ var _ = (function(){
   // assumes array type
     return function(array){
       for (var i = 0; i < array.length; i++) {
-        if (operation(array[i], i) == BREAKER) return;
+        if (operation(array[i], i) === BREAKER) return;
       }
     };
   }
@@ -31,7 +31,7 @@ var _ = (function(){
   // assumes array type
     return function(array){
       for (var i = array.length - 1; i > -1; i--) {
-        operation(array[i], i);
+        if (operation(array[i], i) === BREAKER) return;
       }
     };
   }

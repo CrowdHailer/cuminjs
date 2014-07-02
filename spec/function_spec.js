@@ -42,18 +42,10 @@ describe('Cumin function operations', function () {
       pass3(dummy);
       expect(dummy).toHaveBeenCalledWith(3, 5);
     });
-    it('should keep context when operating unbound', function () {
-      var pass3 = invoke(3);
-      var a = pass3(returnContext);
-      expect(a).toEqual(returnContext());
-    });
-    it('should keep context when bound to object', function () {
-      obj.pass3 = invoke(3);
-      expect(obj.pass3(returnContext)).toBe(obj);
-    });
     it('should keep context when specifically set', function () {
       var pass3 = invoke(3);
-      expect(pass3.call(obj, returnContext)).toBe(obj);
+      pass3.call(obj, dummy);
+      expect(dummy.calls.mostRecent().object).toBe(obj);
     });
   });
 

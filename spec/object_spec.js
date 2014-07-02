@@ -20,7 +20,7 @@ describe('Object only operations', function(){
       eachObject(dummy)({});
       expect(dummy).not.toHaveBeenCalled();
     });
-    iit('should maintain context when calling an object', function () {
+    it('should maintain context when calling an object', function () {
       each(dummy).call(obj, {x: 4, y: 2});
       expect(dummy.calls.mostRecent().object).toBe(obj);
     });

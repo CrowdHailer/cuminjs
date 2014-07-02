@@ -7,7 +7,7 @@ describe('Cumin array operations', function () {
     obj = {};
   });
 
-  _.expose('eachArray eachArrayRight cleave cyclic within');
+  _.expose('eachArray eachArrayRight mapArray cleave cyclic within');
 
   describe('eachArray', function () {
     it('should call the function with every element and corresponding index', function () {
@@ -46,6 +46,21 @@ describe('Cumin array operations', function () {
     it('should maintain context', function () {
       eachArrayRight(dummy).call(obj, [4, 2]);
       expect(dummy.calls.mostRecent().object).toBe(obj);
+    });
+  });
+
+  describe('mapArray', function(){
+    var add3Elements;
+    beforeEach(function(){
+      add3Elements = mapArray(add3);
+    });
+    it('should map an array', function(){
+      expect(add3Elements([1, 2])).
+        toEqual(Object.freeze([4, 5]));
+    });
+    it('should map an empty array', function(){
+      expect(add3Elements([])).
+        toEqual(Object.freeze([]));
     });
   });
 

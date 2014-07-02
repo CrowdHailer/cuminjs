@@ -143,8 +143,8 @@ var _ = (function(){
       return function(){
         var memo = initial;
         each(function(item, location){
-          memo = isDefined(memo) ? operation(memo)(item, location) : item;
-        }).apply({}, arguments);
+          memo = isDefined(memo) ? operation.call(this, memo).call(this, item, location) : item;
+        }).apply(this, arguments);
         return memo;
       };
     };

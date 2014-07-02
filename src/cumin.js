@@ -355,6 +355,12 @@ var _ = (function(){
     };
   }
 
+  function method(key){
+    return function(obj){
+      return obj[key]();
+    };
+  }
+
   var now = Date.now || function() { return new Date().getTime(); };
 
   function random(max){
@@ -442,6 +448,7 @@ var _ = (function(){
 
     I: I,
     dot: dot,
+    method: method,
     now: now,
     times: times,
     random: random,

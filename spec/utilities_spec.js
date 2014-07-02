@@ -8,8 +8,8 @@ describe('Cumin utility operations', function(){
         log();
       }).toThrowError("Can't find variable: log");
     });
-    it('should make functions available on top namespace', function(){
-      _.expose('dot defreeze refreeze size log equals');
+    iit('should make functions available on top namespace', function(){
+      _.expose('dot method defreeze refreeze size log equals');
       expect(function(){
         log();
       }).not.toThrow();
@@ -31,6 +31,14 @@ describe('Cumin utility operations', function(){
       var person = {name: 'Mike', age: 25, city: 'boston'};
       var greeting = dot({hello: 'name', age: 'age'});
       expect(greeting(person)).toEqual(Object.freeze({hello: 'Mike', age: 25}));
+    });
+  });
+
+  describe('method', function(){
+    iit('should get result of named method from and object', function(){
+      var person = {getName: jasmine.createSpy().and.returnValue('Neil')};
+      var name = method('getName');
+      expect(name(person)).toEqual('Neil');
     });
   });
 

@@ -7,7 +7,7 @@ describe('Cumin core functions', function () {
     obj = {};
   });
 
-  _.expose('each ');
+  _.expose('each map');
 
   describe('each', function () {
     it('should call the operation with every element and index of an array', function () {
@@ -46,6 +46,33 @@ describe('Cumin core functions', function () {
     });
     it('should maintain context when calling an object', function () {
       each(dummy).call(obj, {x: 4, y: 2});
+      expect(dummy.calls.mostRecent().object).toBe(obj);
+    });
+  });
+
+  describe('map', function(){
+    var add3All;
+    beforeEach(function(){
+      add3All = map(add3);
+    });
+    it('should map arrays', function(){
+      var answer = add3All([1, 2, 3]);
+      expect(answer).toEqual(Object.freeze([4, 5, 6]));
+    });
+    it('should map objects', function(){
+      var answer = add3All({x: 1, y: 2});
+      expect(answer).toEqual(Object.freeze({x: 4, y: 5}));
+    });
+    it('should map arguments if given multiple', function(){
+      var answer = add3All(1, 2, 3);
+      expect(answer).toEqual(Object.freeze([4, 5, 6]));
+    });
+    it('should maintain context when mapping an array', function () {
+      map(dummy).call(obj, [4, 2]);
+      expect(dummy.calls.mostRecent().object).toBe(obj);
+    });
+    it('should maintain context when mapping an object', function () {
+      map(dummy).call(obj, {x: 4, y: 2});
       expect(dummy.calls.mostRecent().object).toBe(obj);
     });
   });

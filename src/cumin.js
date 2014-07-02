@@ -90,9 +90,9 @@ var _ = (function(){
         collection = argsToList(arguments);
       }
       if (isArray(collection)) {
-        return mapArray(operation)(collection);
+        return mapArray(operation).call(this, collection);
       } else {
-        return mapObject(operation)(collection);
+        return mapObject(operation).call(this, collection);
       }
     };
   }

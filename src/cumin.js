@@ -108,8 +108,6 @@ var _ = (function(){
     };
   }
 
-  var rejectArray = compose(filterArray, not);
-
   function filterObject(operation){
     return function(object){
       var results = {};
@@ -119,8 +117,6 @@ var _ = (function(){
       return FROZEN? Object.freeze(results) : results;
     };
   }
-
-  var rejectObject = compose(filterObject, not);
 
   function filter(operation){
     return function(collection){
@@ -134,8 +130,6 @@ var _ = (function(){
       }
     };
   }
-
-  var reject = compose(filter, not);
 
   function reduce(initial){
     // The same code works here for arrays and objects so does not have varient.
@@ -274,14 +268,11 @@ var _ = (function(){
 
 // Function operations
 
-  function compose(){
-    var funcs = arguments;
-    return function(){
-      var args = arguments;
-      eachArrayRight(function(func){
-        args = [func.apply(this, args)];
-      })(funcs);
-      return args[0];
+  function adjoin(f){
+    return function (g) {
+      return function(){
+        return f.call(this, (g.apply(this, arguments)));
+      };
     };
   }
 
@@ -401,6 +392,12 @@ var _ = (function(){
       return a === b;
     };
   }
+
+  var compose = reduce()(adjoin);
+  var rejectArray = compose(filterArray, not);
+  var rejectObject = compose(filterObject, not);
+  var reject = compose(filter, not);
+
   var _ =  {
     eachArray: eachArray,
     eachArrayRight: eachArrayRight,
@@ -433,6 +430,7 @@ var _ = (function(){
     foundation: foundation,
     overlay: overlay,
 
+    adjoin: adjoin,
     compose: compose,
     invoke: invoke,
     postpone: postpone,

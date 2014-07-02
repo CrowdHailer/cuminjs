@@ -11,6 +11,7 @@
   }
 
   function random(max){
+    max = max || 0;
     return function(){
       return Math.random()*max|0;
     };

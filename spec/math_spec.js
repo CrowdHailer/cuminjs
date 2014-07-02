@@ -20,15 +20,13 @@ describe('Cumin maths library', function(){
 
   describe('random', function(){
     it('should return a number from 0 up to but not including max', function(){
-      var val = random()();
-      var val2 = random(4);
+      var value = random(4);
       var array = map(function(){
-        return val2();
+        return value();
       })([1,1,1,1]);
       expect(all(function(element){
         return -1 < element && element < 4;
       })(array)).toBe(true);
-      expect(val).toBe(0);
     });
   });
 });

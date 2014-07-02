@@ -40,8 +40,9 @@ var _ = (function(){
   // iterates through object key/value pairs
   // no order assumed
     return function(object){
+      var context = this;
       eachArray(function(key){
-        return operation(object[key], key);
+        return operation.call(context, object[key], key);
       })(Object.keys(object));
     };
   }
@@ -56,7 +57,7 @@ var _ = (function(){
       if (isArray(collection)) {
         eachArray(operation).call(this, collection);
       } else {
-        eachObject(operation)(collection);
+        eachObject(operation).call(this, collection);
       }
     };
   }

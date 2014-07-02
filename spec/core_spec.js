@@ -40,8 +40,12 @@ describe('Cumin core functions', function () {
       each(dummy)({x: 4, y: 2});
       expect(dummy.calls.count()).toEqual(1);
     });
-    it('should maintain context', function () {
+    it('should maintain context when calling an array', function () {
       each(dummy).call(obj, [4, 2]);
+      expect(dummy.calls.mostRecent().object).toBe(obj);
+    });
+    it('should maintain context when calling an object', function () {
+      each(dummy).call(obj, {x: 4, y: 2});
       expect(dummy.calls.mostRecent().object).toBe(obj);
     });
   });

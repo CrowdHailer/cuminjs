@@ -19,8 +19,6 @@ Cumin.js adds key utilities for functional programming, such as map, reduce and 
 ##### Main
 
 - each
-- mapArray
-- mapObject
 - map
 - filterArray
 - filterObject
@@ -61,20 +59,14 @@ Cumin.js adds key utilities for functional programming, such as map, reduce and 
 - eachArray
 - eachArrayRight
 - eachObject
+- mapArray
+- mapObject
 
 ### Collections
 
 **each** `_.each(operation)(object)`
 
 Iterates through a collection (array, object, arguments). No order is guarenteed. The operations is called for each item with two arguments `(item, location)`
-
-**mapArray** `_.mapArray(operation)(array)`
-
-Maps each element in an array to an element in new array. New values are the return of operation. Operation is called each time with arguments `(element, index)`. By default the return array is frozen.
-
-**mapObject** `_.mapObject(operation)(object)`
-
-Maps each value in an object to the same key in a new object. New values are the return of operation. Operation is called each time with arguments `(value, key)`. By default the return object is frozen.
 
 **map** `_.map(operation)(collection)`
 
@@ -272,3 +264,11 @@ Iterates over an array of elements, with decreasing index, from index length-1 t
 **eachObj** `_.eachObject(operation)(object)`
 
 Iterates through all key value pairs on an object. The operation is called for each pair with two arguments `(value, key)`
+
+**mapArray** `_.mapArray(operation)(array)`
+
+Maps each element in an array to an element in new array. New values are the return of operation. Operation is called each time with arguments `(element, index)`. By default the return array is frozen.
+
+**mapObject** `_.mapObject(operation)(object)`
+
+Maps each value in an object to the same key in a new object. New values are the return of operation. Operation is called each time with arguments `(value, key)`. By default the return object is frozen.

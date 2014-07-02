@@ -26,25 +26,6 @@ describe('cumin utilities', function(){
     });
   });
 
-  describe('filterArray and rejectArray', function(){
-    var onlyGreaterThan2;
-    beforeEach(function(){
-      onlyGreaterThan2 = filterArray(greaterThan2);
-    });
-    it('should filter an array', function(){
-      expect(onlyGreaterThan2([1, 3])).
-        toEqual(Object.freeze([3]));
-    });
-    it('should filter an empty array', function(){
-      expect(onlyGreaterThan2([])).
-        toEqual(Object.freeze([]));
-    });
-    it('should reject values from an array', function(){
-      expect(rejectArray(greaterThan2)([1, 3])).
-        toEqual(Object.freeze([1]));
-    });
-  });
-
   describe('filterObject and rejectObject', function(){
     var onlyGreaterThan2;
     beforeEach(function(){

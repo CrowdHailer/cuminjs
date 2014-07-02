@@ -4,7 +4,7 @@ describe('cumin utilities', function(){
     dummy = jasmine.createSpy();
   });
 
-  _.expose('all any min max random');
+  _.expose('all any min max');
 
   describe('all', function(){
     it('should check elements of an array', function(){
@@ -118,17 +118,5 @@ describe('cumin utilities', function(){
     });
   });
 
-  describe('random', function(){
-    it('should return a number from 0 up to but not including max', function(){
-      var val = random()();
-      var val2 = random(4);
-      var array = map(function(){
-        return val2();
-      })([1,1,1,1]);
-      expect(all(function(element){
-        return -1 < element && element < 4;
-      })(array)).toBe(true);
-      expect(val).toBe(0);
-    });
-  });
+  
 });

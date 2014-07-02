@@ -9,7 +9,7 @@ describe('Cumin function operations', function () {
   });
 
   _.expose('compose invoke times not postpone debounce');
-  
+
   describe('compose', function () {
     it('should combine functions', function () {
       var compound = compose(add3, multiply2);
@@ -42,12 +42,12 @@ describe('Cumin function operations', function () {
     it('should call a function passed it', function () {
       var later = postpone(dummy);
       expect(dummy.calls.count()).toEqual(0);
-      later();    
+      later();
       expect(dummy.calls.count()).toEqual(1);
     });
     it('should pass arguments', function () {
       var later = postpone(dummy, 2, 3);
-      later();    
+      later();
       expect(dummy.calls.mostRecent().args).toEqual([2, 3]);
     });
     it('should return function result', function () {

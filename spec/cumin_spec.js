@@ -12,7 +12,7 @@ describe('cumin utilities', function(){
       }).toThrowError("Can't find variable: dot");
     });
     it('should make functions available on top namespace', function(){
-      _.expose('dot map each eachObject reduce ' +
+      _.expose('dot map each reduce ' +
                'dot filter ' +
                'merge all any reject max min ' +
                'random mapObject mapArray filterArray ' +
@@ -23,18 +23,6 @@ describe('cumin utilities', function(){
         dot();
         map();
       }).not.toThrow();
-    });
-  });
-
-  describe('eachObject', function(){
-    it('should each all values of an object', function(){
-      eachObject(dummy)({x: 1, y: 2});
-      expect(dummy).toHaveBeenCalledWith(1, 'x');
-      expect(dummy).toHaveBeenCalledWith(2, 'y');
-    });
-    it('should not have been called for an empty object', function(){
-      eachObject(dummy)({});
-      expect(dummy).not.toHaveBeenCalled();
     });
   });
 

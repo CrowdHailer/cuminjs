@@ -1,5 +1,30 @@
 describe('Object only operations', function(){
-  _.expose('extend augment foundation overlay select omit');
+  'use strict';
+
+  var dummy, obj;
+  beforeEach(function () {
+    dummy = jasmine.createSpy();
+    obj = {};
+  });
+
+  _.expose('eachObject extend augment foundation overlay select omit');
+
+
+  describe('eachObject', function(){
+    it('should each all values of an object', function(){
+      eachObject(dummy)({x: 1, y: 2});
+      expect(dummy).toHaveBeenCalledWith(1, 'x');
+      expect(dummy).toHaveBeenCalledWith(2, 'y');
+    });
+    it('should not have been called for an empty object', function(){
+      eachObject(dummy)({});
+      expect(dummy).not.toHaveBeenCalled();
+    });
+    iit('should maintain context when calling an object', function () {
+      each(dummy).call(obj, {x: 4, y: 2});
+      expect(dummy.calls.mostRecent().object).toBe(obj);
+    });
+  });
 
   describe('extend', function(){
     // augment attachemts

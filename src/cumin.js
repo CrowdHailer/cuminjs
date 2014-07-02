@@ -357,7 +357,7 @@ var _ = (function(){
 
   function method(key){
     return function(obj){
-      return obj[key]();
+      return obj[key] && obj[key]();
     };
   }
 

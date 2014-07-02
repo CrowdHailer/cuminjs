@@ -40,6 +40,11 @@ describe('Cumin utility operations', function(){
       var name = method('getName');
       expect(name(person)).toEqual('Neil');
     });
+    iit('should return undefined if there is no method', function(){
+      var person = {};
+      var name = method('getName');
+      expect(name(person)).toEqual();
+    });
   });
 
   describe('defreeze and refreeze', function(){

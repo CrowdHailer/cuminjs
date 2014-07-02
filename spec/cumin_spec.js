@@ -398,22 +398,6 @@ describe('cumin utilities', function(){
     });
   });
 
-  xdescribe('debounce', function(){
-    it('should call with the latest arguments', function(){
-      var late = debounce(0)(dummy);
-      late(3);
-      expect(dummy).toHaveBeenCalledWith(3);
-    });
-    it('should call after activity', function(){
-      var late = debounce(2)(dummy);
-      var time = spyOn(_, 'now').andReturn(0);
-      late(3);
-      time.andReturn(1);
-      late(4);
-      expect(dummy.calls.length).toEqual(1);
-    });
-  });
-
   describe('random', function(){
     it('should return a number from 0 up to but not including max', function(){
       var val = random()();

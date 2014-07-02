@@ -1,5 +1,5 @@
 describe('function "ahem" functions', function(){
-  _.expose('compose invoke times not postpone');
+  _.expose('compose invoke times not postpone debounce');
   var dummy, returnContext, obj;
   beforeEach(function(){
     dummy = jasmine.createSpy();
@@ -85,6 +85,26 @@ describe('function "ahem" functions', function(){
       expect(dummy).toHaveBeenCalledWith(0);
       expect(dummy).toHaveBeenCalledWith(1);
       expect(dummy).not.toHaveBeenCalledWith(2);
+    });
+  });
+
+  describe('debounce', function(){
+    xit('should call with the latest arguments', function(done){
+      var late = debounce(1)(dummy);
+      late(3);
+      setTimeout(function() {
+        expect(dummy).toHaveBeenCalledWith(3);
+        done();
+      }, 2);
+      expect(dummy).not.toHaveBeenCalledWith(3);
+    });
+    xit('should call after activity', function(){
+      var late = debounce(2)(dummy);
+      var time = spyOn(_, 'now').andReturn(0);
+      late(3);
+      time.andReturn(1);
+      late(4);
+      expect(dummy.calls.length).toEqual(1);
     });
   });
 

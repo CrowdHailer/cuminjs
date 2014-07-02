@@ -18,9 +18,6 @@ Cumin.js adds key utilities for functional programming, such as map, reduce and 
 ### List of functions
 ##### Main
 
-- eachArray
-- eachArrayRight
-- eachObject
 - each
 - mapArray
 - mapObject
@@ -60,18 +57,12 @@ Cumin.js adds key utilities for functional programming, such as map, reduce and 
 - omit
 - limit
 
+##### Base
+- eachArray
+- eachArrayRight
+- eachObject
+
 ### Collections
-**eachArray** `_.eachArray(operation)(array)`
-
-Iterates over an array of elements, with increasing index, from index 0 to length-1. The operation is called for each element with two arguments `(element, index)`
-
-**eachArrayRight** `_.eachArrayRight(operation)(array)`
-
-Iterates over an array of elements, with decreasing index, from index length-1 to 0. The operation is called for each element with two arguments `(element, index)` *This is the reverse operation to eachArray*
-
-**eachObj** `_.eachObject(operation)(object)`
-
-Iterates through all key value pairs on an object. The operation is called for each pair with two arguments `(value, key)`
 
 **each** `_.each(operation)(object)`
 
@@ -267,3 +258,15 @@ addition to main object throughout closure
 - [preludejs](https://github.com/loop-recur/PreludeJS)
 - [lambdajs](https://github.com/loop-recur/lambdajs)
 
+
+**eachArray** `_.eachArray(operation)(array)`
+
+Iterates over an array of elements, with increasing index, from index 0 to length-1. The operation is called for each element with two arguments `(element, index)`
+
+**eachArrayRight** `_.eachArrayRight(operation)(array)`
+
+Iterates over an array of elements, with decreasing index, from index length-1 to 0. The operation is called for each element with two arguments `(element, index)` *This is the reverse operation to eachArray*
+
+**eachObj** `_.eachObject(operation)(object)`
+
+Iterates through all key value pairs on an object. The operation is called for each pair with two arguments `(value, key)`

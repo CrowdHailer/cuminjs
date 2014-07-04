@@ -215,19 +215,21 @@ dot() // valid
 ```
 
 ### Future possibilities
-Needs clarification on context;  
-include breaker;  
+Needs clarification on context DONE;  
+include breaker DONE;  
+group by retruns object equiv as partition  
+parralell assign  
 optional checking of input type to skip null steps in all, min etc.  
 delayed return of function. useful in composition eg for nth item.  
 min and max return location  
-zip
-note test for throttle and debounce are basically the same'
-mixin particularly compositions
-dot takes multiple arguments to try in order
-lazy any all to stop execution. Might be useable with multi argument dot.
-conditional execution
-pass hash with key options and value processess
-would work with true false as implicitly turned to strings
+zip  
+note test for throttle and debounce are basically the same'  
+mixin particularly compositions  
+dot takes multiple arguments to try in order  
+lazy any all to stop execution. Might be useable with multi argument   dot.  
+conditional execution  
+pass hash with key options and value processess  
+would work with true false as implicitly turned to strings  
 
 each object and each array now only tested for correct input
 

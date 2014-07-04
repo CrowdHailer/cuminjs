@@ -201,8 +201,8 @@ var _ = (function () {
     return function () {
       var memo;
       each(function (item) {
-        memo = memo && (operation(memo) > operation(item)) ? memo : item;
-      }).apply({}, arguments);
+        memo = memo && (operation.call(this, memo) > operation.call(this, item)) ? memo : item;
+      }).apply(this, arguments);
       return memo;
     };
   }

@@ -136,7 +136,6 @@ describe('cumin utilities', function () {
       expect(min()([1, 2, 3, 4])).toEqual(1);
     });
     it('should maintain context', function () {
-      dummy.and.returnValue(0);
       min(dummy).call(obj, [1, 1]);
       expect(dummy.calls.mostRecent().object).toBe(obj);
     });
@@ -164,7 +163,9 @@ describe('cumin utilities', function () {
     it('should work from values', function () {
       expect(max()(1, 2, 3)).toEqual(3);
     });
+    it('should maintain context', function () {
+      max(dummy).call(obj, [1, 1]);
+      expect(dummy.calls.mostRecent().object).toBe(obj);
+    });
   });
-
-  
 });

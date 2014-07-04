@@ -150,8 +150,10 @@ var _ = (function () {
     return function() {
       var result;
       each(function (item, location) {
-        result = item;
-        return predicate(item) ? BREAKER : undefined;
+        if (predicate(item)) {
+          result = item;
+          return BREAKER;
+        }
       }).apply({}, arguments);
       return result;
     };

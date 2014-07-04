@@ -12,6 +12,12 @@ describe('cumin utilities', function () {
     it('should return the first element that passes the predicate', function () {
       expect(find(greaterThan2)([1, 3, 4])).toEqual(3);
     });
+    it('should return undefined if no elements pass', function () {
+      expect(find(greaterThan2)([1, 0])).toEqual(undefined);
+    });
+    it('should return undefined from an empty array', function () {
+      expect(find(greaterThan2)([])).toEqual(undefined);
+    });
   });
 
   describe('all', function () {

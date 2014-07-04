@@ -61,6 +61,11 @@ describe('cumin utilities', function () {
       expect(allGreaterThan2([1, 3])).toBe(false);
       expect(allGreaterThan2([4, 3])).toBe(true);
     });
+    it('stop checking after finding a false value', function () {
+      dummy.and.returnValue(false);
+      all(dummy)([1, 2]);
+      expect(dummy.calls.count()).toEqual(1);
+    });
   });
 
   describe('any', function () {

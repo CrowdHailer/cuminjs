@@ -164,7 +164,8 @@ var _ = (function () {
     return function () {
       var memo = true;
       each(function (item, location) {
-        memo = memo && operation(item, location);
+        memo = operation(item, location);
+        return memo ? undefined : BREAKER;
       }).apply({}, arguments);
       return memo;
     };

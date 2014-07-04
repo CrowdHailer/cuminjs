@@ -1,10 +1,9 @@
 describe('Cumin function operations', function () {
   'use strict';
 
-  var dummy, returnContext, obj;
+  var dummy, obj;
   beforeEach(function () {
     dummy = jasmine.createSpy();
-    returnContext = function () { return this; };
     obj = {};
   });
 

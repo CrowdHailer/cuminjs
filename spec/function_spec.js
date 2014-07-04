@@ -154,12 +154,17 @@ describe('Cumin function operations', function () {
     beforeEach(function () {
       throttled = throttle(1)(dummy);
     });
-    it('should call with the latest arguments', function(){
+    it('should call with the latest arguments', function (done) {
       times(3)(throttled);
       setTimeout(function ()  {
         expect(dummy).toHaveBeenCalledWith(2);
         done();
       }, 2);
+    });
+    it('should call after current activity', function (done) {
+      throttled();
+      setTimeout(done, 2);
+      expect(dummy).not.toHaveBeenCalled();
     });
   });
 });

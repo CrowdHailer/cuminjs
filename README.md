@@ -16,42 +16,64 @@ Cumin.js adds key utilities for functional programming, such as map, reduce and 
  6. Does not carry any concept of context
 
 ### List of functions
-##### Main
 
+#### Core
 - each
 - map
 - filter
 - reject
 - reduce
+
+#### Search
+- find
 - all
 - any
 - min
 - max
+
+#### Array
 - cleave
 - cyclic
+
+#### Object
 - foundation
 - extend
+
+#### Function
+- adjoin
 - compose
+- invoke
+- times
+- not
+- pospone
 - debounce
 - throttle
-- not
-- Identity (I)
-- dot
-- times
-- random
 
-##### Special
+#### Utilities
+- equals
+- dot
+- method
+- size
+- now
+- log
+- Identity (I)
+
+#### Special
 - expose
 - defreeze
 - refreeze
 
-##### Development
+#### Maths
+- round
+- random
+
+#### Development
 - and
 - pick
 - omit
 - limit
 
-##### Base
+#### Base
 - eachArray
 - eachArrayRight
 - eachObject

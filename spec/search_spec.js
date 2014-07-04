@@ -1,12 +1,35 @@
 describe('cumin utilities', function () {
   'use strict';
 
-  var dummy;
+  var dummy, obj;
   beforeEach(function () {
     dummy = jasmine.createSpy();
+    obj = {};
   });
 
-  _.expose('all any min max');
+  _.expose('find all any min max');
+
+  describe('find', function () {
+    it('should return the first element that passes the predicate', function () {
+      expect(find(greaterThan2)([1, 3, 4])).toEqual(3);
+    });
+    it('should return undefined if no elements pass', function () {
+      expect(find(greaterThan2)([1, 0])).toEqual(undefined);
+    });
+    it('should return undefined from an empty array', function () {
+      expect(find(greaterThan2)([])).toEqual(undefined);
+    });
+    it('should stop searching after finding a value', function () {
+      dummy.and.returnValue(true);
+      find(dummy)([1, 2]);
+      expect(dummy.calls.count()).toEqual(1);
+    });
+    it('should maintain context', function () {
+      var search = find(dummy);
+      search.call(obj, [1]);
+      expect(dummy.calls.mostRecent().object).toBe(obj);
+    });
+  });
 
   describe('all', function () {
     it('should check elements of an array', function () {
@@ -37,6 +60,15 @@ describe('cumin utilities', function () {
       var allGreaterThan2 = all(greaterThan2);
       expect(allGreaterThan2([1, 3])).toBe(false);
       expect(allGreaterThan2([4, 3])).toBe(true);
+    });
+    it('stop checking after finding a false value', function () {
+      dummy.and.returnValue(false);
+      all(dummy)([1, 2]);
+      expect(dummy.calls.count()).toEqual(1);
+    });
+    it('should maintain context', function () {
+      all(dummy).call(obj,[1]);
+      expect(dummy.calls.mostRecent().object).toBe(obj);
     });
   });
 
@@ -70,6 +102,15 @@ describe('cumin utilities', function () {
       expect(anyGreaterThan2([1, 3])).toBe(true);
       expect(anyGreaterThan2([1, 1])).toBe(false);
     });
+    it('stop checking after finding a true value', function () {
+      dummy.and.returnValue(true);
+      any(dummy)([1, 2]);
+      expect(dummy.calls.count()).toEqual(1);
+    });
+    it('should maintain context', function () {
+      any(dummy).call(obj, [1]);
+      expect(dummy.calls.mostRecent().object).toBe(obj);
+    });
   });
 
   describe('min', function () {
@@ -93,6 +134,10 @@ describe('cumin utilities', function () {
     });
     it('should work from values given no comparison', function () {
       expect(min()([1, 2, 3, 4])).toEqual(1);
+    });
+    it('should maintain context', function () {
+      min(dummy).call(obj, [1, 1]);
+      expect(dummy.calls.mostRecent().object).toBe(obj);
     });
   });
 
@@ -118,7 +163,9 @@ describe('cumin utilities', function () {
     it('should work from values', function () {
       expect(max()(1, 2, 3)).toEqual(3);
     });
+    it('should maintain context', function () {
+      max(dummy).call(obj, [1, 1]);
+      expect(dummy.calls.mostRecent().object).toBe(obj);
+    });
   });
-
-  
 });

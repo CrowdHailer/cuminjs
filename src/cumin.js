@@ -302,10 +302,11 @@ var _ = (function () {
     return function (func) {
       var timeout, args;
       return function () {
+        var context = this;
         args = arguments;
         clearTimeout(timeout);
         timeout = setTimeout(function () {
-          func.apply({}, args);
+          func.apply(context, args);
         }, wait);
       };
     };

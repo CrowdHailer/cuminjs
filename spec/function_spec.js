@@ -124,6 +124,13 @@ describe('Cumin function operations', function () {
         done();
       }, 2);
     });
+    it('should maintain context', function (done) {
+      late.call(obj);
+      setTimeout(function ()  {
+        expect(dummy.calls.mostRecent().object).toBe(obj);
+        done();
+      }, 2);
+    });
     it('should call after activity', function () {
       late();
       expect(dummy).not.toHaveBeenCalled();

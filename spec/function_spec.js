@@ -117,7 +117,7 @@ describe('Cumin function operations', function () {
         done();
       }, 2);
     });
-    it('should call only once in each time period', function (done) {
+    it('should call only once after time period', function (done) {
       times(3)(late);
       setTimeout(function ()  {
         expect(dummy.calls.count()).toEqual(1);

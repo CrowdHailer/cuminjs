@@ -6,7 +6,13 @@ describe('cumin utilities', function () {
     dummy = jasmine.createSpy();
   });
 
-  _.expose('all any min max');
+  _.expose('find all any min max');
+
+  describe('find', function () {
+    it('should return the first element that passes the predicate', function () {
+      expect(find(greaterThan2)([1, 3, 4])).toEqual(3);
+    });
+  });
 
   describe('all', function () {
     it('should check elements of an array', function () {

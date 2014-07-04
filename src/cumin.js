@@ -146,6 +146,17 @@ var _ = (function () {
 
 // Higher collection operations
 
+  function find(predicate) {
+    return function() {
+      var result;
+      each(function (item, location) {
+        result = item;
+        return predicate(item) ? BREAKER : undefined;
+      }).apply({}, arguments);
+      return result;
+    };
+  }
+
   function all(operation) {
     operation = operation || I;
     return function () {
@@ -418,6 +429,7 @@ var _ = (function () {
     reject: reject,
     reduce: reduce,
 
+    find: find,
     all: all, //poss every 
     any: any, //poss sum use any as anything eg first from obj or and shift to obj
     min: min,

@@ -173,5 +173,12 @@ describe('Cumin function operations', function () {
         done();
       }, 2);
     });
+    it('should call only once each time period', function (done) {
+      times(3)(throttled);
+      setTimeout(function ()  {
+        expect(dummy.calls.count()).toEqual(1);
+        done();
+      }, 2);
+    });
   });
 });

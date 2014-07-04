@@ -80,10 +80,13 @@ describe('Cumin function operations', function () {
   });
 
   describe('times', function () {
+    var twice;
+    beforeEach(function () {
+      twice = times(2);
+    });
     it('should call a function n times', function () {
-      var thrice = times(3);
-      thrice(dummy);
-      expect(dummy.calls.count()).toEqual(3);
+      twice(dummy);
+      expect(dummy.calls.count()).toEqual(2);
     });
     it('should not call the function given 0 or less', function () {
       times(0)(dummy);
@@ -91,14 +94,13 @@ describe('Cumin function operations', function () {
       expect(dummy.calls.count()).toEqual(0);
     });
     it('should call the function with the indecies', function () {
-      var twice = times(2);
       twice(dummy);
       expect(dummy).toHaveBeenCalledWith(0);
       expect(dummy).toHaveBeenCalledWith(1);
       expect(dummy).not.toHaveBeenCalledWith(2);
     });
     it('should maintain context', function () {
-      times(1).call(obj, dummy);
+      twice.call(obj, dummy);
       expect(dummy.calls.mostRecent().object).toBe(obj);
     });
   });

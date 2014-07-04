@@ -161,13 +161,27 @@ var _ = (function () {
 
 // Higher collection operations
 
+  function find(predicate) {
+    return function() {
+      var result;
+      each(function (item) {
+        if (predicate.call(this, item)) {
+          result = item;
+          return BREAKER;
+        }
+      }).apply(this, arguments);
+      return result;
+    };
+  }
+
   function all(operation) {
     operation = operation || I;
     return function () {
       var memo = true;
       each(function (item, location) {
-        memo = memo && operation(item, location);
-      }).apply({}, arguments);
+        memo = operation.call(this, item, location);
+        return memo ? undefined : BREAKER;
+      }).apply(this, arguments);
       return memo;
     };
     // return location of first fail or length as location??
@@ -178,8 +192,9 @@ var _ = (function () {
     return function () {
       var memo = false;
       each(function (item, location) {
-        memo = memo || operation(item, location);
-      }).apply({}, arguments);
+        memo = operation.call(this, item, location);
+        return memo ? BREAKER : undefined;
+      }).apply(this, arguments);
       return memo;
     };
     // return location of first success or length as location??
@@ -190,8 +205,8 @@ var _ = (function () {
     return function () {
       var memo;
       each(function (item) {
-        memo = memo && (operation(memo) < operation(item)) ? memo : item;
-      }).apply({}, arguments);
+        memo = memo && (operation.call(this, memo) < operation.call(this, item)) ? memo : item;
+      }).apply(this, arguments);
       return memo;
     };
   }
@@ -201,8 +216,8 @@ var _ = (function () {
     return function () {
       var memo;
       each(function (item) {
-        memo = memo && (operation(memo) > operation(item)) ? memo : item;
-      }).apply({}, arguments);
+        memo = memo && (operation.call(this, memo) > operation.call(this, item)) ? memo : item;
+      }).apply(this, arguments);
       return memo;
     };
   }
@@ -433,6 +448,7 @@ var _ = (function () {
     reject: reject,
     reduce: reduce,
 
+    find: find,
     all: all, //poss every 
     any: any, //poss sum use any as anything eg first from obj or and shift to obj
     min: min,

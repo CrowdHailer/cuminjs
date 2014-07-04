@@ -106,11 +106,11 @@ describe('Cumin function operations', function () {
   });
 
   describe('debounce', function () {
-    xit('should call with the latest arguments', function(done){
+    it('should call with the latest arguments', function (done) {
       var late = debounce(1)(dummy);
-      late(3);
+      times(3)(late);
       setTimeout(function ()  {
-        expect(dummy).toHaveBeenCalledWith(3);
+        expect(dummy).toHaveBeenCalledWith(2);
         done();
       }, 2);
       expect(dummy).not.toHaveBeenCalledWith(3);

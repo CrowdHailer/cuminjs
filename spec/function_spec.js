@@ -166,5 +166,12 @@ describe('Cumin function operations', function () {
       setTimeout(done, 2);
       expect(dummy).not.toHaveBeenCalled();
     });
+    it('should maintain context', function (done) {
+      throttled.call(obj);
+      setTimeout(function ()  {
+        expect(dummy.calls.mostRecent().object).toBe(obj);
+        done();
+      }, 2);
+    });
   });
 });

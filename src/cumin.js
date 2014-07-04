@@ -317,10 +317,11 @@ var _ = (function () {
       var timeout, args;
       return function () {
         args = arguments;
+        var context = this;
         if (timeout) { return; }
         timeout = setTimeout(function () {
           timeout = null;
-          func.apply({}, args);
+          func.apply(context, args);
         }, wait);
       };
     };

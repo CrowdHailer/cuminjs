@@ -8,7 +8,7 @@ describe('Cumin function operations', function () {
     obj = {};
   });
 
-  _.expose('adjoin compose invoke times not postpone debounce');
+  _.expose('adjoin compose invoke times not postpone debounce throttle');
 
   describe('adjoin', function () {
     it('should combine two functions', function () {
@@ -110,7 +110,7 @@ describe('Cumin function operations', function () {
       var lessThan2 = not(greaterThan2);
       expect(lessThan2(1)).toBe(true);
     });
-    iit('should maintain context', function () {
+    it('should maintain context', function () {
       var lessThan2 = not(dummy);
       lessThan2.call(obj);
       expect(dummy.calls.mostRecent().object).toBe(obj);
@@ -146,6 +146,20 @@ describe('Cumin function operations', function () {
     it('should call after activity', function () {
       late();
       expect(dummy).not.toHaveBeenCalled();
+    });
+  });
+
+  describe('throttle', function () {
+    var throttled;
+    beforeEach(function () {
+      throttled = throttle(1)(dummy);
+    });
+    it('should call with the latest arguments', function(){
+      times(3)(throttled);
+      setTimeout(function ()  {
+        expect(dummy).toHaveBeenCalledWith(2);
+        done();
+      }, 2);
     });
   });
 });

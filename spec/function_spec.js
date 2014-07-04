@@ -97,6 +97,10 @@ describe('Cumin function operations', function () {
       expect(dummy).toHaveBeenCalledWith(1);
       expect(dummy).not.toHaveBeenCalledWith(2);
     });
+    it('should maintain context', function () {
+      times(1).call(obj, dummy);
+      expect(dummy.calls.mostRecent().object).toBe(obj);
+    });
   });
 
   describe('debounce', function () {

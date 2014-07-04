@@ -293,7 +293,7 @@ var _ = (function () {
   function times(n) {
     return function (operation) {
       for (var i = 0; i < n; i++) {
-        operation(i);
+        operation.call(this, i);
       }
     };
   }

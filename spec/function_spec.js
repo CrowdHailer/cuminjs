@@ -34,6 +34,12 @@ describe('Cumin function operations', function () {
       var compound = compose(add3, multiply2);
       expect(compound(2)).toEqual(7);
     });
+    it('should maintain context', function () {
+      var dummer = jasmine.createSpy();
+      var compound = compose(dummy, dummer);
+      compound.call(obj);
+      expect(dummy.calls.mostRecent().object).toBe(obj);
+    });
   });
 
   describe('invoke', function () {

@@ -1,4 +1,3 @@
-
 // Definitions
 // Arrays have index, element
 // Objects have key, value

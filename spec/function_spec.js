@@ -106,19 +106,27 @@ describe('Cumin function operations', function () {
   });
 
   describe('debounce', function () {
+    var late;
+    beforeEach(function () {
+      late = debounce(1)(dummy);
+    });
     it('should call with the latest arguments', function (done) {
-      var late = debounce(1)(dummy);
       times(3)(late);
       setTimeout(function ()  {
         expect(dummy).toHaveBeenCalledWith(2);
         done();
       }, 2);
-      expect(dummy).not.toHaveBeenCalledWith(3);
+    });
+    it('should call only once in each time period', function (done) {
+      times(3)(late);
+      setTimeout(function ()  {
+        expect(dummy.calls.count()).toEqual(1);
+        done();
+      }, 2);
     });
     it('should call after activity', function () {
-      var late = debounce(1)(dummy);
       late();
-      expect(dummy).not.toHaveBeenCalledWith(3);
+      expect(dummy).not.toHaveBeenCalled();
     });
   });
 

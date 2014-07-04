@@ -164,9 +164,9 @@ var _ = (function () {
     return function () {
       var memo = true;
       each(function (item, location) {
-        memo = operation(item, location);
+        memo = operation.call(this, item, location);
         return memo ? undefined : BREAKER;
-      }).apply({}, arguments);
+      }).apply(this, arguments);
       return memo;
     };
     // return location of first fail or length as location??

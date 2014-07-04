@@ -66,6 +66,10 @@ describe('cumin utilities', function () {
       all(dummy)([1, 2]);
       expect(dummy.calls.count()).toEqual(1);
     });
+    it('should maintain context', function () {
+      all(dummy).call(obj,[1]);
+      expect(dummy.calls.mostRecent().object).toBe(obj);
+    });
   });
 
   describe('any', function () {

@@ -220,7 +220,8 @@ include breaker;
 optional checking of input type to skip null steps in all, min etc.  
 delayed return of function. useful in composition eg for nth item.  
 min and max return location  
-zip  
+zip
+note test for throttle and debounce are basically the same'
 mixin particularly compositions
 dot takes multiple arguments to try in order
 lazy any all to stop execution. Might be useable with multi argument dot.

@@ -328,7 +328,7 @@ var _ = (function () {
 
   function not(func) {
     return function () {
-      return !func.apply({}, arguments);
+      return !func.apply(this, arguments);
     };
   }
 

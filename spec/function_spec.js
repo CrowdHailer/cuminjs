@@ -105,6 +105,18 @@ describe('Cumin function operations', function () {
     });
   });
 
+  describe('not', function () {
+    it('should late eval truthy statments', function () {
+      var lessThan2 = not(greaterThan2);
+      expect(lessThan2(1)).toBe(true);
+    });
+    iit('should maintain context', function () {
+      var lessThan2 = not(dummy);
+      lessThan2.call(obj);
+      expect(dummy.calls.mostRecent().object).toBe(obj);
+    });
+  });
+
   describe('debounce', function () {
     var late;
     beforeEach(function () {
@@ -134,13 +146,6 @@ describe('Cumin function operations', function () {
     it('should call after activity', function () {
       late();
       expect(dummy).not.toHaveBeenCalled();
-    });
-  });
-
-  describe('not', function () {
-    it('should late eval truthy statments', function () {
-      var lessThan2 = not(greaterThan2);
-      expect(lessThan2(1)).toBe(true);
     });
   });
 });

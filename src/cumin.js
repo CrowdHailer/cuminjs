@@ -149,12 +149,12 @@ var _ = (function () {
   function find(predicate) {
     return function() {
       var result;
-      each(function (item, location) {
-        if (predicate(item)) {
+      each(function (item) {
+        if (predicate.call(this, item)) {
           result = item;
           return BREAKER;
         }
-      }).apply({}, arguments);
+      }).apply(this, arguments);
       return result;
     };
   }

@@ -1,9 +1,10 @@
 describe('cumin utilities', function () {
   'use strict';
 
-  var dummy;
+  var dummy, obj;
   beforeEach(function () {
     dummy = jasmine.createSpy();
+    obj = {};
   });
 
   _.expose('find all any min max');
@@ -22,6 +23,11 @@ describe('cumin utilities', function () {
       dummy.and.returnValue(true);
       find(dummy)([1, 2]);
       expect(dummy.calls.count()).toEqual(1);
+    });
+    it('should maintain context', function () {
+      var search = find(dummy);
+      search.call(obj, [1]);
+      expect(dummy.calls.mostRecent().object).toBe(obj);
     });
   });
 

@@ -115,13 +115,10 @@ describe('Cumin function operations', function () {
       }, 2);
       expect(dummy).not.toHaveBeenCalledWith(3);
     });
-    xit('should call after activity', function () {
-      var late = debounce(2)(dummy);
-      var time = spyOn(_, 'now').andReturn(0);
-      late(3);
-      time.andReturn(1);
-      late(4);
-      expect(dummy.calls.length).toEqual(1);
+    it('should call after activity', function () {
+      var late = debounce(1)(dummy);
+      late();
+      expect(dummy).not.toHaveBeenCalledWith(3);
     });
   });
 

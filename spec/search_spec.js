@@ -18,6 +18,11 @@ describe('cumin utilities', function () {
     it('should return undefined from an empty array', function () {
       expect(find(greaterThan2)([])).toEqual(undefined);
     });
+    it('should stop searching after finding a value', function () {
+      dummy.and.returnValue(true);
+      find(dummy)([1, 2]);
+      expect(dummy.calls.count()).toEqual(1);
+    });
   });
 
   describe('all', function () {

@@ -50,18 +50,18 @@ describe('Cumin array operations', function () {
     });
   });
 
-  describe('mapArray', function(){
+  describe('mapArray', function () {
     var add3Elements;
-    beforeEach(function(){
+    beforeEach(function () {
       add3Elements = mapArray(add3);
     });
-    it('should map an array', function(){
-      expect(add3Elements([1, 2])).
-        toEqual(Object.freeze([4, 5]));
+    it('should map an array', function () {
+      expect(add3Elements([1, 2]))
+        .toEqual(Object.freeze([4, 5]));
     });
-    it('should map an empty array', function(){
-      expect(add3Elements([])).
-        toEqual(Object.freeze([]));
+    it('should map an empty array', function () {
+      expect(add3Elements([]))
+        .toEqual(Object.freeze([]));
     });
     it('should maintain context', function () {
       mapArray(dummy).call(obj, [4, 2]);
@@ -69,26 +69,26 @@ describe('Cumin array operations', function () {
     });
   });
 
-  describe('filterArray and rejectArray', function(){
+  describe('filterArray and rejectArray', function () {
     var onlyGreaterThan2;
-    beforeEach(function(){
+    beforeEach(function () {
       onlyGreaterThan2 = filterArray(greaterThan2);
     });
-    it('should filter an array', function(){
-      expect(onlyGreaterThan2([1, 3])).
-        toEqual(Object.freeze([3]));
+    it('should filter an array', function () {
+      expect(onlyGreaterThan2([1, 3]))
+        .toEqual(Object.freeze([3]));
     });
-    it('should filter an empty array', function(){
-      expect(onlyGreaterThan2([])).
-        toEqual(Object.freeze([]));
+    it('should filter an empty array', function () {
+      expect(onlyGreaterThan2([]))
+        .toEqual(Object.freeze([]));
     });
     it('should maintain context', function () {
       filterArray(dummy).call(obj, [4, 2]);
       expect(dummy.calls.mostRecent().object).toBe(obj);
     });
-    it('should reject values from an array', function(){
-      expect(rejectArray(greaterThan2)([1, 3])).
-        toEqual(Object.freeze([1]));
+    it('should reject values from an array', function () {
+      expect(rejectArray(greaterThan2)([1, 3]))
+        .toEqual(Object.freeze([1]));
     });
   });
 
@@ -137,8 +137,8 @@ describe('Cumin array operations', function () {
       var includes = compose(any, equals);
       var includes2 = includes(2);
       // LARGE ISSUE WITH ANY ALL MEMORY BETWEEN RUNS
-      expect(includes2([1,3])).toBe(false);
-      expect(includes2([1,2,3])).toBe(true);
+      expect(includes2([1, 3])).toBe(false);
+      expect(includes2([1, 2, 3])).toBe(true);
     });
   });
 });

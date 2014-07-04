@@ -50,20 +50,20 @@ describe('Cumin core functions', function () {
     });
   });
 
-  describe('map', function(){
+  describe('map', function () {
     var add3All;
-    beforeEach(function(){
+    beforeEach(function () {
       add3All = map(add3);
     });
-    it('should map arrays', function(){
+    it('should map arrays', function () {
       var answer = add3All([1, 2, 3]);
       expect(answer).toEqual(Object.freeze([4, 5, 6]));
     });
-    it('should map objects', function(){
+    it('should map objects', function () {
       var answer = add3All({x: 1, y: 2});
       expect(answer).toEqual(Object.freeze({x: 4, y: 5}));
     });
-    it('should map arguments if given multiple', function(){
+    it('should map arguments if given multiple', function () {
       var answer = add3All(1, 2, 3);
       expect(answer).toEqual(Object.freeze([4, 5, 6]));
     });
@@ -77,14 +77,14 @@ describe('Cumin core functions', function () {
     });
   });
 
-  describe('filter', function(){
-    it('should filter from array', function(){
+  describe('filter', function () {
+    it('should filter from array', function () {
       expect(filter(greaterThan2)([1, 3, 2])).toEqual(Object.freeze([3]));
     });
-    it('should filter from object', function(){
+    it('should filter from object', function () {
       expect(filter(greaterThan2)({x: 1, y: 3, z: 2})).toEqual(Object.freeze({y: 3}));
     });
-    it('should filter from arguments', function(){
+    it('should filter from arguments', function () {
       expect(filter(greaterThan2)(1, 3, 2)).toEqual(Object.freeze([3]));
     });
     it('should maintain context when calling an array', function () {
@@ -97,14 +97,14 @@ describe('Cumin core functions', function () {
     });
   });
 
-  describe('reject', function(){
-    it('should reject from array', function(){
+  describe('reject', function () {
+    it('should reject from array', function () {
       expect(reject(greaterThan2)([1, 3, 2])).toEqual(Object.freeze([1, 2]));
     });
-    it('should reject from object', function(){
+    it('should reject from object', function () {
       expect(reject(greaterThan2)({x: 1, y: 3, z: 4})).toEqual(Object.freeze({x: 1}));
     });
-    it('should reject from arguments', function(){
+    it('should reject from arguments', function () {
       expect(reject(greaterThan2)(1, 3, 2)).toEqual(Object.freeze([1, 2]));
     });
     xit('should maintain context when calling an array', function () {
@@ -117,57 +117,57 @@ describe('Cumin core functions', function () {
     });
   });
 
-  describe('reduce', function(){
+  describe('reduce', function () {
     var sum, asString;
-    beforeEach(function(){
+    beforeEach(function () {
       sum = reduce(0)(add);
-      asString = reduce('')(function(memo){
-        return function(item, location){
+      asString = reduce('')(function (memo) {
+        return function (item, location) {
           return memo + location + ':' + item + ',';
         };
       });
     });
-    it('should reduce a list', function(){
+    it('should reduce a list', function () {
       expect(sum([1, 2, 3])).toEqual(6);
     });
-    it('should reduce a list without an initial value', function(){
+    it('should reduce a list without an initial value', function () {
       expect(reduce()(add)([1, 2, 3])).toEqual(6);
     });
-    it('should reduce an object', function(){
+    it('should reduce an object', function () {
       expect(sum({x: 1, y: 3, z: 2})).toEqual(6);
     });
-    it('should reduce arguments', function(){
+    it('should reduce arguments', function () {
       expect(sum(1, 2, 3)).toEqual(6);
     });
-    it('should reduce empty list', function(){
+    it('should reduce empty list', function () {
       expect(sum([])).toEqual(0);
     });
-    it('should reduce empty object', function(){
+    it('should reduce empty object', function () {
       expect(sum({})).toEqual(0);
     });
-    it('should take initial value from array if not given an initial', function(){
+    it('should take initial value from array if not given an initial', function () {
       expect(reduce()(add)([1, 2, 3])).toEqual(6);
     });
-    it('should take initial value from object if not given initial', function(){
+    it('should take initial value from object if not given initial', function () {
       expect(reduce()(add)({x: 1, y: 3, z: 2})).toEqual(6);
     });
-    it('should take initial value from arguments if not given initial', function(){
+    it('should take initial value from arguments if not given initial', function () {
       expect(reduce()(add)(1, 2, 3)).toEqual(6);
     });
-    it('should be able to use array index', function(){
+    it('should be able to use array index', function () {
       expect(asString([1, 2])).toEqual('0:1,1:2,');
     });
-    it('should be able to use arguments index', function(){
+    it('should be able to use arguments index', function () {
       expect(asString(1, 2)).toEqual('0:1,1:2,');
     });
-    it('should be able to use object key', function(){
+    it('should be able to use object key', function () {
       expect(asString({x: 1, y: 3})).toEqual('x:1,y:3,');
     });
-    it('should reset memory each time it is used', function(){
+    it('should reset memory each time it is used', function () {
       expect(sum([1, 2, 3])).toEqual(6);
       expect(sum([1, 2, 3])).toEqual(6);
     });
-    it('should maintain context', function(){
+    it('should maintain context', function () {
       var dummer = jasmine.createSpy();
       dummer.and.returnValue(2);
       dummy.and.returnValue(dummer);

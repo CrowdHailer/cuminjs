@@ -8,7 +8,7 @@ describe('Cumin function operations', function () {
     obj = {};
   });
 
-  _.expose('adjoin compose invoke times not postpone debounce');
+  _.expose('adjoin compose invoke times not postpone debounce throttle');
 
   describe('adjoin', function () {
     it('should combine two functions', function () {
@@ -33,6 +33,12 @@ describe('Cumin function operations', function () {
     it('should combine functions', function () {
       var compound = compose(add3, multiply2);
       expect(compound(2)).toEqual(7);
+    });
+    it('should maintain context', function () {
+      var dummer = jasmine.createSpy();
+      var compound = compose(dummy, dummer);
+      compound.call(obj);
+      expect(dummy.calls.mostRecent().object).toBe(obj);
     });
   });
 
@@ -74,10 +80,13 @@ describe('Cumin function operations', function () {
   });
 
   describe('times', function () {
+    var twice;
+    beforeEach(function () {
+      twice = times(2);
+    });
     it('should call a function n times', function () {
-      var thrice = times(3);
-      thrice(dummy);
-      expect(dummy.calls.count()).toEqual(3);
+      twice(dummy);
+      expect(dummy.calls.count()).toEqual(2);
     });
     it('should not call the function given 0 or less', function () {
       times(0)(dummy);
@@ -85,31 +94,14 @@ describe('Cumin function operations', function () {
       expect(dummy.calls.count()).toEqual(0);
     });
     it('should call the function with the indecies', function () {
-      var twice = times(2);
       twice(dummy);
       expect(dummy).toHaveBeenCalledWith(0);
       expect(dummy).toHaveBeenCalledWith(1);
       expect(dummy).not.toHaveBeenCalledWith(2);
     });
-  });
-
-  describe('debounce', function () {
-    xit('should call with the latest arguments', function(done){
-      var late = debounce(1)(dummy);
-      late(3);
-      setTimeout(function ()  {
-        expect(dummy).toHaveBeenCalledWith(3);
-        done();
-      }, 2);
-      expect(dummy).not.toHaveBeenCalledWith(3);
-    });
-    xit('should call after activity', function () {
-      var late = debounce(2)(dummy);
-      var time = spyOn(_, 'now').andReturn(0);
-      late(3);
-      time.andReturn(1);
-      late(4);
-      expect(dummy.calls.length).toEqual(1);
+    it('should maintain context', function () {
+      twice.call(obj, dummy);
+      expect(dummy.calls.mostRecent().object).toBe(obj);
     });
   });
 
@@ -117,6 +109,76 @@ describe('Cumin function operations', function () {
     it('should late eval truthy statments', function () {
       var lessThan2 = not(greaterThan2);
       expect(lessThan2(1)).toBe(true);
+    });
+    it('should maintain context', function () {
+      var lessThan2 = not(dummy);
+      lessThan2.call(obj);
+      expect(dummy.calls.mostRecent().object).toBe(obj);
+    });
+  });
+
+  describe('debounce', function () {
+    var late;
+    beforeEach(function () {
+      late = debounce(1)(dummy);
+    });
+    it('should call with the latest arguments', function (done) {
+      times(3)(late);
+      setTimeout(function ()  {
+        expect(dummy).toHaveBeenCalledWith(2);
+        done();
+      }, 2);
+    });
+    it('should call only once after time period', function (done) {
+      times(3)(late);
+      setTimeout(function ()  {
+        expect(dummy.calls.count()).toEqual(1);
+        done();
+      }, 2);
+    });
+    it('should maintain context', function (done) {
+      late.call(obj);
+      setTimeout(function ()  {
+        expect(dummy.calls.mostRecent().object).toBe(obj);
+        done();
+      }, 2);
+    });
+    it('should call after activity', function () {
+      late();
+      expect(dummy).not.toHaveBeenCalled();
+    });
+  });
+
+  describe('throttle', function () {
+    var throttled;
+    beforeEach(function () {
+      throttled = throttle(1)(dummy);
+    });
+    it('should call with the latest arguments', function (done) {
+      times(3)(throttled);
+      setTimeout(function ()  {
+        expect(dummy).toHaveBeenCalledWith(2);
+        done();
+      }, 2);
+    });
+    it('should call after current activity', function (done) {
+      throttled();
+      setTimeout(done, 2);
+      expect(dummy).not.toHaveBeenCalled();
+    });
+    it('should maintain context', function (done) {
+      throttled.call(obj);
+      setTimeout(function ()  {
+        expect(dummy.calls.mostRecent().object).toBe(obj);
+        done();
+      }, 2);
+    });
+    it('should call only once each time period', function (done) {
+      times(3)(throttled);
+      setTimeout(function ()  {
+        expect(dummy.calls.count()).toEqual(1);
+        done();
+      }, 2);
     });
   });
 });

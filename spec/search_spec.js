@@ -102,6 +102,15 @@ describe('cumin utilities', function () {
       expect(anyGreaterThan2([1, 3])).toBe(true);
       expect(anyGreaterThan2([1, 1])).toBe(false);
     });
+    it('stop checking after finding a true value', function () {
+      dummy.and.returnValue(true);
+      any(dummy)([1, 2]);
+      expect(dummy.calls.count()).toEqual(1);
+    });
+    it('should maintain context', function () {
+      any(dummy).call(obj,[1]);
+      expect(dummy.calls.mostRecent().object).toBe(obj);
+    });
   });
 
   describe('min', function () {

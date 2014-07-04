@@ -177,8 +177,9 @@ var _ = (function () {
     return function () {
       var memo = false;
       each(function (item, location) {
-        memo = memo || operation(item, location);
-      }).apply({}, arguments);
+        memo = operation.call(this, item, location);
+        return memo ? BREAKER : undefined;
+      }).apply(this, arguments);
       return memo;
     };
     // return location of first success or length as location??

@@ -7,7 +7,7 @@ describe('Object only operations', function () {
     obj = {};
   });
 
-  _.expose('eachObject mapObject filterObject rejectObject extend augment foundation overlay select omit');
+  _.expose('eachObject mapObject filterObject rejectObject extend augment foundation overlay select omit peruse');
 
 
   describe('eachObject', function () {
@@ -148,6 +148,14 @@ describe('Object only operations', function () {
       var a = {x: 5};
       expect(clone(a)).toEqual(Object.freeze({x: 5}));
       expect(clone(a)).not.toBe(a);
+    });
+  });
+
+  describe('peruse', function () {
+    // Add defaults test.
+    it('should fetch items from object', function () {
+      var conf = peruse({a: 2, b: 3});
+      expect(conf('a')).toEqual(2);
     });
   });
 });

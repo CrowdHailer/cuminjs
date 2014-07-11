@@ -36,8 +36,11 @@ Cumin.js adds key utilities for functional programming, such as map, reduce and 
 - cyclic
 
 #### Object
-- foundation
 - extend
+- augment
+- foundation
+- overlay
+- peruse
 
 #### Function
 - adjoin

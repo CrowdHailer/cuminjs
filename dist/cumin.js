@@ -296,6 +296,12 @@ var _ = (function () {
     };
   }
 
+  function peruse(obj) {
+    return function(key){
+      return obj[key];
+    };
+  }
+
 // Function operations
 
   function adjoin(f) {
@@ -462,6 +468,7 @@ var _ = (function () {
     augment: augment,
     foundation: foundation,
     overlay: overlay,
+    peruse: peruse,
 
     adjoin: adjoin,
     compose: compose,
